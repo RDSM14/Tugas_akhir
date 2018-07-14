@@ -3,36 +3,7 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>/template/font-awesome/clocklib/assets/css/github.min.css">
 <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>/template/font-awesome/clocklib/assets/css/clock.css">
 
-    <?php if($this->session->flashdata('data_jadwal_masuk'))
-    {
-    ?>
-    <script>
-        alert("Data Mata Pelajaran Telah Disimpan");
-    </script>
-        
-    <?php
-    }
-    ?>
-    <?php if($this->session->flashdata('data_jadwal_change'))
-    {
-    ?>
-    <script>
-        alert("Data Mata Pelajaran Telah Diubah");
-    </script>
-        
-    <?php
-    }
-    ?>
-    <?php if($this->session->flashdata('data_jadwal_hapus'))
-    {
-    ?>
-    <script>
-        alert("Data Mata Pelajaran Telah Dihapus");
-    </script>
-        
-    <?php
-    }
-    ?>
+    
 <div class="col-sm-12">
     <!-- start: TEXT FIELDS PANEL -->
     <div class="panel panel-default">
@@ -58,7 +29,7 @@
         <div class="panel-body">
 
             <?php
-            echo form_open_multipart('jadwal/edit', 'role="form" class="form-horizontal"');
+            echo form_open_multipart('jadwal/edit_jadwal', 'role="form" class="form-horizontal"');
             ?>
             <?php foreach ($jadwal as $pilih)
             {
@@ -72,7 +43,7 @@
                 $smester = $pilih->semester;
                 $day = $pilih->hari;
                 $rom = $pilih->id_rombel;
-                
+                $id_jadwalnya = $pilih->id_jadwal;
                 
             }
             ?>
@@ -81,7 +52,9 @@
                     Tahun Akademik
                 </label>
                 <div class="col-sm-2">
-                <select class="form-control">
+                    <input type="hidden" name="id_jadwal" value="<?php echo $id_jadwalnya;?>"  id="form-field-1" class="form-control">
+                <select class="form-control" name="ta">
+                    
                     <?php foreach($tahun_akademik as $tahun)
                     {
                     ?>
@@ -93,13 +66,13 @@
            </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" >
                 <label class="col-sm-3 control-label" for="form-field-1">
                     Kelas 
                 </label>
    
                 <div class="col-sm-2">
-                    <select class="form-control">
+                    <select class="form-control" name="kelas" >
                         <?php for($i=1;$i<=$kelas['jumlah_kelas'];$i++)
                         {
                         ?>
@@ -117,7 +90,7 @@
                 </label>
                 
                     <div class="col-sm-2">
-                <select class="form-control">
+                <select class="form-control" name="mapel">
                     <?php foreach($mapel as $mapel)
                     {    //$aktif = ($mapel->id_mapel == $pelajaran?'selected':''); 
                         
@@ -137,7 +110,7 @@
                 </label>
               
                    <div class="col-sm-2">
-                <select class="form-control">
+                <select class="form-control" name="guru">
                     <?php foreach($guru as $guru)
                     {
                     ?>
@@ -152,9 +125,9 @@
                 <label class="col-sm-3 control-label" for="form-field-1">
                     Jam Mulai
                 </label>
-                <div class="col-sm-2">
+                <div class="col-sm-2" >
                     <div class="input-group clockpicker-with-callbacks ">
-                        <input type="text" id="jam_mulai" class="form-control" value="<?php echo $mulai;?>">
+                        <input type="text" id="jam_mulai" class="form-control" value="<?php echo $mulai;?>" name="mulai">
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-time"></span>
                             </span>
@@ -168,7 +141,7 @@
                 </label>
                 <div class="col-sm-2">
                     <div class="input-group clockpicker-with-callbacks col-sm-2">
-                        <input type="text" id="jam_selesai" class="form-control" value="<?php echo $selesai ?>">
+                        <input type="text" id="jam_selesai" class="form-control" value="<?php echo $selesai ?>" name="selesai">
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-time"></span>
                         </span>
@@ -180,7 +153,7 @@
                     Ruangan
                 </label>
                 <div class="col-sm-2">
-                <select class="form-control">
+                <select class="form-control" name="ruangan">
                     <?php foreach($ruangan as $ruangan)
                     {
                     ?>
@@ -197,7 +170,7 @@
                     Semester
                 </label>
                 <div class="col-sm-2">
-             <select class="form-control">
+             <select class="form-control" name="semester">
                 
                 <option value="1"<?php if($smester=='1'){ ?> selected="selected" <?php } ?>>1</option>
                 <option value="2"<?php if($smester=='2'){ ?> selected="selected" <?php } ?>>2</option>
@@ -210,7 +183,7 @@
                     Hari
                 </label>
            <div class="col-sm-2">
-               <select class="form-control">
+               <select class="form-control" name="hari">
                     <?php foreach($hari as $hari)
 {
     ?>
@@ -227,7 +200,7 @@
                     Rombel
                 </label>
                 <div class="col-sm-2">
-               <select class="form-control">
+               <select class="form-control" name="rombel">
                     <?php foreach($rombel as $rombel)
                     {
                     ?>

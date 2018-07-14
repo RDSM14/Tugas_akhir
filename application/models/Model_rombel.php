@@ -6,7 +6,8 @@ class Model_rombel extends CI_Model {
     
     function save() {
         $data = array(
-            'kd_jurusan'    => $this->input->post('jurusan', TRUE),
+            
+            'id_sekolah'    => $_SESSION['id_sekolah'],
             'kelas'    => $this->input->post('kelas', TRUE),
             'nama_rombel'  => $this->input->post('nama_rombel', TRUE)
         );
@@ -15,7 +16,7 @@ class Model_rombel extends CI_Model {
     
     function update() {
         $data = array(
-            'kd_jurusan'    => $this->input->post('jurusan', TRUE),
+            'id_sekolah'    => $_SESSION['id_sekolah'],
             'kelas'    => $this->input->post('kelas', TRUE),
             'nama_rombel'  => $this->input->post('nama_rombel', TRUE)
         );

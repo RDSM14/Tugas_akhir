@@ -136,5 +136,24 @@ class Model_jadwal extends CI_Model{
         $this->db->insert('tbl_jadwal',$data);
     }
     
+    function update() {
+        $data = array(
+            'id_tahun_akademik'             => $this->input->post('ta', TRUE),
+            'kelas'                         => $this->input->post('kelas', TRUE),
+            'id_mapel'                      => $this->input->post('mapel', TRUE),
+            'id_guru'                       => $this->input->post('guru', TRUE),
+            'jam_mulai'                     => $this->input->post('mulai', TRUE),
+            'jam_selesai'                   => $this->input->post('selesai', TRUE),
+            'id_ruangan'                    => $this->input->post('ruangan', TRUE),
+            'hari'                          => $this->input->post('hari', TRUE),
+            'semester'                      => $this->input->post('semester', TRUE),
+            'id_rombel'                     => $this->input->post('rombel', TRUE),
+            'id_sekolah'                    => $_SESSION['id_sekolah']
+        );
+        $id     = $this->input->post('id_jadwal');
+        $this->db->where('id_jadwal',$id);
+        $this->db->update('tbl_jadwal',$data);
+    }
+    
     
 }

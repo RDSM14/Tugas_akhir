@@ -1,6 +1,35 @@
 <div class="col-md-12">
     <!-- start: DYNAMIC TABLE PANEL -->
-   
+   <?php if($this->session->flashdata('data_rombel_masuk'))
+    {
+    ?>
+    <script>
+        alert("Data Rombongan Belajar Telah Disimpan");
+    </script>
+        
+    <?php
+    }
+    ?>
+    <?php if($this->session->flashdata('data_rombel_change'))
+    {
+    ?>
+    <script>
+        alert("Data Rombongan Belajar Telah Diubah");
+    </script>
+        
+    <?php
+    }
+    ?>
+    <?php if($this->session->flashdata('data_rombel_hapus'))
+    {
+    ?>
+    <script>
+        alert("Data Rombongan Belajar Telah Dihapus");
+    </script>
+        
+    <?php
+    }
+    ?>
     <div class="panel panel-default">
         <div class="panel-heading">
             <i class="fa fa-external-link-square"></i> Dynamic Table
@@ -19,7 +48,6 @@
                     <tr>
                         <th>NO</th>
                         <th>NAMA ROMBEL</th>
-                        <th>JURUSAN</th>
                         <th>KELAS</th>
                         <th></th>
                     </tr>
@@ -46,7 +74,6 @@
                         "orderable": false,
                     },
                     { "data": "nama_rombel" },
-                    { "data": "nama_jurusan" },
                     { "data": "kelas","width": "60px","sClass": "text-center" },
                     { "data": "aksi","width": "90px" },
                 ]

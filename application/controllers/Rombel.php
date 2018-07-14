@@ -10,7 +10,7 @@ Class Rombel extends CI_Controller {
 
     function data() {
         // nama tabel
-        $table = 'v_master_rombel';
+        $table = 'tbl_rombel';
         // nama PK
         $primaryKey = 'id_rombel';
         // list field
@@ -18,7 +18,6 @@ Class Rombel extends CI_Controller {
             array('db' => 'id_rombel', 'dt' => 'id_rombel'),
             array('db' => 'nama_rombel', 'dt' => 'nama_rombel'),
             array('db' => 'kelas', 'dt' => 'kelas'),
-            array('db' => 'nama_jurusan', 'dt' => 'nama_jurusan'),
             array(
                 'db' => 'id_rombel',
                 'dt' => 'aksi',
@@ -36,9 +35,9 @@ Class Rombel extends CI_Controller {
             'db' => $this->db->database,
             'host' => $this->db->hostname
         );
-
+        $where = "id_sekolah =".$_SESSION['id_sekolah']."";
         echo json_encode(
-                SSP::simple($_GET, $sql_details, $table, $primaryKey, $columns)
+                SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns,$where)
         );
     }
 
@@ -49,6 +48,7 @@ Class Rombel extends CI_Controller {
     function add() {
         if (isset($_POST['submit'])) {
             $this->Model_rombel->save();
+            $this->session->set_flashdata('data_rombel_masuk', 'Data Telah Ditambah');
             redirect('rombel');
         } else {
             $infoSekolah = "SELECT js.jumlah_kelas
@@ -62,6 +62,7 @@ Class Rombel extends CI_Controller {
     function edit(){
         if(isset($_POST['submit'])){
             $this->Model_rombel->update();
+            $this->session->set_flashdata('data_rombel_change', 'Data Telah Diubah');
             redirect('rombel');
         }else{
             $infoSekolah = "SELECT js.jumlah_kelas
@@ -81,6 +82,8 @@ Class Rombel extends CI_Controller {
             $this->db->where('id_rombel',$id_rombel);
             $this->db->delete('tbl_rombel');
         }
+        
+        $this->session->set_flashdata('data_rombel_hapus', 'Data Telah Dihapus');
         redirect('rombel');
     }
     

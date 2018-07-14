@@ -51,6 +51,7 @@ class Model_siswa extends CI_Model {
             'status_keluarga'=> $this->input->post('status_keluarga', TRUE),
             'telepon_siswa' => $this->input->post('telepon_siswa', TRUE),
             'asal_sekolah'  => $this->input->post('asal_sekolah', TRUE),
+            'id_sekolah'   => $_SESSION['id_sekolah'],
             //'kelas_terima'  => $this->input->post('kelas_terima', TRUE),
             'tanggal_terima'=> $this->input->post('tanggal_terima', TRUE)
         );
@@ -68,6 +69,7 @@ class Model_siswa extends CI_Model {
             'status_keluarga'=> $this->input->post('status_keluarga', TRUE),
             'telepon_siswa' => $this->input->post('telepon_siswa', TRUE),
             'asal_sekolah'  => $this->input->post('asal_sekolah', TRUE),
+            'id_sekolah'   => $_SESSION['id_sekolah'],    
             //'kelas_terima'  => $this->input->post('kelas_terima', TRUE),
             'tanggal_terima'=> $this->input->post('tanggal_terima', TRUE)
         );

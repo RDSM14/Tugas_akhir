@@ -38,15 +38,6 @@
 
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="form-field-1">
-                    JURUSAN
-                </label>
-                <div class="col-sm-9">
-                    <?php echo cmb_dinamis('jurusan', 'tbl_jurusan', 'nama_jurusan', 'kd_jurusan') ?>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-sm-2 control-label" for="form-field-1">
                     KELAS
                 </label>
                 <div class="col-sm-9">

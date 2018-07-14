@@ -8,6 +8,7 @@ class Model_tahunakademik extends CI_Model {
         $data = array(
             'tahun_akademik'    => $this->input->post('tahun_akademik', TRUE),
             'semester_aktif'    => $this->input->post('semester_aktif', TRUE),
+            'id_sekolah'        => $_SESSION['id_sekolah'],
             'is_aktif'          => $this->input->post('is_aktif', TRUE)
             
         );
@@ -18,6 +19,7 @@ class Model_tahunakademik extends CI_Model {
         $data = array(
             'tahun_akademik'    => $this->input->post('tahun_akademik', TRUE),
             'semester_aktif'    => $this->input->post('semester_aktif', TRUE),
+            'id_sekolah'        => $_SESSION['id_sekolah'],
             'is_aktif'          => $this->input->post('is_aktif', TRUE)
         );
         $id_tahun_akademik   = $this->input->post('id_tahun_akademik');

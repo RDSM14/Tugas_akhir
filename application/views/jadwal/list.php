@@ -3,6 +3,36 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>/template/font-awesome/clocklib/assets/css/github.min.css">
 <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>/template/font-awesome/clocklib/assets/css/clock.css">
 
+    <?php if($this->session->flashdata('data_jadwal_masuk'))
+    {
+    ?>
+    <script>
+        alert("Data Mata Pelajaran Telah Disimpan");
+    </script>
+        
+    <?php
+    }
+    ?>
+    <?php if($this->session->flashdata('data_jadwal_change'))
+    {
+    ?>
+    <script>
+        alert("Data Mata Pelajaran Telah Diubah");
+    </script>
+        
+    <?php
+    }
+    ?>
+    <?php if($this->session->flashdata('data_jadwal_hapus'))
+    {
+    ?>
+    <script>
+        alert("Data Mata Pelajaran Telah Dihapus");
+    </script>
+        
+    <?php
+    }
+    ?>
 <div class="col-md-12">
     <!-- start: DYNAMIC TABLE PANEL -->
 

@@ -40,9 +40,9 @@ Class Kurikulum extends CI_Controller {
             'db' => $this->db->database,
             'host' => $this->db->hostname
         );
-
+        $where = "id_sekolah =".$_SESSION['id_sekolah']."";
         echo json_encode(
-                SSP::simple($_GET, $sql_details, $table, $primaryKey, $columns)
+                SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns,$where)
         );
     }
 
