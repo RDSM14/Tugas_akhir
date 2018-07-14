@@ -11,13 +11,13 @@ Class jadwal extends CI_Controller{
             // load daftar ngajar guru
             $sql = "SELECT tj.id_jadwal,tj.kelas,tm.nama_mapel,tj.jam_mulai,tj.jam_selesai,tr.nama_ruangan,tj.hari,tj.semester
                     FROM tbl_jadwal as tj,tbl_ruangan as tr,tbl_mapel as tm
-                    WHERE tj.kd_mapel=tm.kd_mapel and tj.kd_ruangan=tr.kd_ruangan and tj.id_guru=".$this->session->userdata('id_guru');
+                    WHERE tj.id_mapel=tm.id_mapel and tj.kd_ruangan=tr.kd_ruangan and tj.id_guru=".$this->session->userdata('id_guru');
             $data['jadwal'] = $this->db->query($sql); 
             $this->template->load('template','jadwal/jadwal_ajar_guru',$data);
         }elseif($this->session->userdata('id_level_user')==6||$this->session->userdata('id_level_user')==7){
             // load daftar jadwal siswa
             $sql = "SELECT tj.id_jadwal,tj.kelas,tm.nama_mapel,tj.jam_mulai,tj.jam_selesai,tr.nama_ruangan,tj.hari,tj.semester,tj.id_rombel,gr.nama_guru                    FROM tbl_jadwal as tj,tbl_ruangan as tr,tbl_mapel as tm,tbl_guru as gr
-                    WHERE tj.kd_mapel=tm.kd_mapel and tj.kd_ruangan=tr.kd_ruangan and tj.id_guru=gr.id_guru and tj.id_rombel=".$this->session->userdata('id_rombel');
+                    WHERE tj.id_mapel=tm.id_mapel and tj.kd_ruangan=tr.kd_ruangan and tj.id_guru=gr.id_guru and tj.id_rombel=".$this->session->userdata('id_rombel');
             $data['jadwal'] = $this->db->query($sql); 
             $this->template->load('template','jadwal/jadwal_ajar_siswa',$data);
         }else{
@@ -223,7 +223,7 @@ Class jadwal extends CI_Controller{
     function getPelajaran($jam,$hari,$rombel){
         $sql = "SELECT tj.*,tm.nama_mapel
                 FROM tbl_jadwal as tj,tbl_mapel as tm 
-                WHERE tj.kd_mapel=tm.kd_mapel and tj.id_rombel=$rombel and tj.hari='$hari' and tj.jam='$jam'";
+                WHERE tj.id_mapel=tm.id_mapel and tj.id_rombel=$rombel and tj.hari='$hari' and tj.jam='$jam'";
         $pelajaran = $this->db->query($sql);
         if($pelajaran->num_rows()>0){
             $row = $pelajaran->row_array();
