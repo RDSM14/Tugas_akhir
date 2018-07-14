@@ -1,4 +1,4 @@
-<!--NO USE -->
+<?php echo $_SESSION['id_level_user'];?>
 <div class="col-md-12">
     <!-- start: DYNAMIC TABLE PANEL -->
     <table class="table table-bordered">

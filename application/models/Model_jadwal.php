@@ -48,4 +48,93 @@ class Model_jadwal extends CI_Model{
         }
     }
     
+     function rombel()
+    {
+        $this->db->select("id_rombel, nama_rombel");
+        $this->db->from("tbl_rombel");
+        $this->db->where("id_sekolah", $_SESSION['id_sekolah']);
+        
+        $query = $this->db->get();
+        return $query->result();
+    }
+    
+      function ruangan()
+    {
+        $this->db->select("id_ruangan, nama_ruangan");
+        $this->db->from("tbl_ruangan");
+        $this->db->where("id_sekolah", $_SESSION['id_sekolah']);
+        
+        $query = $this->db->get();
+        return $query->result();
+    }
+    
+    function tahun_akademik()
+    {
+        $this->db->select("tahun_akademik, id_tahun_akademik");
+        $this->db->from("tbl_tahun_akademik");
+        $this->db->where("id_sekolah", $_SESSION['id_sekolah']);
+        
+        $query = $this->db->get();
+        return $query->result();
+    }
+    
+     function guru()
+    {
+        $this->db->select("id_guru, nama_guru");
+        $this->db->from("tbl_guru");
+        $this->db->where("id_sekolah", $_SESSION['id_sekolah']);
+        
+        $query = $this->db->get();
+        return $query->result();
+    }
+    
+    function mapel()
+    {
+        $this->db->select("id_mapel, nama_mapel");
+        $this->db->from("tbl_mapel");
+        $this->db->where("id_sekolah", $_SESSION['id_sekolah']);
+        
+        $query = $this->db->get();
+        return $query->result();
+    }
+    
+    
+    function kelas()
+    {
+       
+        $this->db->select("js.jumlah_kelas");
+        $this->db->from("tbl_jenjang_sekolah js");
+        $this->db->join("tbl_sekolah_info si", "js.id_jenjang = si.id_jenjang_sekolah");
+        
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+    function pilih_jadwal($id)
+    {
+       
+        $this->db->select("jd.id_jadwal,jd.id_tahun_akademik,jd.kelas,jd.id_mapel as id_mapel,jd.id_guru,jd.jam_mulai,jd.jam_selesai,jd.id_ruangan,jd.semester,jd.hari,jd.id_rombel");
+        $this->db->from("tbl_jadwal jd");
+        $this->db->where("id_jadwal", $id);
+        
+        $query = $this->db->get();
+        return $query->result();
+    }
+    function save() {
+        $data = array(
+            'id_tahun_akademik'             => $this->input->post('ta', TRUE),
+            'kelas'                         => $this->input->post('kelas', TRUE),
+            'id_mapel'                      => $this->input->post('mapel', TRUE),
+            'id_guru'                       => $this->input->post('guru', TRUE),
+            'jam_mulai'                     => $this->input->post('mulai', TRUE),
+            'jam_selesai'                   => $this->input->post('selesai', TRUE),
+            'id_ruangan'                    => $this->input->post('ruangan', TRUE),
+            'hari'                          => $this->input->post('hari', TRUE),
+            'semester'                      => $this->input->post('semester', TRUE),
+            'id_rombel'                        => $this->input->post('rombel', TRUE),
+            'id_sekolah'                        => $_SESSION['id_sekolah']
+        );
+        $this->db->insert('tbl_jadwal',$data);
+    }
+    
+    
 }

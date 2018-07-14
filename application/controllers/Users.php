@@ -96,6 +96,7 @@ Class Users extends CI_Controller {
     
     function modul(){
         $level_user = $_GET['level_user'];
+        $id_sekolah = $_SESSION['id_sekolah'];
         echo "<table id='mytable2' class='table table-striped table-bordered table-hover table-full-width dataTable'>
                 <thead>
                     <tr>
@@ -113,7 +114,7 @@ Class Users extends CI_Controller {
                 <td>".  strtoupper($row->nama_menu)."</td>
                 <td>$row->link</td>
                 <td align='center'><input type='checkbox' ";
-            $this->chek_akses($level_user, $row->id);
+            $this->chek_akses($level_user, $row->id,$id_sekolah);
              echo " onclick='addRule($row->id)'></td>
                 </tr>";
             $no++;
@@ -123,8 +124,8 @@ Class Users extends CI_Controller {
             </table>";
     }
     
-    function chek_akses($level_user,$id_menu){
-        $data = array('id_level_user'=>$level_user,'id_menu'=>$id_menu);
+    function chek_akses($level_user,$id_menu,$id_sekolah){
+        $data = array('id_level_user'=>$level_user,'id_menu'=>$id_menu,'id_sekolah'=>$id_sekolah);
         $chek = $this->db->get_where('tbl_user_rule',$data);
         if($chek->num_rows()>0){
             echo "checked";
@@ -137,7 +138,8 @@ Class Users extends CI_Controller {
     function addrule(){
         $level_user = $_GET['level_user'];
         $id_menu    = $_GET['id_menu'];
-        $data       = array('id_level_user'=>$level_user,'id_menu'=>$id_menu);
+        $id_sekolah = $_SESSION['id_sekolah'];
+        $data       = array('id_level_user'=>$level_user,'id_menu'=>$id_menu,'id_sekolah'=>$id_sekolah);
         $chek       = $this->db->get_where('tbl_user_rule',$data);
         if($chek->num_rows()<1){
             $this->db->insert('tbl_user_rule',$data);
@@ -145,6 +147,7 @@ Class Users extends CI_Controller {
         }else{
             $this->db->where('id_menu',$id_menu);
             $this->db->where('id_level_user',$level_user);
+            $this->db->where('id_sekolah',$id_sekolah);
             $this->db->delete('tbl_user_rule');
             echo " berhasil delete akses modul";
         }

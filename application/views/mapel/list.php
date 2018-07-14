@@ -1,6 +1,35 @@
 <div class="col-md-12">
     <!-- start: DYNAMIC TABLE PANEL -->
-   
+    <?php if($this->session->flashdata('data_mapel_masuk'))
+    {
+    ?>
+    <script>
+        alert("Data Mata Pelajaran Telah Disimpan");
+    </script>
+        
+    <?php
+    }
+    ?>
+    <?php if($this->session->flashdata('data_mapel_ubah'))
+    {
+    ?>
+    <script>
+        alert("Data Mata Pelajaran Telah Diubah");
+    </script>
+        
+    <?php
+    }
+    ?>
+    <?php if($this->session->flashdata('data_mapel_hapus'))
+    {
+    ?>
+    <script>
+        alert("Data Mata Pelajaran Telah Dihapus");
+    </script>
+        
+    <?php
+    }
+    ?>
     <div class="panel panel-default">
         <div class="panel-heading">
             <i class="fa fa-external-link-square"></i> Dynamic Table
@@ -20,6 +49,10 @@
                         <th>NO</th>
                         <th>KODE MAPEL</th>
                         <th>NAMA MATA PELAJARAN</th>
+                        <th>NILAI MINIMUM A</th>
+                        <th>NILAI MINIMUM B</th>
+                        <th>NILAI MINIMUM C</th>
+                        <th>NILAI MINIMUM D</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -51,6 +84,10 @@
                         "sClass": "text-center"
                     },
                     { "data": "nama_mapel" },
+                    { "data": "min_a" },
+                    { "data": "min_b" },
+                    { "data": "min_c" },
+                    { "data": "min_d" },
                     { "data": "aksi","width": "80px" },
                 ]
             } );

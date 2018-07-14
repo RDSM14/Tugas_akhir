@@ -1,15 +1,18 @@
+<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>/template/font-awesome/clocklib/assets/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>/template/font-awesome/clocklib/dist/bootstrap-clockpicker.min.css">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>/template/font-awesome/clocklib/assets/css/github.min.css">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>/template/font-awesome/clocklib/assets/css/clock.css">
+
 <div class="col-md-12">
     <!-- start: DYNAMIC TABLE PANEL -->
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            <i class="fa fa-external-link-square"></i> Filter Data
-            <a class="btn btn-xs btn-link panel-refresh" href="#"> <i class="fa fa-refresh"></i> </a>
+            Filter Data
         </div>
         <div class="panel-body">
             <?php echo form_open('jadwal/cetak_jadwal');?>
             <table class="table table-bordered">
-                <tr><td>JURUSAN</td><td><?php echo cmb_dinamis('jurusan', 'tbl_jurusan', 'nama_jurusan', 'kd_jurusan', null, "id='jurusan' onChange='loadRombel()()'") ?></td></tr>
                 <tr><td>KELAS</td><td>
                         <select id="kelas" class="form-control" onchange="loadRombel()()">
 
@@ -41,11 +44,10 @@
     <!-- start: DYNAMIC TABLE PANEL -->
 
     <div class="panel panel-default">
-        <div class="panel-heading">
-            <i class="fa fa-external-link-square"></i> Daftar Pelajaran
+        <div class="panel-heading"> Daftar Pelajaran
             <div class="panel-tools">
                 <a class="btn btn-xs btn-link panel-collapse collapses" href="#"> </a>
-                <?php echo anchor('siswa/add','<i class="fa fa-pencil-square-o" aria-hidden="true"></i>',"title='Buat Jadwal Pelajaran Baru'");?>
+                <?php echo anchor('jadwal/add','<i class="fa fa-pencil-square-o" aria-hidden="true"></i>',"title='Buat Jadwal Pelajaran Baru'");?>
                 <a class="btn btn-xs btn-link panel-refresh" href="#"> <i class="fa fa-refresh"></i> </a>
                 <a class="btn btn-xs btn-link panel-expand" href="#"> <i class="fa fa-search"></i> </a>
             </div>
@@ -67,11 +69,10 @@
    
     function loadRombel(){
         var kelas  = $("#kelas").val();
-        var jurusan= $("#jurusan").val();
         $.ajax({
             type:'GET',
             url :'<?php echo base_url() ?>index.php/jadwal/show_rombel',
-            data:'kelas='+kelas+'&jurusan='+jurusan,
+            data:'kelas='+kelas,
             success:function(html){
                 $("#showRombel").html(html);
                 loadPelajaran();
@@ -86,7 +87,7 @@
         $.ajax({
             type:'GET',
             url :'<?php echo base_url() ?>index.php/jadwal/dataJadwal',
-            data:'jurusan='+jurusan+'&kelas='+kelas+'&rombel='+rombel+'&id_kurikulum=<?php echo $this->uri->segment(3) ?>',
+            data:'kelas='+kelas+'&rombel='+rombel+'&id_kurikulum=<?php echo $this->uri->segment(3) ?>',
             success:function(html){
                 $("#tabel").html(html);
                 //loadRombel();
@@ -149,6 +150,9 @@
 
 </script>
 
+
+
+
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
@@ -162,7 +166,7 @@
             </div>
             <div class="modal-body">
                 <table class="table table-bordered">
-                    <tr><td>Kurikulum</td><td><?php echo cmb_dinamis('kurikulum', 'tbl_kurikulum', 'nama_kurikulum', 'id_kurikulum') ?></td></tr>
+                    <!--<tr><td>Kurikulum</td><td><?php echo cmb_dinamis('kurikulum', 'tbl_kurikulum', 'nama_kurikulum', 'id_kurikulum') ?></td></tr>-->
                     <tr><td>Semester</td><td><?php echo form_dropdown('semester', array(1 => 'SEMESTER 1', 2 => 'SEMESTER 2'), null, "class='form-control'"); ?></td></tr>
                 </table>
             </div>

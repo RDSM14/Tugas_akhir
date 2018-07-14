@@ -17,6 +17,7 @@ Class Tahunakademik extends CI_Controller {
         $columns = array(
             array('db' => 'id_tahun_akademik', 'dt' => 'id_tahunakademik'),
             array('db' => 'tahun_akademik', 'dt' => 'tahun_akademik'),
+            array('db' => 'semester_aktif', 'dt' => 'semester_aktif'),
             array('db' => 'is_aktif',
                 'dt' => 'is_aktif',
                 'formatter' => function( $d) {
@@ -55,8 +56,8 @@ Class Tahunakademik extends CI_Controller {
             $idTahunAkademik = $this->db->insert_id();
             
             // setup data dumy walikelas
-            $this->load->model('Model_walikelas');
-            $this->Model_walikelas->setup_walikelas($idTahunAkademik);
+            //$this->load->model('Model_walikelas');
+            //$this->Model_walikelas->setup_walikelas($idTahunAkademik);
             redirect('tahunakademik');
         } else {
             $this->template->load('template', 'tahunakademik/add');

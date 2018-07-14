@@ -5,7 +5,7 @@
         <div class="panel-heading">
             <i class="fa fa-external-link-square"></i> Dynamic Table
             <div class="panel-tools">
-                <?php echo anchor('tahunakademik/add','<i class="fa fa-pencil-square-o" aria-hidden="true"></i>',"title='Dambah Data'");?>
+                <?php echo anchor('tahunakademik/add','<i class="fa fa-pencil-square-o" aria-hidden="true"></i>',"title='Tambah Data'");?>
                 <a class="btn btn-xs btn-link panel-collapse collapses" href="#"> </a>
                 <a class="btn btn-xs btn-link panel-config" href="#panel-config" data-toggle="modal"> <i class="fa fa-wrench"></i> </a>
                 <a class="btn btn-xs btn-link panel-refresh" href="#"> <i class="fa fa-refresh"></i> </a>
@@ -19,7 +19,8 @@
                     <tr>
                         <th>NO</th>
                         <th>TAHUN AKADEMIK</th>
-                        <th>IS AKTIF</th>
+                        <th>SEMESTER AKTIF</th>
+                        <th>STATUS</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -49,6 +50,7 @@
                         "width": "420px",
                         "sClass": "text-center"
                     },
+                    { "data": "semester_aktif" },
                     { "data": "is_aktif" },
                     { "data": "aksi","width": "80px" },
                 ]

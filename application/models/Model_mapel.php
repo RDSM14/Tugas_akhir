@@ -6,18 +6,28 @@ class Model_mapel extends CI_Model {
     
     function save() {
         $data = array(
-            'kd_mapel'    => $this->input->post('kd_mapel', TRUE),
-            'nama_mapel'  => $this->input->post('nama_mapel', TRUE)
+            'kd_mapel'      => $this->input->post('kd_mapel', TRUE),
+            'nama_mapel'    => $this->input->post('nama_mapel', TRUE),
+            'min_a'         => $this->input->post('min_a', TRUE),
+            'min_b'         => $this->input->post('min_b', TRUE),
+            'min_c'         => $this->input->post('min_c', TRUE),
+            'min_d'         => $this->input->post('min_d', TRUE)
+            
         );
         $this->db->insert($this->table,$data);
     }
     
     function update() {
         $data = array(
-            'nama_mapel'  => $this->input->post('nama_mapel', TRUE)
+            'kd_mapel'    => $this->input->post('kd_mapel', TRUE),
+            'nama_mapel'    => $this->input->post('nama_mapel', TRUE),
+            'min_a'         => $this->input->post('min_a', TRUE),
+            'min_b'         => $this->input->post('min_b', TRUE),
+            'min_c'         => $this->input->post('min_c', TRUE),
+            'min_d'         => $this->input->post('min_d', TRUE)
         );
-        $kd_mapel   = $this->input->post('kd_mapel');
-        $this->db->where('kd_mapel',$kd_mapel);
+        $id_mapel   = $this->input->post('id_mapel');
+        $this->db->where('id_mapel',$id_mapel);
         $this->db->update($this->table,$data);
     }
 

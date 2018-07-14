@@ -38,6 +38,14 @@
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="form-field-1">
+                    SEMESTER AKTIF
+                </label>
+                <div class="col-sm-9">
+                    <?php echo form_dropdown('semester_aktif',array('1'=>'1','2'=>'2'),$tahunakademik['semester_aktif'],"class='form-control'")?>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="form-field-1">
                     IS AKTIF
                 </label>
                 <div class="col-sm-9">

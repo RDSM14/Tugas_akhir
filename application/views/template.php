@@ -59,7 +59,7 @@
                 <div class="navbar-tools">
                     <!-- start: TOP NAVIGATION MENU -->
                     <ul class="nav navbar-right">
-                        <!-- start: TO-DO DROPDOWN -->
+                        <!-- start: TO-DO DROPDOWN --><?php /*
                         <li class="dropdown">
                             <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" data-close-others="true" href="#">
                                 <i class="fa fa-envelope-o" aria-hidden="true"></i>
@@ -160,7 +160,7 @@
                             </ul>
                         </li>
                         <!-- end: TO-DO DROPDOWN-->
-                        <!-- start: NOTIFICATION DROPDOWN -->
+                        <!-- start: NOTIFICATION DROPDOWN --><?php /*
                         <li class="dropdown">
                             <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" data-close-others="true" href="#">
                                 <i class="fa fa-map-o" aria-hidden="true"></i>
@@ -275,7 +275,7 @@
                             </ul>
                         </li>
                         <!-- end: NOTIFICATION DROPDOWN -->
-                        <!-- start: MESSAGE DROPDOWN -->
+                        <!-- start: MESSAGE DROPDOWN --><?php /*
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-close-others="true" data-hover="dropdown" data-toggle="dropdown" href="#">
                                 <i class="fa fa-wifi" aria-hidden="true"></i>
@@ -367,7 +367,7 @@
                                     </a>
                                 </li>
                             </ul>
-                        </li>
+                        </li>*/ ?>
                         <!-- end: MESSAGE DROPDOWN -->
                         <!-- start: USER DROPDOWN -->
                         <li class="dropdown current-user">
@@ -383,21 +383,6 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="pages_calendar.html">
-                                        <i class="clip-calendar"></i> &nbsp;My Calendar
-                                    </a>
-                                <li>
-                                    <a href="pages_messages.html">
-                                        <i class="clip-bubble-4"></i> &nbsp;My Messages (3)
-                                    </a>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <a href="utility_lock_screen.html">
-                                        <i class="clip-locked"></i> &nbsp;Lock Screen
-                                    </a>
-                                </li>
-                                <li>
 
                                     <?php
                                     echo anchor('auth/logout', '<i class="fa fa-sign-out" aria-hidden="true"></i> &nbsp;Log Out');
@@ -407,7 +392,7 @@
                             </ul>
                         </li>
                         <!-- end: USER DROPDOWN -->
-                        <!-- start: PAGE SIDEBAR TOGGLE -->
+                        <!-- start: PAGE SIDEBAR TOGGLE 
                         <li>
                             <a class="sb-toggle" href="#"><i class="fa fa-outdent"></i></a>
                         </li>
@@ -432,12 +417,13 @@
                     <!-- end: MAIN MENU TOGGLER BUTTON -->
                     <!-- start: MAIN NAVIGATION MENU -->
                     <ul class="main-navigation-menu">
-
+                        <!--header-->
                         <!-- ini area menu dinamis --->
 
                         <?php
                         $id_level_user = $this->session->userdata('id_level_user');
-                        $sql_menu = "SELECT * FROM tabel_menu WHERE id in(select id_menu from tbl_user_rule where id_level_user=$id_level_user) and is_main_menu=0";
+                        $id_sekolah = $this->session->userdata('id_sekolah');
+                        $sql_menu = "SELECT * FROM tabel_menu WHERE id in(select id_menu from tbl_user_rule where id_level_user=$id_level_user AND id_sekolah=$id_sekolah) and is_main_menu=0";
                         $main_menu = $this->db->query($sql_menu)->result();
                         foreach ($main_menu as $main) {
                             // chek apakah ada submenu ?
@@ -465,7 +451,7 @@
                         }
                         ?>
                         
-                        <li class="active_open"><a href="<?php echo base_url() ?>/auth/logout"><i class="fa fa-sign-out"></i><span class="title">LOGOUT</span></a></li>
+                        <!--<li class="active_open"><a href="<?php echo base_url() ?>/auth/logout"><i class="fa fa-sign-out"></i><span class="title">LOGOUT</span></a></li>-->
 
                     </ul>
                     <!-- end: MAIN NAVIGATION MENU -->
@@ -591,7 +577,7 @@
                                 </div>
                             </div>
                             <!-- end: STYLE SELECTOR BOX -->
-                            <!-- start: PAGE TITLE & BREADCRUMB -->
+                            <!-- start: PAGE TITLE & BREADCRUMB 
                             <ol class="breadcrumb">
                                 <li>
                                     <i class="fa fa-home" aria-hidden="true"></i>
@@ -612,7 +598,7 @@
                                         </div>
                                     </form>
                                 </li>
-                            </ol>
+                            </ol>-->
                             <div class="page-header">
                                 <h1>Dashboard <small>overview &amp; stats </small></h1>
                             </div>
@@ -1036,7 +1022,7 @@
             
             
             
-            
+            <!--
             <script type="text/javascript" src="http://clipone.nurisakbar.com/bower_components/bootstrap/dist/js/"></script>
             <script type="text/javascript" src="http://clipone.nurisakbar.com/bower_components/bootstrap-hover-dropdown/"></script>
             <script type="text/javascript" src="http://clipone.nurisakbar.com/bower_components/blockUI/"></script>
@@ -1045,8 +1031,8 @@
             <script type="text/javascript" src="http://clipone.nurisakbar.com/bower_components/jquery.cookie/"></script>
             <script type="text/javascript" src="http://clipone.nurisakbar.com/bower_components/sweetalert/dist/"></script>
             <script type="text/javascript" src="http://clipone.nurisakbar.com/assets/js/min/"></script>
-            <!-- end: MAIN JAVASCRIPTS -->
-            <!-- start: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
+            <!-- end: MAIN JAVASCRIPTS
+            <!-- start: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY 
             <script src="http://clipone.nurisakbar.com/bower_components/Flot/"></script>
             <script src="http://clipone.nurisakbar.com/bower_components/Flot/"></script>
             <script src="http://clipone.nurisakbar.com/bower_components/Flot/"></script>

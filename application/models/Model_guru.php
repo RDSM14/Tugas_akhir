@@ -27,10 +27,14 @@ class Model_guru extends CI_Model {
     }
     
     function chekLogin($username,$password){
-        $this->db->where('username',$username);
+        $this->db->where('nuptk',$username);
         $this->db->where('password',  md5($password));
         $user = $this->db->get('tbl_guru')->row_array();
         return $user;
     }
-
+    function chekwali($loginGuruwali){
+        $this->db->where('id_guru',$loginGuruwali);
+        $user = $this->db->get('tbl_walikelas')->row_array();
+        return $user;
+    }
 }

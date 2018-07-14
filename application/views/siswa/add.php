@@ -1,4 +1,4 @@
-<div class="col-sm-6">
+<div class="col-sm-12">
     <!-- start: TEXT FIELDS PANEL -->
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -29,10 +29,10 @@
 
             <div class="form-group">
                 <label class="col-sm-3 control-label" for="form-field-1">
-                    NIM / NISN
+                    NIS / NISN
                 </label>
                 <div class="col-sm-4">
-                    <input type="text" name="nim" placeholder="MASUKAN NIM" id="form-field-1" class="form-control">
+                    <input type="text" name="nim" placeholder="MASUKAN NIS" id="form-field-1" class="form-control">
                 </div>
                 <div class="col-sm-5">
                     <input type="text" name="nisn" placeholder="MASUKAN NISN" id="form-field-1" class="form-control">
@@ -87,14 +87,79 @@
                     <input type="file" name="userfile">
                 </div>
             </div>
-
             <div class="form-group">
                 <label class="col-sm-3 control-label" for="form-field-1">
-                    ROMBEL
+                    Alamat
+                </label>
+                <div class="col-sm-9">
+                    <textarea class="form-control" name="alamat_siswa"></textarea>
+                </div>
+               
+            </div>
+
+            <!--<div class="form-group">
+                <label class="col-sm-3 control-label" for="form-field-1">
+                    RT / RW
+                </label>
+                <div class="col-sm-3">
+                    <input type="text" name="rt" placeholder="RT" id="form-field-1" class="form-control">
+                </div>
+                                <div class="col-sm-3">
+                    <input type="text" name="rw" placeholder="RW" id="form-field-1" class="form-control">
+                </div>
+            </div>-->
+            
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="form-field-1">
+                    Telepon Siswa 
+                </label>
+                <div class="col-sm-9">
+                    <input type="text" name="telepon_siswa" placeholder="MASUKAN NOMOR TELEPON SISWA" id="form-field-1" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="form-field-1">
+                     Diterima di Kelas
                 </label>
                 <div class="col-sm-6">
                     <?php echo cmb_dinamis('rombel', 'tbl_rombel', 'nama_rombel', 'id_rombel') ?>
                 </div>
+            </div>
+             <div class="form-group">
+                <label class="col-sm-3 control-label" for="form-field-1">
+                    Tanggal Diterima
+                </label>
+                <div class="col-sm-6">
+                    <input type="date" name="tanggal_terima" id="form-field-1" class="form-control">
+                </div>
+            </div> 
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="form-field-1">
+                    Asal Sekolah
+                </label>
+                <div class="col-sm-9">
+                    <textarea class="form-control" name="asal_sekolah"></textarea>
+                </div>
+               
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="form-field-1">
+                    Status Siswa
+                </label>
+                <div class="col-sm-5">
+                    <?php
+                    echo form_dropdown('status_keluarga', array('Anak Kandung' => 'Anak Kandung', 'Anak Tiri' => 'Anak Tiri', 'Keponakan' => 'Keponakan'), null, "class='form-control'");
+                    ?>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="form-field-1">
+                    Data Orang Tua 
+                </label>
+                <div class="col-sm-9">
+                    <input type="text" name="ortu" placeholder="Masukkan data ortu" id="form-field-1" class="form-control">
+                </div>
+                <input type="hidden" name="id_sekolah" value="<?php echo $_SESSION['id_sekolah'] ?>">
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="form-field-1">
@@ -107,6 +172,7 @@
                     <?php echo anchor('siswa', 'Kembali', array('class' => 'btn btn-info btn-sm')); ?>
                 </div>
             </div>
+            
             </form>
         </div>
     </div>
@@ -115,12 +181,12 @@
 
 
 
-<div class="col-sm-6">
-    <!-- start: TEXT FIELDS PANEL -->
+ <!--<div class="col-sm-6">
+    <!-- start: TEXT FIELDS PANEL
     <div class="panel panel-default">
         <div class="panel-heading">
             <i class="fa fa-external-link-square"></i>
-            Form Data Peserta Didik
+            Form Data Lain Peserta Didik
             <div class="panel-tools">
                 <a class="btn btn-xs btn-link panel-collapse collapses" href="#">
                 </a>
@@ -143,77 +209,7 @@
             <?php
             echo form_open_multipart('siswa/add', 'role="form" class="form-horizontal"');
             ?>
-
-            <div class="form-group">
-                <label class="col-sm-3 control-label" for="form-field-1">
-                    Alamat
-                </label>
-                <div class="col-sm-6">
-                    <textarea class="form-control"></textarea>
-                </div>
-               
-            </div>
-
-            <div class="form-group">
-                <label class="col-sm-3 control-label" for="form-field-1">
-                    RT / RW
-                </label>
-                <div class="col-sm-3">
-                    <input type="text" name="nama" placeholder="RT" id="form-field-1" class="form-control">
-                </div>
-                                <div class="col-sm-3">
-                    <input type="text" name="nama" placeholder="RW" id="form-field-1" class="form-control">
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-sm-3 control-label" for="form-field-1">
-                    TTL
-                </label>
-                <div class="col-sm-5">
-                    <input type="text" name="tempat_lahir" placeholder="TEMPAT LAHIR" id="form-field-1" class="form-control">
-                </div>
-                <div class="col-sm-4">
-                    <input type="date" name="tanggal_lahir" placeholder="TANGGAL LAHIR" id="form-field-1" class="form-control">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label" for="form-field-1">
-                    JENIS KELAMIN
-                </label>
-                <div class="col-sm-5">
-                    <?php
-                    echo form_dropdown('gender', array('P' => 'LAKI LAKI', 'W' => 'PEREMPUAN'), null, "class='form-control'");
-                    ?>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label" for="form-field-1">
-                    AGAMA
-                </label>
-                <div class="col-sm-5">
-                    <?php
-                    echo cmb_dinamis('agama', 'tbl_agama', 'nama_agama', 'kd_agama');
-                    ?>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label" for="form-field-1">
-                    Foto
-                </label>
-                <div class="col-sm-2">
-                    <input type="file" name="userfile">
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-sm-3 control-label" for="form-field-1">
-                    ROMBEL
-                </label>
-                <div class="col-sm-6">
-                    <?php echo cmb_dinamis('rombel', 'tbl_rombel', 'nama_rombel', 'id_rombel') ?>
-                </div>
-            </div>
+             
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="form-field-1">
 
@@ -227,6 +223,6 @@
             </div>
             </form>
         </div>
-    </div>
-    <!-- end: TEXT FIELDS PANEL -->
-</div>
+    </div> -->
+    <!-- end: TEXT FIELDS PANEL 
+</div>-->

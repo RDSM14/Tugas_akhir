@@ -30,10 +30,13 @@
 
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="form-field-1">
-                    NIM
+                    NIS / NISN
                 </label>
-                <div class="col-sm-9">
+                <div class="col-sm-4">
                     <input type="text" value="<?php echo $siswa['nim'] ?>" readonly="" placeholder="MASUKAN NIM" id="form-field-1" class="form-control">
+                </div>
+                <div class="col-sm-5">
+                    <input type="text" value="<?php echo $siswa['nisn'] ?>" readonly="" name="nisn" placeholder="MASUKAN NISN" id="form-field-1" class="form-control">
                 </div>
             </div>
             <div class="form-group">
@@ -69,7 +72,7 @@
                 <label class="col-sm-2 control-label" for="form-field-1">
                     AGAMA
                 </label>
-                <div class="col-sm-3">
+                <div class="col-sm-2">
                     <?php
                     echo cmb_dinamis('agama', 'tbl_agama', 'nama_agama', 'kd_agama', $siswa['kd_agama']);
                     ?>
@@ -88,11 +91,61 @@
                 <label class="col-sm-2 control-label" for="form-field-1">
                     PILIH ROMBEL
                 </label>
-                <div class="col-sm-6">
+                <div class="col-sm-2">
                    <?php echo cmb_dinamis('rombel', 'tbl_rombel', 'nama_rombel', 'id_rombel',$siswa['id_rombel'])?>
                 </div>
             </div>
             <div class="form-group">
+                <label class="col-sm-2 control-label" for="form-field-1">
+                    ALAMAT
+                </label>
+                 <div class="col-sm-9">
+                    <textarea class="form-control" name="alamat_siswa"><?php echo $siswa['alamat_siswa'] ?></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="form-field-1">
+                    TELEPON SISWA
+                </label>
+                <div class="col-sm-9">
+                    <input type="text" value="<?php echo $siswa['telepon_siswa'] ?>" name="telepon_siswa" placeholder="MASUKAN NOMOR TELEPON SISWA" id="form-field-1" class="form-control">
+                </div>
+            </div>
+                 <div class="form-group">
+                <label class="col-sm-2 control-label" for="form-field-1">
+                    DITERIMA DI KELAS
+                </label>
+                 <div class="col-sm-2">
+                   <?php echo cmb_dinamis('kelas_terima', 'tbl_rombel', 'nama_rombel', 'id_rombel',$siswa['id_rombel'])?>
+                </div>
+            </div>
+             <div class="form-group">
+                <label class="col-sm-2 control-label" for="form-field-1">
+                    TANGGAL DITERIMA
+                </label>
+                <div class="col-sm-6">
+                    <input type="date" name="tanggal_terima" value="<?php echo $siswa['tanggal_terima'] ?>" id="form-field-1" class="form-control">
+                </div>
+            </div> 
+            
+             <div class="form-group">
+                <label class="col-sm-2 control-label" for="form-field-1">
+                    ASAL SEKOLAH
+                </label>
+                <div class="col-sm-6">
+                    <input type="text" name="asal_sekolah" value="<?php echo $siswa['asal_sekolah'] ?>" id="form-field-1" class="form-control">
+                </div>
+            </div> 
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="form-field-1">
+                    STATUS SISWA
+                </label>
+                <div class="col-sm-9">
+                    <?php
+                    echo form_dropdown('status_keluarga', array('Anak Kandung' => 'Anak Kandung', 'Anak Tiri' => 'Anak Tiri', 'Keponakan' => 'Keponakan'), $siswa['status_keluarga'], "class='form-control'");
+                    ?>
+                </div>
+            </div> 
                 <label class="col-sm-2 control-label" for="form-field-1">
 
                 </label>
