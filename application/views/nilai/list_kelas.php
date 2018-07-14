@@ -20,16 +20,17 @@
         </div>
         <div class="panel-body">
             <table class="table table-bordered">
-                <tr><th>NO</th><th>JURUSAN</th><th>MATAPELAJARAN</th><th>HARI</th><th>JAM</th><th>RUANG</th><th></td></tr>
+                <tr><th>NO</th><th>KELAS</th><th>MATAPELAJARAN</th><th>HARI</th><th>JAM MULAI</th><th>JAM SELESAI</th><th>RUANG</th><th></td></tr>
                 <?php
                 $no=1;;
                 foreach ($jadwal->result() as $row){
                     echo "<tr>
                         <td>$no</td>
-                        <td>KELAS $row->kelas $row->nama_jurusan</td>
+                        <td>KELAS $row->kelas $row->nama_rombel</td>
                         <td>$row->nama_mapel</td>
                         <td>$row->hari</td>
-                        <td>$row->jam</td>
+                        <td>$row->jam_mulai</td>
+                        <td>$row->jam_selesai</td>
                         <td>$row->nama_ruangan</td>
                         <td>".anchor('nilai/rombel/'.$row->id_jadwal,'<i class="fa fa-eye" aria-hidden="true"></i>',"title='Lihat Kelas'")."</td>
                         </tr>";

@@ -11,13 +11,13 @@ Class jadwal extends CI_Controller{
             // load daftar ngajar guru
             $sql = "SELECT tj.id_jadwal,tj.kelas,tm.nama_mapel,tj.jam_mulai,tj.jam_selesai,tr.nama_ruangan,tj.hari,tj.semester
                     FROM tbl_jadwal as tj,tbl_ruangan as tr,tbl_mapel as tm
-                    WHERE tj.id_mapel=tm.id_mapel and tj.kd_ruangan=tr.kd_ruangan and tj.id_guru=".$this->session->userdata('id_guru');
+                    WHERE tj.id_mapel=tm.id_mapel and tj.id_ruangan=tr.id_ruangan and tj.id_guru=".$this->session->userdata('id_guru');
             $data['jadwal'] = $this->db->query($sql); 
             $this->template->load('template','jadwal/jadwal_ajar_guru',$data);
         }elseif($this->session->userdata('id_level_user')==6||$this->session->userdata('id_level_user')==7){
             // load daftar jadwal siswa
             $sql = "SELECT tj.id_jadwal,tj.kelas,tm.nama_mapel,tj.jam_mulai,tj.jam_selesai,tr.nama_ruangan,tj.hari,tj.semester,tj.id_rombel,gr.nama_guru                    FROM tbl_jadwal as tj,tbl_ruangan as tr,tbl_mapel as tm,tbl_guru as gr
-                    WHERE tj.id_mapel=tm.id_mapel and tj.kd_ruangan=tr.kd_ruangan and tj.id_guru=gr.id_guru and tj.id_rombel=".$this->session->userdata('id_rombel');
+                    WHERE tj.id_mapel=tm.id_mapel and tj.id_ruangan=tr.id_ruangan and tj.id_guru=gr.id_guru and tj.id_rombel=".$this->session->userdata('id_rombel');
             $data['jadwal'] = $this->db->query($sql); 
             $this->template->load('template','jadwal/jadwal_ajar_siswa',$data);
         }else{
@@ -44,7 +44,7 @@ Class jadwal extends CI_Controller{
         if($kelas=='semua_kelas'){
             $selected_kelas = '';
         }else{
-            $selected_kelas="and kd.kelas='$kelas'";
+            $selected_kelas="and id.kelas='$kelas'";
         }
         echo "<table class='table table-striped table-bordered table-hover table-full-width dataTable'>
                 <thead>
@@ -130,49 +130,6 @@ Class jadwal extends CI_Controller{
         }
     }
     
-    function updateGuru(){
-        $id_guru = $_GET['id_guru'];
-        $id_jadwal = $_GET['id_jadwal'];
-        $this->db->where('id_jadwal',$id_jadwal);
-        $this->db->update('tbl_jadwal',array('id_guru'=>$id_guru));
-    }
-    
-   function updateRuangan(){
-        $kd_ruangan = $_GET['kd_ruangan'];
-        $id_jadwal  = $_GET['id_jadwal'];
-        $this->db->where('id_jadwal',$id_jadwal);
-        $this->db->update('tbl_jadwal',array('kd_ruangan'=>$kd_ruangan));
-    }
-    
-    function updateHari(){
-        $hari       = $_GET['hari'];
-        $id_jadwal  = $_GET['id_jadwal'];
-        $this->db->where('id_jadwal',$id_jadwal);
-        $this->db->update('tbl_jadwal',array('hari'=>$hari));
-    }
-    
-    function updateJam_mulai(){
-        $jam_mulai        = $_GET['jam_mulai'];
-        $id_jadwal  = $_GET['id_jadwal'];
-        $this->db->where('id_jadwal',$id_jadwal);
-        $this->db->update('tbl_jadwal',array('jam_mulai'=>$jam_mulai));
-    }
-    function updateJam_selesai(){
-        $jam_mulai       = $_GET['jam_selesai'];
-        $id_jadwal  = $_GET['id_jadwal'];
-        $this->db->where('id_jadwal',$id_jadwal);
-        $this->db->update('tbl_jadwal',array('jam'=>$jam_mulai));
-    }
-    
-    function show_rombel(){
-        echo "<select id='rombel' name='rombel' class='form-control' onchange='loadPelajaran()'>";
-        $where  = array ('kelas'=>$_GET['kelas']);
-        $rombel = $this->db->get_where('tbl_rombel',$where);
-        foreach ($rombel->result() as $row){
-            echo "<option value='$row->id_rombel'>$row->nama_rombel</option>";
-        }
-        echo "</select>";
-    }
     
     function cetak_jadwal(){
         $rombel = $_POST['rombel'];

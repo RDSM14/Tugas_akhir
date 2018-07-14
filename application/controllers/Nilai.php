@@ -4,9 +4,9 @@ class Nilai extends CI_Controller{
     
     function index(){
                     // load daftar ngajar guru
-        $sql = "SELECT tj.id_rombel,tj.id_jadwal,tjr.nama_jurusan,tj.kelas,tm.nama_mapel,tj.jam,tr.nama_ruangan,tj.hari,tj.semester
-                    FROM tbl_jadwal as tj,tbl_jurusan as tjr,tbl_ruangan as tr,tbl_mapel as tm
-                    WHERE tj.kd_jurusan=tjr.kd_jurusan and tj.kd_mapel=tm.kd_mapel and tj.kd_ruangan=tr.kd_ruangan and tj.id_guru=".$this->session->userdata('id_guru');
+        $sql = "SELECT tj.id_rombel,tj.id_jadwal,tj.kelas,tm.nama_mapel,tj.jam_mulai,tj.jam_selesai,tr.nama_ruangan,tj.hari,tj.semester,tb.nama_rombel
+                    FROM tbl_jadwal as tj,tbl_ruangan as tr,tbl_mapel as tm,tbl_rombel as tb
+                    WHERE tj.id_mapel=tm.id_mapel and tj.id_ruangan=tr.id_ruangan and tb.id_rombel=tj.id_rombel and tj.id_guru='".$_SESSION['id_guru']."'";
         $data['jadwal'] = $this->db->query($sql); 
         $this->template->load('template','nilai/list_kelas',$data);
     }
@@ -20,17 +20,15 @@ class Nilai extends CI_Controller{
                             FROM tbl_jadwal AS j,tbl_jurusan as jr, tbl_rombel as rb,tbl_mapel as mp
                             WHERE j.kd_jurusan=jr.kd_jurusan and rb.id_rombel=j.id_rombel and mp.kd_mapel=j.kd_mapel 
                             and j.id_jadwal=13='$id_rombel'";*/
-        $rombel         = "SELECT * FROM tbl_jadwal,tbl_rombel,tbl_siswa,tbl_mapel,tbl_jurusan WHERE                              tbl_jadwal.id_rombel=tbl_rombel.id_rombel AND tbl_rombel.id_rombel=tbl_siswa.id_rombel AND id_jadwal='$id_jadwal'";
-        $siswa          =   "SELECT s.nim,s.nama
-                            FROM tbl_history_kelas as hk,tbl_siswa as s 
-                            WHERE hk.nim=s.nim and hk.id_tahun_akademik=".  get_tahun_akademik_aktif('id_tahun_akademik')." 
-                            and hk.id_rombel='$id_rombel'";
+        $rombel         = "SELECT * FROM tbl_jadwal,tbl_rombel,tbl_siswa,tbl_mapel WHERE                              tbl_jadwal.id_rombel=tbl_rombel.id_rombel AND tbl_rombel.id_rombel=tbl_siswa.id_rombel AND id_jadwal='$id_jadwal'";
+        $siswa          =   "SELECT s.nim,s.nama,s.nisn,n.nilai_pengetahuan,n.nilai_keterampilan,n.nilai_spiritual,n.nilai_sosial
+                             FROM tbl_history_kelas as hk,tbl_siswa as s,tbl_nilai as n
+                             WHERE hk.nim=s.nim and n.nisn=s.nisn and hk.id_tahun_akademik=".get_tahun_akademik_aktif('id_tahun_akademik')." 
+                             and hk.id_rombel='$id_rombel' and s.id_sekolah='".$_SESSION['id_sekolah']."'";
         $data['rombel'] =   $this->db->query($rombel)->row_array();
         $data['siswa']  =   $this->db->query($siswa)->result();
         $this->template->load('template','nilai/form_nilai',$data);
     }
-    
- 
     
     function update_nilai(){
         $nim        = $_GET['nim'];
