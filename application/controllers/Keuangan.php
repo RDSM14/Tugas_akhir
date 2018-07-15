@@ -4,6 +4,11 @@ class Keuangan extends CI_Controller{
     function __construct() {
         parent::__construct();
         $this->load->model('Model_keuangan');
+        
+        if($_SESSION['id_sekolah'] == null)
+        {
+            redirect('');
+        }
     }
     
     

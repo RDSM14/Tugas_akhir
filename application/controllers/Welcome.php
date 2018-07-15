@@ -20,6 +20,10 @@ class Welcome extends CI_Controller {
      * @see https://codeigniter.com/user_guide/general/urls.html
      */
     public function index() {
+        if($_SESSION['id_sekolah'] == null)
+        {
+            redirect('');
+        }
         $this->output->delete_cache();
         //$this->load->view('template');
         $this->template->load('template', 'table-example');

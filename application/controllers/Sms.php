@@ -3,7 +3,12 @@ class sms extends CI_Controller{
     
     
     function index(){
+        if($_SESSION['id_sekolah'] == null)
+        {
+            redirect('');
+        }
         $this->template->load('template','sms/form_sms');
+        
     }
     
     

@@ -6,6 +6,11 @@ Class Jenis_pembayaran extends CI_Controller {
         parent::__construct();
         $this->load->library('ssp');
         $this->load->model('Model_jenis_pembayaran');
+        
+        if($_SESSION['id_sekolah'] == null)
+        {
+            redirect('');
+        }
     }
 
     function data() {

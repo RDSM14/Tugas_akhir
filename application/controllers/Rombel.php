@@ -4,6 +4,10 @@ Class Rombel extends CI_Controller {
 
     function __construct() {
         parent::__construct();
+        if($_SESSION['id_sekolah'] == null)
+        {
+            redirect('');
+        }
         $this->load->library('ssp');
         $this->load->model('Model_rombel');
     }

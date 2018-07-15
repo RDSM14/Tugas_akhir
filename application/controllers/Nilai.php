@@ -3,6 +3,11 @@ class Nilai extends CI_Controller{
     
     
     function index(){
+        
+        if($_SESSION['id_sekolah'] == null)
+        {
+            redirect('');
+        }
                     // load daftar ngajar guru
         $sql = "SELECT tj.id_rombel,tj.id_jadwal,tj.kelas,tm.nama_mapel,tj.jam_mulai,tj.jam_selesai,tr.nama_ruangan,tj.hari,tj.semester,tb.nama_rombel
                     FROM tbl_jadwal as tj,tbl_ruangan as tr,tbl_mapel as tm,tbl_rombel as tb
@@ -21,33 +26,182 @@ class Nilai extends CI_Controller{
                             WHERE j.kd_jurusan=jr.kd_jurusan and rb.id_rombel=j.id_rombel and mp.kd_mapel=j.kd_mapel 
                             and j.id_jadwal=13='$id_rombel'";*/
         $rombel         = "SELECT * FROM tbl_jadwal,tbl_rombel,tbl_siswa,tbl_mapel WHERE                              tbl_jadwal.id_rombel=tbl_rombel.id_rombel AND tbl_rombel.id_rombel=tbl_siswa.id_rombel AND id_jadwal='$id_jadwal'";
-        $siswa          =   "SELECT s.nim,s.nama,s.nisn,n.nilai_pengetahuan,n.nilai_keterampilan,n.nilai_spiritual,n.nilai_sosial
-                             FROM tbl_history_kelas as hk,tbl_siswa as s,tbl_nilai as n
-                             WHERE hk.nim=s.nim and n.nisn=s.nisn and hk.id_tahun_akademik=".get_tahun_akademik_aktif('id_tahun_akademik')." 
-                             and hk.id_rombel='$id_rombel' and s.id_sekolah='".$_SESSION['id_sekolah']."'";
+        $siswa          =   "SELECT s.nama,s.nisn
+                            FROM tbl_history_kelas as hk,tbl_siswa as s
+                            WHERE hk.nisn=s.nisn ";
+        
+        $deskripsi      =   "SELECT * FROM tbl_deskripsi_nilai tdn, tbl_nilai tn WHERE tdn.id_nilai = tn.id_nilai";
+        
         $data['rombel'] =   $this->db->query($rombel)->row_array();
         $data['siswa']  =   $this->db->query($siswa)->result();
+        $data['deskripsi']  =   $this->db->query($deskripsi)->result();
         $this->template->load('template','nilai/form_nilai',$data);
     }
     
     function update_nilai(){
-        $nim        = $_GET['nim'];
+        $nisn        = $_GET['nisn'];
         $id_jadwal  = $_GET['id_jadwal'];
-        $nilai      = $_GET['nilai'];
+        $nilai_pengetahuan      = $_GET['nilai'];
         
         // parameter
-        $params = array('nim'=>$nim,'id_jadwal'=>$id_jadwal,'nilai'=>$nilai);
+        $params = array('nisn'=>$nisn,'id_jadwal'=>$id_jadwal,'nilai_pengetahuan'=>$nilai_pengetahuan);
         
-        $validasi = array('nim'=>$nim,'id_jadwal'=>$id_jadwal);
+        $validasi = array('nisn'=>$nisn,'id_jadwal'=>$id_jadwal);
         $chek = $this->db->get_where('tbl_nilai',$validasi);
         if($chek->num_rows()>0){
             // proses update
-            $this->db->where('nim',$nim);
-            $this->db->where('id_jadwal',$id_jadwal);
-            $this->db->update('tbl_nilai',array('nilai'=>$nilai));
+            $this->db->where('nisn',$nisn);
+            $this->db->where('id_jadwal', $id_jadwal);
+            $this->db->update('tbl_nilai',array('nilai_pengetahuan'=>$nilai_pengetahuan));
         }else{
             // proses insert
             $this->db->insert('tbl_nilai',$params);
+            echo "data sudah masuk";
+        }
+    }
+    
+    function update_nilai_spiritual(){
+        $nisn        = $_GET['nisn'];
+        $id_jadwal  = $_GET['id_jadwal'];
+        $nilai_spiritual      = $_GET['nilai_spiritual'];
+        
+        // parameter
+        $params = array('nisn'=>$nisn,'id_jadwal'=>$id_jadwal,'nilai_spiritual'=>$nilai_spiritual);
+        
+        $validasi = array('nisn'=>$nisn,'id_jadwal'=>$id_jadwal);
+        $chek = $this->db->get_where('tbl_nilai',$validasi);
+        if($chek->num_rows()>0){
+            // proses update
+            $this->db->where('nisn',$nisn);
+            $this->db->where('id_jadwal', $id_jadwal);
+            $this->db->update('tbl_nilai',array('nilai_spiritual'=>$nilai_spiritual));
+        }else{
+            // proses insert
+            $this->db->insert('tbl_nilai',$params);
+            echo "data sudah masuk";
+        }
+    }
+    
+    function update_nilai_sosial(){
+        $nisn        = $_GET['nisn'];
+        $id_jadwal  = $_GET['id_jadwal'];
+        $nilai_sosial      = $_GET['nilai_sosial'];
+        
+        // parameter
+        $params = array('nisn'=>$nisn,'id_jadwal'=>$id_jadwal,'nilai_sosial'=>$nilai_spiritual);
+        
+        $validasi = array('nisn'=>$nisn,'id_jadwal'=>$id_jadwal);
+        $chek = $this->db->get_where('tbl_nilai',$validasi);
+        if($chek->num_rows()>0){
+            // proses update
+            $this->db->where('nisn',$nisn);
+            $this->db->where('id_jadwal', $id_jadwal);
+            $this->db->update('tbl_nilai',array('nilai_sosial'=>$nilai_sosial));
+        }else{
+            // proses insert
+            $this->db->insert('tbl_nilai',$params);
+            echo "data sudah masuk";
+        }
+    }
+    
+    function update_nilai_keterampilan(){
+        $nisn        = $_GET['nisn'];
+        $id_jadwal  = $_GET['id_jadwal'];
+        $nilai_keterampilan      = $_GET['nilai_keterampilan'];
+        
+        // parameter
+        $params = array('nisn'=>$nisn,'id_jadwal'=>$id_jadwal,'nilai_keterampilan'=>$nilai_keterampilan);
+        
+        $validasi = array('nisn'=>$nisn,'id_jadwal'=>$id_jadwal);
+        $chek = $this->db->get_where('tbl_nilai',$validasi);
+        if($chek->num_rows()>0){
+            // proses update
+            $this->db->where('nisn',$nisn);
+            $this->db->where('id_jadwal', $id_jadwal);
+            $this->db->update('tbl_nilai',array('nilai_keterampilan'=>$nilai_keterampilan));
+        }else{
+            // proses insert
+            $this->db->insert('tbl_nilai',$params);
+            echo "data sudah masuk";
+        }
+    }
+    
+     function update_deskripsi_pengetahuan(){
+        $id_deskripsi = $_GET['id_deskripsi'];
+        $deskripsi_pengetahuan = $_GET['deskripsi_pengetahuan'];
+        
+        // parameter
+        $params = array('id_deskripsi'=>$id_deskripsi,'deskripsi_pengetahuan'=>$deskripsi_pengetahuan);
+        
+        $validasi = array('id_deskripsi'=>$id_deskripsi);
+        $chek = $this->db->get_where('tbl_deskripsi_nilai', $validasi);
+        if($chek->num_rows()>0){
+            // proses update
+            $this->db->where('id_deskripsi', $id_deskripsi);
+            $this->db->update('tbl_deskripsi_nilai', array('deskripsi_pengetahuan'=> $deskripsi_pengetahuan));
+        }else{
+            // proses insert
+            $this->db->insert('tbl_deskripsi_nilai',$params);
+            echo "data sudah masuk";
+        }
+    }
+    
+     function update_deskripsi_spiritual(){
+        $id_deskripsi = $_GET['id_deskripsi'];
+        $deskripsi_spiritual = $_GET['deskripsi_spiritual'];
+        
+        // parameter
+        $params = array('id_deskripsi'=>$id_deskripsi,'deskripsi_spiritual'=>$deskripsi_spiritual);
+        
+        $validasi = array('id_deskripsi'=>$id_deskripsi);
+        $chek = $this->db->get_where('tbl_deskripsi_nilai', $validasi);
+        if($chek->num_rows()>0){
+            // proses update
+            $this->db->where('id_deskripsi', $id_deskripsi);
+            $this->db->update('tbl_deskripsi_nilai', array('deskripsi_spiritual'=> $deskripsi_spiritual));
+        }else{
+            // proses insert
+            $this->db->insert('tbl_deskripsi_nilai',$params);
+            echo "data sudah masuk";
+        }
+    }
+    
+     function update_deskripsi_sosial(){
+        $id_deskripsi = $_GET['id_deskripsi'];
+        $deskripsi_sosial = $_GET['deskripsi_sosial'];
+        
+        // parameter
+        $params = array('id_deskripsi'=>$id_deskripsi,'deskripsi_sosial'=>$deskripsi_sosial);
+        
+        $validasi = array('id_deskripsi'=>$id_deskripsi);
+        $chek = $this->db->get_where('tbl_deskripsi_nilai', $validasi);
+        if($chek->num_rows()>0){
+            // proses update
+            $this->db->where('id_deskripsi', $id_deskripsi);
+            $this->db->update('tbl_deskripsi_nilai', array('deskripsi_sosial'=> $deskripsi_sosial));
+        }else{
+            // proses insert
+            $this->db->insert('tbl_deskripsi_nilai',$params);
+            echo "data sudah masuk";
+        }
+    }
+    
+    function update_deskripsi_keterampilan(){
+        $id_deskripsi = $_GET['id_deskripsi'];
+        $deskripsi_keterampilan = $_GET['deskripsi_keterampilan'];
+        
+        // parameter
+        $params = array('id_deskripsi'=>$id_deskripsi,'deskripsi_sosial'=>$deskripsi_keterampilanl);
+        
+        $validasi = array('id_deskripsi'=>$id_deskripsi);
+        $chek = $this->db->get_where('tbl_deskripsi_nilai', $validasi);
+        if($chek->num_rows()>0){
+            // proses update
+            $this->db->where('id_deskripsi', $id_deskripsi);
+            $this->db->update('tbl_deskripsi_nilai', array('deskripsi_keterampilan'=> $deskripsi_keterampilan));
+        }else{
+            // proses insert
+            $this->db->insert('tbl_deskripsi_nilai',$params);
             echo "data sudah masuk";
         }
     }

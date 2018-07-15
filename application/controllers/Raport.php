@@ -4,6 +4,10 @@ class Raport extends CI_Controller{
     
     // menampilkan list siswa
     function index(){
+        if($_SESSION['id_sekolah'] == null)
+        {
+            redirect('');
+        }
         $walikelas      = $this->db->get_where('tbl_walikelas',array('id_guru'=>  $this->session->userdata('id_guru')))->row_array();
         $rombel         =   "SELECT rb.nama_rombel,rb.kelas,jr.nama_jurusan, mp.nama_mapel
                             FROM tbl_jadwal AS j,tbl_jurusan as jr, tbl_rombel as rb,tbl_mapel as mp

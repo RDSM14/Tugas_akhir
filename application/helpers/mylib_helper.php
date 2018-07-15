@@ -20,26 +20,46 @@ function get_tahun_akademik_aktif($field) {
     return $tahun[$field];
 }
 
-function chek_nilai($nim, $id_jadwal) {
+function chek_nilai($nisn, $id_jadwal) {
     $ci = & get_instance();
-    $nilai = $ci->db->get_where('tbl_nilai', array('nim' => $nim, 'id_jadwal' => $id_jadwal));
+    $nilai = $ci->db->get_where('tbl_nilai', array('nisn' => $nisn, 'id_jadwal' => $id_jadwal));
     if ($nilai->num_rows() > 0) {
         $row = $nilai->row_array();
-        return $row['nilai'];
+        return $row['nilai_pengetahuan'];
     } else {
         return 0;
     }
 }
 
-function chek_komponen_biaya($id_jenis_pembayaran) {
+function chek_nilai_spiritual($nisn, $id_jadwal) {
     $ci = & get_instance();
-    $where = array(
-        'id_jenis_pembayaran' => $id_jenis_pembayaran,
-        'id_tahun_akademik' => get_tahun_akademik_aktif('semester_aktif'));
-    $biaya = $ci->db->get_where('tbl_biaya_sekolah', $where);
-    if ($biaya->num_rows() > 0) {
-        $row = $biaya->row_array();
-        return $row['jumlah_biaya'];
+    $nilai = $ci->db->get_where('tbl_nilai', array('nisn' => $nisn, 'id_jadwal' => $id_jadwal));
+    if ($nilai->num_rows() > 0) {
+        $row = $nilai->row_array();
+        return $row['nilai_spiritual'];
+    } else {
+        return 0;
+    }
+}
+
+
+function chek_nilai_sosial($nisn, $id_jadwal) {
+    $ci = & get_instance();
+    $nilai = $ci->db->get_where('tbl_nilai', array('nisn' => $nisn, 'id_jadwal' => $id_jadwal));
+    if ($nilai->num_rows() > 0) {
+        $row = $nilai->row_array();
+        return $row['nilai_sosial'];
+    } else {
+        return 0;
+    }
+}
+
+function chek_nilai_keterampilan($nisn, $id_jadwal) {
+    $ci = & get_instance();
+    $nilai = $ci->db->get_where('tbl_nilai', array('nisn' => $nisn, 'id_jadwal' => $id_jadwal));
+    if ($nilai->num_rows() > 0) {
+        $row = $nilai->row_array();
+        return $row['nilai_keterampilan'];
     } else {
         return 0;
     }

@@ -4,6 +4,10 @@ class Walikelas extends CI_Controller{
     function __construct() {
         parent::__construct();
         $this->load->library('ssp');
+        if($_SESSION['id_sekolah'] == null)
+        {
+            redirect('');
+        }
     }
     
     

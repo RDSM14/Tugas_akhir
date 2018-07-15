@@ -6,6 +6,11 @@ Class Jurusan extends CI_Controller {
         parent::__construct();
         $this->load->library('ssp');
         $this->load->model('Model_jurusan');
+        
+        if($_SESSION['id_sekolah'] == null)
+        {
+            redirect('');
+        }
     }
 
     function data() {

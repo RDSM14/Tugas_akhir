@@ -22,7 +22,7 @@
             <table class="table table-bordered">
                 <tr><th>NO</th><th>KELAS</th><th>MATAPELAJARAN</th><th>HARI</th><th>JAM MULAI</th><th>JAM SELESAI</th><th>RUANG</th><th></td></tr>
                 <?php
-                $no=1;;
+                $no=1;
                 foreach ($jadwal->result() as $row){
                     echo "<tr>
                         <td>$no</td>

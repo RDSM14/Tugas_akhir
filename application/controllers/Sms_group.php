@@ -6,6 +6,10 @@ Class Sms_group extends CI_Controller {
         parent::__construct();
         $this->load->library('ssp');
         $this->load->model('Model_sms_group');
+        if($_SESSION['id_sekolah'] == null)
+        {
+            redirect('');
+        }
     }
 
     function data() {

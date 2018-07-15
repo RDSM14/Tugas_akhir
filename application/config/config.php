@@ -326,6 +326,8 @@ $config['cache_query_string'] = FALSE;
 */
 $config['encryption_key'] = '';
 
+$config['sess_expire_on_close'] = TRUE;
+
 /*
 |--------------------------------------------------------------------------
 | Session Variables

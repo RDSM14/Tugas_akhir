@@ -1,7 +1,7 @@
 <?php
 
 class Model_siswa extends CI_Model {
-
+    
     public $table ="tbl_siswa";
     
     function save($foto) {

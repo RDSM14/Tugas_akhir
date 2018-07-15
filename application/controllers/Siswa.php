@@ -4,13 +4,15 @@ Class Siswa extends CI_Controller {
 
     function __construct() {
         parent::__construct();
+        if($_SESSION['id_sekolah'] == null)
+        {
+            redirect('');
+        }
         //chekAksesModule();
         $this->load->library('ssp');
-        $this->load->model('Model_siswa');
+        $this->load->model('Model_siswa');        
     }
 
-    
-    
     function data() {
    
         // nama tabel

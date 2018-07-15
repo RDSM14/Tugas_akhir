@@ -4,6 +4,11 @@ Class jadwal extends CI_Controller{
     function __construct() {
         parent::__construct();
         $this->load->model(array('Model_jadwal'));
+        
+        if($_SESSION['id_sekolah'] == null)
+        {
+            redirect('');
+        }
     }
     
     function index(){
