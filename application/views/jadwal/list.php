@@ -29,8 +29,7 @@
     <script>
         alert("Data Mata Pelajaran Telah Dihapus");
     </script>
-        
-    <?php
+     <?php   
     }
     ?>
 <div class="col-md-12">

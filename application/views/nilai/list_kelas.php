@@ -32,7 +32,7 @@
                         <td>$row->jam_mulai</td>
                         <td>$row->jam_selesai</td>
                         <td>$row->nama_ruangan</td>
-                        <td>".anchor('nilai/rombel/'.$row->id_jadwal,'<i class="fa fa-eye" aria-hidden="true"></i>',"title='Lihat Kelas'")."</td>
+                        <td>".anchor('nilai/rombel/'.$row->id_jadwal."/". $row->id_mapel,'<i class="fa fa-eye" aria-hidden="true"></i>',"title='Lihat Kelas'")."</td>
                         </tr>";
                     $no++;
                 }

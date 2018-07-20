@@ -10,7 +10,7 @@ Class Guru extends CI_Controller {
         
         if($_SESSION['id_sekolah'] == null)
         {
-            redirect('');
+            redirect('auth');
         }
     }
 
@@ -60,6 +60,7 @@ Class Guru extends CI_Controller {
     function add() {
         if (isset($_POST['submit'])) {
             $this->Model_guru->save();
+            $this->session->set_flashdata('data_guru_masuk', 'Data Telah Dihapus');
             redirect('guru');
         } else {
             $this->template->load('template', 'guru/add');
@@ -69,6 +70,7 @@ Class Guru extends CI_Controller {
     function edit(){
         if(isset($_POST['submit'])){
             $this->Model_guru->update();
+            $this->session->set_flashdata('data_guru_change', 'Data Telah Dihapus');
             redirect('guru');
         }else{
             $id_guru      = $this->uri->segment(3);
@@ -83,6 +85,7 @@ Class Guru extends CI_Controller {
             // proses delete data
             $this->db->where('id_guru',$id_guru);
             $this->db->delete('tbl_guru');
+            $this->session->set_flashdata('data_guru_hapus', 'Data Telah Dihapus');
         }
         redirect('guru');
     }

@@ -7,7 +7,14 @@
         </div>
         <div class="panel-body">
             <table id="mytable" class="table table-striped table-bordered table-hover table-full-width dataTable" cellspacing="0" width="100%">
-                <tr><td>Pilih Level</td><td><?php echo cmb_dinamis('level_user', 'tbl_level_user', 'nama_level', 'id_level_user', null, "id='level_user' onchange='loadData()'") ?></td></tr>
+                <tr><td>Pilih Level</td><td><select class="form-control" name="level_user" id="level_user" onchange='loadData()'>
+                    <option value="3">Tata Usaha</option>
+                    <option value="5">Wali Kelas</option>
+                    <option value="4">Guru</option>
+                    <option value="6">Siswa</option>
+                    <option value="7">Orang Tua</option>
+                  
+                </select></td></tr>
             </table>
         </div>
 
@@ -61,7 +68,7 @@
             success:function(html){
                 //$("#tabel").html(html);
                 //loadData();
-                alert('suksess memberikan akses');
+                alert('sukses memberikan akses');
             }
         })
     }

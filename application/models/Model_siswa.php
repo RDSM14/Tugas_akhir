@@ -85,10 +85,14 @@ class Model_siswa extends CI_Model {
         $user = $this->db->get('tbl_siswa')->row_array();
         return $user;
     }
-    /*function chekLoginOrtu($username,$password){
+    function chekLoginOrtu($username,$password){
+        $this->db->select('a.nisn,b.password_orangtua');
+        $this->db->from('tbl_siswa a'); 
+        $this->db->join('tbl_orang_tua b', 'b.id_orang_tua=a.id_orang_tua', 'left');
         $this->db->where('nisn',$username);
-        $this->db->where('password_orangtua',  md5($password));
-        $user = $this->db->get('tbl_siswa')->row_array();
+        $this->db->where('password_orangtua',  md5($password)); 
+        $query = $this->db->get();
+        $user = $query->row_array();
         return $user;
-    }*/
+    }
 }

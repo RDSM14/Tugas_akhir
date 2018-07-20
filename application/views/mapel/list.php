@@ -30,9 +30,31 @@
     <?php
     }
     ?>
+    
+    <?php if($this->session->flashdata('data_komponen_masuk'))
+    {
+    ?>
+    <script>
+        alert("Data Mata Pelajaran Telah Disimpan");
+    </script>
+        
+    <?php
+    }
+    ?>
+    <?php if($this->session->flashdata('data_komponen_change'))
+    {
+    ?>
+    <script>
+        alert("Data Mata Pelajaran Telah Diubah");
+    </script>
+        
+    <?php
+    }
+    ?>
+
     <div class="panel panel-default">
         <div class="panel-heading">
-            <i class="fa fa-external-link-square"></i> Dynamic Table
+            <i class="fa fa-external-link-square"></i> Data Mata Pelajaran
             <div class="panel-tools">
                 <?php echo anchor('mapel/add','<i class="fa fa-pencil-square-o" aria-hidden="true"></i>',"title='Dambah Data'");?>
                 <a class="btn btn-xs btn-link panel-collapse collapses" href="#"> </a>
@@ -88,7 +110,7 @@
                     { "data": "min_b" },
                     { "data": "min_c" },
                     { "data": "min_d" },
-                    { "data": "aksi","width": "80px" },
+                    { "data": "aksi","width": "100px" },
                 ]
             } );
                

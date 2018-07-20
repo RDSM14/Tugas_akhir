@@ -9,8 +9,7 @@ class Model_guru extends CI_Model {
             'nuptk'      => $this->input->post('nuptk', TRUE),
             'nama_guru'  => $this->input->post('nama_guru', TRUE),
             'gender'     => $this->input->post('gender', TRUE),
-            'username'   => $this->input->post('username', TRUE),
-            'id_sekolah'   => $_SESSION['id_sekolah'],
+            'id_sekolah' => $_SESSION['id_sekolah'],
             'password'   => md5($this->input->post('password', TRUE))
         );
         $this->db->insert($this->table,$data);

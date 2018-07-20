@@ -1,3 +1,33 @@
+    <?php if($this->session->flashdata('data_siswa_masuk'))
+    {
+    ?>
+    <script>
+        alert("Data Siswa Telah Disimpan");
+    </script>
+        
+    <?php
+    }
+    ?>
+    <?php if($this->session->flashdata('data_siswa_change'))
+    {
+    ?>
+    <script>
+        alert("Data Siswa Telah Diubah");
+    </script>
+        
+    <?php
+    }
+    ?>
+    <?php if($this->session->flashdata('data_siswa_hapus'))
+    {
+    ?>
+    <script>
+        alert("Data Siswa Telah Dihapus");
+    </script>
+        
+    <?php
+    }
+    ?>
 <div class="col-md-12">
     <!-- start: DYNAMIC TABLE PANEL -->
    <?php echo anchor('siswa/add','Input Data Baru',array('class'=>'btn btn-danger btn-sm'))?>
@@ -7,7 +37,7 @@
     <div style="margin-bottom: 10px;"></div>
     <div class="panel panel-default">
         <div class="panel-heading">
-            <i class="fa fa-external-link-square"></i> Dynamic Table
+            <i class="fa fa-external-link-square"></i> Data Siswa
             <div class="panel-tools">                
                 <a class="btn btn-xs btn-link panel-collapse collapses" href="#"> </a>
                 <?php echo anchor('siswa/add','<i class="fa fa-pencil-square-o" aria-hidden="true"></i>',"title='Tambah Data'");?>
@@ -22,10 +52,9 @@
                     <tr>
                         <th>NO</th>
                         <th>FOTO</th>
+                        <th>NISN</th>
                         <th>NIM</th>
                         <th>NAMA</th>
-                        <th>TEMPAT LAHIR</th>
-                        <th>TANGGAL LAHIR</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -50,15 +79,19 @@
                         "sClass": "text-center",
                         "orderable": false,
                     },
-                    { "data": "foto" },
+                    { "data": "foto",
+                      "width": "120px",
+                      "sClass": "text-center" },
                     {
-                        "data": "nim",
+                        "data": "nisn",
                         "width": "120px",
                         "sClass": "text-center"
                     },
-                    { "data": "nama" },
-                    { "data": "tempat_lahir" },
-                    { "data": "tanggal_lahir", "width": "150px" },
+                    { "data": "nim",
+                      "width": "120px",
+                      "sClass": "text-center" },
+                    { "data": "nama"  },
+                    //{ "data": "tbl_rombel.nama_rombel", "width": "150px" },
                     { "data": "aksi","width": "75px" },
                 ]
             } );

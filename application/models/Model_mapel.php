@@ -30,5 +30,42 @@ class Model_mapel extends CI_Model {
         $this->db->where('id_mapel',$id_mapel);
         $this->db->update($this->table,$data);
     }
+    
+    function komponen_jenis_nilai()
+    {
+         $this->db->select('a.id_jenis_nilai,a.nama_jenis_nilai');
+        $this->db->from('tbl_jenis_nilai a'); 
+        $query = $this->db->get();
+        return $query->result();
+    }
+    
+    function save_komponen() {
+        $data = array(
+            'nama_komponen'      => $this->input->post('nama_komponen', TRUE),
+            'id_jenis_nilai'    => $this->input->post('jenis_nilai', TRUE),
+            'id_mapel'         => $this->input->post('id_mapel', TRUE)
+            
+        );
+        $this->db->insert('tbl_komponen_nilai',$data);
+    }
+    function ubah_komponen() {
+        $data = array(
+            'nama_komponen'      => $this->input->post('nama_komponen', TRUE),
+            'id_jenis_nilai'    => $this->input->post('jenis_nilai', TRUE),
+            'id_mapel'         => $this->input->post('id_mapel', TRUE)
+            
+        );
+        $id     = $this->input->post('id_komponen');
+        $this->db->where('id_komponen',$id);
+        $this->db->update('tbl_komponen_nilai',$data);
+    }
+    function nilai_edit_komponen($id_komponen){
+         $this->db->select('a.id_komponen,a.nama_komponen,a.id_jenis_nilai,a.id_mapel');
+            $this->db->from('tbl_komponen_nilai a'); 
+            $this->db->where('a.id_komponen',$id_komponen);
+            $query = $this->db->get(); 
+            return $query->result();
+    }
+        
 
 }

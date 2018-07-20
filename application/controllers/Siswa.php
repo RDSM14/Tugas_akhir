@@ -18,7 +18,7 @@ Class Siswa extends CI_Controller {
         // nama tabel
         $table = 'tbl_siswa';
         // nama PK
-        $primaryKey = 'nim';
+        $primaryKey = 'nisn';
         // list field
         $columns = array(
             array('db' => 'foto',
@@ -31,12 +31,12 @@ Class Siswa extends CI_Controller {
                    }   
                 }
             ),
+            array('db' => 'nisn', 'dt' => 'nisn'),
             array('db' => 'nim', 'dt' => 'nim'),
             array('db' => 'nama', 'dt' => 'nama'),
-            array('db' => 'tempat_lahir', 'dt' => 'tempat_lahir'),
-            array('db' => 'tanggal_lahir', 'dt' => 'tanggal_lahir'),
+        //    array('db' => 'tbl_rombel.nama_rombel', 'dt' => 'nama_rombel'),
             array(
-                'db' => 'nim',
+                'db' => 'nisn',
                 'dt' => 'aksi',
                 'formatter' => function( $d) {
                     //return "<a href='edit.php?id=$d'>EDIT</a>";
@@ -45,6 +45,7 @@ Class Siswa extends CI_Controller {
                 }
             )
         );
+       // $qjoin = "join 'tbl_rombel' on 'tbl_rombel'.'id_rombel' = 'tbl_siswa'.id_rombel' ";
 
         $sql_details = array(
             'user' => $this->db->username,
@@ -54,7 +55,7 @@ Class Siswa extends CI_Controller {
         );
         $where = "id_sekolah =".$_SESSION['id_sekolah']."";
         echo json_encode(
-                SSP::simple($_GET, $sql_details, $table, $primaryKey, $columns,$where)
+                SSP::simple($_GET, $sql_details, $table, $primaryKey, $columns,$where,null)
         );
     }
 
@@ -66,6 +67,7 @@ Class Siswa extends CI_Controller {
         if (isset($_POST['submit'])) {
             $uploadFoto = $this->upload_foto_siswa();
             $this->Model_siswa->save($uploadFoto);
+            $this->session->set_flashdata('data_siswa_masuk', '');
             redirect('siswa');
         } else {
             $this->template->load('template', 'siswa/add');
@@ -76,21 +78,23 @@ Class Siswa extends CI_Controller {
         if(isset($_POST['submit'])){
             $uploadFoto = $this->upload_foto_siswa();
             $this->Model_siswa->update($uploadFoto);
+            $this->session->set_flashdata('data_siswa_change', 'Data');
             redirect('siswa');
         }else{
-            $nim           = $this->uri->segment(3);
-            $data['siswa'] = $this->db->get_where('tbl_siswa',array('nim'=>$nim))->row_array();
+            $nisn           = $this->uri->segment(3);
+            $data['siswa'] = $this->db->get_where('tbl_siswa',array('nisn'=>$nisn))->row_array();
             $this->template->load('template', 'siswa/edit',$data);
         }
     }
     
     function delete(){
-        $nim = $this->uri->segment(3);
-        if(!empty($nim)){
+        $nisn = $this->uri->segment(3);
+        if(!empty($nisn)){
             // proses delete data
-            $this->db->where('nim',$nim);
+            $this->db->where('nisn',$nisn);
             $this->db->delete('tbl_siswa');
         }
+        $this->session->set_flashdata('data_siswa_hapus', 'Data Telah Dihapus');
         redirect('siswa');
     }
     
@@ -118,11 +122,11 @@ Class Siswa extends CI_Controller {
         $rombel = $_GET['rombel'];
         
         echo "<table class='table table-bordered'>
-            <tr><th width='90'>NIM</th><th>NAMA</th></tr>";
+            <tr><th width='90'>NISN</th><th>NAMA</th></tr>";
         $this->db->where('id_rombel',$rombel);
         $siswa = $this->db->get('tbl_siswa');
         foreach ($siswa->result() as $row){
-            echo "<tr><td>$row->nim</td><td>$row->nama</td></tr>";
+            echo "<tr><td>$row->nisn</td><td>$row->nama</td></tr>";
         }
         echo"</table>";
     }
@@ -130,7 +134,7 @@ Class Siswa extends CI_Controller {
     function data_by_rombel_excel(){
         $this->load->library('CPHP_excel');
         $objPHPExcel = new PHPExcel();
-        $objPHPExcel->getActiveSheet()->setCellValue('A1', 'NIM');
+        $objPHPExcel->getActiveSheet()->setCellValue('A1', 'NISN');
         $objPHPExcel->getActiveSheet()->setCellValue('B1', 'SISWA');
         
         $rombel = $_POST['rombel'];
@@ -138,7 +142,7 @@ Class Siswa extends CI_Controller {
         $siswa = $this->db->get('tbl_siswa');
         $no=2;
         foreach ($siswa->result() as $row){
-            $objPHPExcel->getActiveSheet()->setCellValue('A'.$no, $row->nim);
+            $objPHPExcel->getActiveSheet()->setCellValue('A'.$no, $row->nisn);
             $objPHPExcel->getActiveSheet()->setCellValue('B'.$no, $row->nama);
             $no++;
         }

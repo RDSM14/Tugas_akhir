@@ -21,8 +21,8 @@ Class jadwal extends CI_Controller{
             $this->template->load('template','jadwal/jadwal_ajar_guru',$data);
         }elseif($this->session->userdata('id_level_user')==6||$this->session->userdata('id_level_user')==7){
             // load daftar jadwal siswa
-            $sql = "SELECT tj.id_jadwal,tj.kelas,tm.nama_mapel,tj.jam_mulai,tj.jam_selesai,tr.nama_ruangan,tj.hari,tj.semester,tj.id_rombel,gr.nama_guru                    FROM tbl_jadwal as tj,tbl_ruangan as tr,tbl_mapel as tm,tbl_guru as gr
-                    WHERE tj.id_mapel=tm.id_mapel and tj.id_ruangan=tr.id_ruangan and tj.id_guru=gr.id_guru and tj.id_rombel=".$this->session->userdata('id_rombel');
+            $sql = "SELECT tj.id_jadwal,tj.kelas,tm.nama_mapel,tj.jam_mulai,tj.jam_selesai,tr.nama_ruangan,tj.hari,tj.semester,tj.id_rombel,gr.nama_guru,tl.nama_rombel                    FROM tbl_jadwal as tj,tbl_ruangan as tr,tbl_mapel as tm,tbl_guru as gr,tbl_rombel as tl
+                    WHERE tj.id_mapel=tm.id_mapel and tl.id_rombel=tj.id_rombel and tj.id_ruangan=tr.id_ruangan and tj.id_guru=gr.id_guru and tj.id_rombel=".$this->session->userdata('id_rombel');
             $data['jadwal'] = $this->db->query($sql); 
             $this->template->load('template','jadwal/jadwal_ajar_siswa',$data);
         }else{
@@ -84,6 +84,16 @@ Class jadwal extends CI_Controller{
         }
         
         echo"</table>";
+    }
+    
+    function show_rombel(){
+        echo "<select id='rombel' name='rombel' class='form-control' onchange='loadPelajaran()'>";
+        $where  = array ('kelas'=>$_GET['kelas']);
+        $rombel = $this->db->get_where('tbl_rombel',$where);
+        foreach ($rombel->result() as $row){
+            echo "<option value='$row->id_rombel'>$row->nama_rombel</option>";
+        }
+        echo "</select>";
     }
     
     function add() {

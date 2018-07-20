@@ -32,8 +32,9 @@ Class Mapel extends CI_Controller {
                 'dt' => 'aksi',
                 'formatter' => function( $d) {
                     //return "<a href='edit.php?id=$d'>EDIT</a>";
-                    return anchor('mapel/edit/'.$d,'<i class="fa fa-edit"></i>','class="btn btn-xs btn-teal tooltips" data-placement="top" data-original-title="Edit"').' 
-                        '.anchor('mapel/delete/'.$d,'<i class="fa fa-trash-o"></i>','class="btn btn-xs btn-danger tooltips" data-placement="top" data-original-title="Delete"');
+                    return anchor('mapel/edit/'.$d,'<i class="fa fa-edit"></i>','class="btn btn-xs btn-teal tooltips" data-placement="top" data-original-title="Edit" title="Edit Mata Pelajaran"').' 
+                        '.anchor('mapel/delete/'.$d,'<i class="fa fa-trash-o"></i>','class="btn btn-xs btn-danger tooltips" data-placement="top" data-original-title="Delete" title="Hapus Mata Pelajaran"').' 
+                        '.anchor('mapel/list_komponen/'.$d,'<i class="fa fa-navicon"></i>','class="btn btn-xs btn-success tooltips" data-placement="top" data-original-title="List" title="Detail Komponen Nilai"');
                 }
             )
         );
@@ -92,8 +93,57 @@ Class Mapel extends CI_Controller {
             $this->db->where('id_mapel',$id_mapel);
             $this->db->delete('tbl_mapel');
         }
-        $this->session->set_flashdata('data_mapel_hapus', 'Data Telah Disimpan');
+        $this->session->set_flashdata('data_mapel_hapus', 'Data Telah Dihapus');
         redirect('mapel');
     }
-
+    
+    function list_komponen(){
+       $id_mapel      = $this->uri->segment(3);
+           
+            //$data['mapel'] = $this->db->get_where('tbl_mapel',array('id_mapel'=>$id_mapel))->row_array();
+            $this->db->select('a.id_komponen,a.nama_komponen,a.id_jenis_nilai,a.id_mapel,b.id_mapel,b.nama_mapel,c.id_jenis_nilai,c.nama_jenis_nilai');
+            $this->db->from('tbl_komponen_nilai a'); 
+            $this->db->join('tbl_mapel b', 'b.id_mapel=a.id_mapel', 'left');
+            $this->db->join('tbl_jenis_nilai c', 'c.id_jenis_nilai=a.id_jenis_nilai', 'left');
+            $this->db->where('a.id_mapel',$id_mapel);
+            $query = $this->db->get(); 
+            $data['komponen'] = $query->result();
+            $this->template->load('template', 'mapel/komponen', $data);
+    }
+    
+    function add_komponen() {
+        if (isset($_POST['submit'])) {
+            $this->Model_mapel->save_komponen();
+            //$id_mapel = $this->uri->segment(3);
+            $this->session->set_flashdata('data_komponen_masuk', 'Data Telah Disimpan');
+            redirect('mapel');
+        } else {
+            //$this->load->library('uri');
+            $this->data['id_mapel'] = $this->uri->segment(3);
+            $this->data['jenis_nilai'] =  $this->Model_mapel->komponen_jenis_nilai();
+            $this->template->load('template', 'mapel/add_komponen', $this->data);
+        }
+    }
+    function edit_komponen($id_komponen) {
+        if (isset($_POST['submit'])) {
+            $this->Model_mapel->ubah_komponen();
+            $this->session->set_flashdata('data_komponen_change', 'Data Telah Diubah');
+            redirect('mapel');
+        } else {
+            $this->data['jenis_nilai'] =  $this->Model_mapel->komponen_jenis_nilai();
+            $this->data['nilai_edit_komponen'] =  $this->Model_mapel->nilai_edit_komponen($id_komponen);
+            $this->template->load('template', 'mapel/edit_komponen',  $this->data);
+        }
+    }
+    function hapus_komponen($id_komponen){
+        if(!empty($id_komponen)){
+            // proses delete data
+            $this->db->where('id_komponen',$id_komponen);
+            $this->db->delete('tbl_komponen_nilai');
+        }
+        $this->session->set_flashdata('data_komponen_hapus', 'Data Telah Dihapus');
+        redirect('mapel');
+    }
+    
+    
 }

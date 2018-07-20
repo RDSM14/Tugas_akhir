@@ -24,52 +24,44 @@
         <div class="panel-body">
 
             <?php
-            echo form_open('guru/add', 'role="form" class="form-horizontal"');
+            echo form_open('tu/edit', 'role="form" class="form-horizontal"');
+           
             ?>
 
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="form-field-1">
-                    NUPTK
+                    NIP
                 </label>
                 <div class="col-sm-9">
-                    <input type="text" name="nuptk" placeholder="  MASUKAN NUPTK" id="form-field-1" class="form-control">
+                    <input type="text" name="nip" value="<?php echo $tu['nip']?>" placeholder="MASUKAN nip" id="form-field-1" class="form-control" readonly>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="form-field-1">
-                    NAMA GURU
+                    NAMA LENGKAP
                 </label>
                 <div class="col-sm-9">
-                    <input type="text" name="nama_guru" placeholder="  MASUKAN NAMA GURU" id="form-field-1" class="form-control">
+                    <input type="text" value="<?php echo $tu['nama_lengkap']?>" name="nama_lengkap" placeholder="MASUKAN NAMA tu" id="form-field-1" class="form-control">
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="form-field-1">
-                    JENIS KELAMIN
+                    TELEPON
                 </label>
                 <div class="col-sm-9">
-                    <?php echo form_dropdown('gender', array('p' => 'LAKI LAKI', 'w' => 'PEREMPUAN'), '', "class='form-control'") ?>
+                    <input type="text" value="<?php echo $tu['telepon_TU']?>" name="telepon_TU" placeholder="MASUKAN NOMOR TELEPON KARYAWAN" id="form-field-1" class="form-control">
                 </div>
             </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label" for="form-field-1">
-                    PASSWORD
-                </label>
-                <div class="col-sm-9">
-                    <input type="password" name="password" placeholder="  MASUKAN PASSWORD" id="form-field-1" class="form-control">
-                </div>
-            </div>
-
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="form-field-1">
 
                 </label>
                 <div class="col-sm-1">
-                    <button type="submit" name="submit" class="btn btn-danger  btn-sm">SIMPAN</button>
+                    <button type="submit" name="submit" class="btn btn-danger btn-sm">SIMPAN</button>
                 </div>
                 <div class="col-sm-1">
-                    <?php echo anchor('guru', 'Kembali', array('class' => 'btn btn-info btn-sm')); ?>
+                    <?php echo anchor('tu', 'Kembali', array('class' => 'btn btn-info btn-sm')); ?>
                 </div>
             </div>
             </form>

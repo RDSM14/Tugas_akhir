@@ -3,7 +3,7 @@
     <table class="table table-bordered">
         <tr><td width="200">TAHUN AKADEMIK</td><td>  <?php echo get_tahun_akademik_aktif('tahun_akademik')?></td></tr>
         <tr><td>SEMESTER</td><td>   <?php echo get_tahun_akademik_aktif('semester_aktif')?></td></tr>
-        <tr><td>JURUSAN</td><td>  KELAS <?php echo $rombel['kelas']?> ( <?php echo $rombel['nama_rombel']?> )</td></tr>
+        <tr><td>KELAS</td><td>  KELAS <?php echo $rombel['kelas']?> ( <?php echo $rombel['nama_rombel']?> )</td></tr>
         <tr><td>MATA PELAJARAN</td><td><?php echo $rombel['nama_mapel']?></td></tr>
     </table>
     <!-- end: DYNAMIC TABLE PANEL -->
@@ -21,16 +21,12 @@
         </div>
         <div class="panel-body">
             <table class="table table-bordered">
-                <tr><th>NIS</th><th>NAMA</th><th>NILAI PENGETAHUAN</th><th>NILAI SPRITUAL</th><th>NILAI SOSIAL</th><th>NILAI KETERAMPILAN</th><th>DESKRIPSI</th></tr>
+                <tr><th>NIS</th><th>NAMA</th><th></th><th></th>
                 <?php foreach ($siswa as $row){
             
-                    echo "<tr>  <td width='100'>$row->nisn</td>
+                    echo "<tr>  <td width='140'>$row->nisn</td>
                                 <td>".  strtoupper($row->nama)."</td>
-                                <td width='150'><input type='int' onkeyup='updateNilaiPengetahuan(\"$row->nisn\")' id='nilai".$row->nisn."' value='".  chek_nilai($row->nisn, $this->uri->segment(3))."' class='form-control'></td>
-                                <td width='150'><input type='int' onkeyup='updateNilaiSpiritual(\"$row->nisn\")' id='nilai_spiritual".$row->nisn."' value='".  chek_nilai_spiritual($row->nisn, $this->uri->segment(3))."' class='form-control'></td>
-                                
-                                <td width='150'><input type='int' onkeyup='updateNilaiSosial(\"$row->nisn\")' id='nilai_sosial".$row->nisn."' value='".  chek_nilai_sosial($row->nisn, $this->uri->segment(3))."' class='form-control'></td>
-                                  <td width='150'><input type='int' onkeyup='updateNilaiKeterampilan(\"$row->nisn\")' id='nilai_keterampilan".$row->nisn."' value='".  chek_nilai_keterampilan($row->nisn, $this->uri->segment(3))."' class='form-control'></td>
+                                <td width='150'><button class='btn btn-success' data-toggle='modal' data-target='#ModalAngka'>Komponen Nilai</td>
                                     <td width='150'><button class='btn btn-success' data-toggle='modal' data-target='#myModal'>Deskripsi / Catatan</td>
                                 
                                 </tr>";
@@ -109,6 +105,63 @@
   </div>
 </div>
 
+
+
+
+<div class="modal fade" id="ModalAngka" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Komponen Nilai</h4>
+      </div>
+      <div class="modal-body">
+        
+        <?php
+        echo form_open_multipart('siswa/add', 'role="form" class="form-horizontal"');
+        foreach ($nilai as $nilai){
+                $id_nilai = $nilai->id_nilai;
+                $sekor = $nilai->skor;
+            echo $sekor;
+        }
+        ?>
+          
+          
+          <?php  foreach ($komponen_nilai as $komponen_nilai){
+                
+        //$komponen = array_merge($nilai,$komponen_nilai);
+          //foreach($komponen as $komponen) {
+    ?>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="form-field-1">
+                <?php echo $komponen_nilai->nama_komponen ;?>
+            </label>
+           
+            
+
+            <div class="col-sm-9">
+                <input type="text" id="<?php echo $komponen_nilai->nama_komponen ?>" 
+                       value="<?php echo $sekor.$id_nilai ?>" 
+                       onkeyup="update<?php echo $komponen_nilai->id_komponen ?>
+                       (<?php echo $id_nilai?>)" name="nama" 
+                       placeholder="MASUKAN NAMA LENGKAP" id="form-field-1" class="form-control">
+                <!--<textarea name="deskripsi_pengetahuan" id="deskripsi_pengetahuan" class="form-control" onkeyup="updateDeskripsiPengetahuan(<?php echo $desk->id_deskripsi ?>)"><?php echo $desk->deskripsi_pengetahuan ?></textarea>
+            </div>-->
+            </div>
+        </div>  
+<?php 
+}?>
+        
+        </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--END OF MODAL-->
 
 <script type="text/javascript">
 
@@ -217,3 +270,4 @@ $.ajax({
 }
 
 </script>
+
