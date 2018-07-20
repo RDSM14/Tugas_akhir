@@ -423,31 +423,64 @@
                         <?php
                         $id_level_user = $this->session->userdata('id_level_user');
                         $id_sekolah = $this->session->userdata('id_sekolah');
-                        $sql_menu = "SELECT * FROM tabel_menu WHERE id in(select id_menu from tbl_user_rule where id_level_user=$id_level_user AND id_sekolah=$id_sekolah) and is_main_menu=0";
-                        $main_menu = $this->db->query($sql_menu)->result();
-                        foreach ($main_menu as $main) {
-                            // chek apakah ada submenu ?
-                            $submenu = $this->db->get_where('tabel_menu', array('is_main_menu' => $main->id));
-                            if ($submenu->num_rows() > 0) {
-                                // tampilkan submenu disini
-                                echo "<li>
-                                    <a href='javascript:void(0)'>
-                                    <i class='" . $main->icon . "'></i>
-                                    <span class='title'> " . strtoupper($main->nama_menu) . " </span>
-                                    <i class='fa fa-angle-down' aria-hidden='true'></i>
-                                    <span class='selected'></span>
-                                    </a>
-                                    <ul class='sub-menu'>";
-                                foreach ($submenu->result() as $sub) {
-                                    echo "<li>" . anchor($sub->link, "<i class='" . $sub->icon . "'></i><span class='title'> " . strtoupper($sub->nama_menu)) . "</span></li>";
-                                }
+                        if($id_level_user != '2'){
+                            $sql_menu = "SELECT * FROM tabel_menu WHERE id in(select id_menu from tbl_user_rule where id_level_user=$id_level_user AND id_sekolah=$id_sekolah) and is_main_menu=0";
+                            $main_menu = $this->db->query($sql_menu)->result();
+                            foreach ($main_menu as $main) {
+                                // chek apakah ada submenu ?
+                                $submenu = $this->db->get_where('tabel_menu', array('is_main_menu' => $main->id));
+                                if ($submenu->num_rows() > 0) {
+                                    // tampilkan submenu disini
+                                    echo "<li>
+                                        <a href='javascript:void(0)'>
+                                        <i class='" . $main->icon . "'></i>
+                                        <span class='title'> " . strtoupper($main->nama_menu) . " </span>
+                                        <i class='fa fa-angle-down' aria-hidden='true'></i>
+                                        <span class='selected'></span>
+                                        </a>
+                                        <ul class='sub-menu'>";
+                                    foreach ($submenu->result() as $sub) {
+                                        echo "<li>" . anchor($sub->link, "<i class='" . $sub->icon . "'></i><span class='title'> " . strtoupper($sub->nama_menu)) . "</span></li>";
+                                    }
 
-                                echo"</ul>
-                                    </li>";
-                            } else {
-                                // tampilkan main menu
-                                echo "<li>" . anchor($main->link, "<i class='" . $main->icon . "'></i><span class='title'>" . strtoupper($main->nama_menu)) . "</span></li>";
+                                    echo"</ul>
+                                        </li>";
+                                } else {
+                                    // tampilkan main menu
+                                    echo "<li>" . anchor($main->link, "<i class='" . $main->icon . "'></i><span class='title'>" . strtoupper($main->nama_menu)) . "</span></li>";
+                                }
                             }
+                        }
+                        else{
+                            $sql_menu = "SELECT * FROM tabel_menu WHERE is_main_menu=0";
+                            $main_menu = $this->db->query($sql_menu)->result();
+                            foreach ($main_menu as $main) {
+                                // chek apakah ada submenu ?
+                                $submenu = $this->db->get_where('tabel_menu', array('is_main_menu' => $main->id));
+                                if ($submenu->num_rows() > 0) {
+                                    // tampilkan submenu disini
+                                    echo "<li>
+                                        <a href='javascript:void(0)'>
+                                        <i class='" . $main->icon . "'></i>
+                                        <span class='title'> " . strtoupper($main->nama_menu) . " </span>
+                                        <i class='fa fa-angle-down' aria-hidden='true'></i>
+                                        <span class='selected'></span>
+                                        </a>
+                                        <ul class='sub-menu'>";
+                                    foreach ($submenu->result() as $sub) {
+                                        echo "<li>" . anchor($sub->link, "<i class='" . $sub->icon . "'></i><span class='title'> " . strtoupper($sub->nama_menu)) . "</span></li>";
+                                    }
+
+                                    echo"</ul>
+                                        </li>";
+                                } else {
+                                    // tampilkan main menu
+                                    echo "<li>" . anchor($main->link, "<i class='" . $main->icon . "'></i><span class='title'>" . strtoupper($main->nama_menu)) . "</span></li>";
+                                }
+                            }
+                            
+                            
+                            
                         }
                         ?>
                         
