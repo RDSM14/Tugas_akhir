@@ -10,9 +10,9 @@ class Nilai extends CI_Controller{
         }
         if($this->session->userdata('id_level_user')==4||$this->session->userdata('id_level_user')==5){
             // load daftar ngajar guru
-            $sql = "SELECT tj.id_rombel,tj.id_jadwal,tj.kelas,tm.nama_mapel,tm.id_mapel,tj.jam_mulai,tj.jam_selesai,tr.nama_ruangan,tj.hari,tj.semester,tb.nama_rombel
+            $sql = "SELECT tj.id_rombel,tj.id_jadwal as id_jadwal,tj.kelas,tm.nama_mapel,tm.id_mapel,tj.jam_mulai,tj.jam_selesai,tr.nama_ruangan,tj.hari,tj.semester,tb.nama_rombel
                     FROM tbl_jadwal as tj,tbl_ruangan as tr,tbl_mapel as tm,tbl_rombel as tb
-                    WHERE tj.id_mapel=tm.id_mapel and tj.id_ruangan=tr.id_ruangan and tb.id_rombel=tj.id_rombel and tj.id_guru='".$_SESSION['id_guru']."'";
+                    WHERE tj.id_mapel=tm.id_mapel and tj.id_ruangan=tr.id_ruangan and tb.id_rombel=tj.id_rombel and tj.username_guru='".$_SESSION['username']."'";
         $data['jadwal'] = $this->db->query($sql); 
         $this->template->load('template','nilai/list_kelas',$data);
             
@@ -35,7 +35,7 @@ class Nilai extends CI_Controller{
                             FROM tbl_jadwal AS j,tbl_jurusan as jr, tbl_rombel as rb,tbl_mapel as mp
                             WHERE j.kd_jurusan=jr.kd_jurusan and rb.id_rombel=j.id_rombel and mp.kd_mapel=j.kd_mapel 
                             and j.id_jadwal=13='$id_rombel'";*/
-        $rombel         = "SELECT * FROM tbl_jadwal,tbl_rombel,tbl_siswa,tbl_mapel WHERE                              tbl_jadwal.id_rombel=tbl_rombel.id_rombel AND tbl_rombel.id_rombel=tbl_siswa.id_rombel AND id_jadwal='$id_jadwal' AND tbl_mapel.id_mapel='$id_mapel'";
+        $rombel         = "SELECT *,tbl_mapel.id_mapel as id_mapel FROM tbl_jadwal,tbl_rombel,tbl_siswa,tbl_mapel WHERE                              tbl_jadwal.id_rombel=tbl_rombel.id_rombel AND tbl_rombel.id_rombel=tbl_siswa.id_rombel AND id_jadwal='$id_jadwal' AND tbl_mapel.id_mapel='$id_mapel'";
         $siswa          =   "SELECT s.nama,s.nisn
                             FROM tbl_history_kelas as hk,tbl_siswa as s
                             WHERE hk.nisn=s.nisn ";
@@ -43,7 +43,8 @@ class Nilai extends CI_Controller{
         $deskripsi      =   "SELECT * FROM tbl_deskripsi_nilai tdn, tbl_nilai tn WHERE tdn.id_mapel = tn.id_mapel";
         
         $komponen_nilai =   "SELECT DISTINCT * FROM tbl_komponen_nilai tkn, tbl_mapel tm WHERE tkn.id_mapel= tm.id_mapel AND tm.id_mapel='$id_mapel'";
-        $nilai          =   "SELECT DISTINCT * FROM tbl_nilai tn,tbl_komponen_nilai tkn WHERE tkn.id_komponen= tn.id_komponen";
+        
+        $nilai          =   "SELECT * FROM tbl_nilai tn ";
                
         $data['rombel'] =   $this->db->query($rombel)->row_array();
         $data['siswa']  =   $this->db->query($siswa)->result();

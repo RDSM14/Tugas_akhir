@@ -24,8 +24,8 @@
         <div class="panel-body">
 
             <?php
-            echo form_open('guru/edit', 'role="form" class="form-horizontal"');
-            echo form_hidden('username', $guru['username']);
+            echo form_open('admin/edit', 'role="form" class="form-horizontal"');
+            echo form_hidden('email', $admin['email']);
             ?>
 
             <div class="form-group">
@@ -33,24 +33,24 @@
                     NUPTK
                 </label>
                 <div class="col-sm-9">
-                    <input type="text" name="nuptk" value="<?php echo $guru['nuptk']?>" placeholder="MASUKAN NUPTK" id="form-field-1" class="form-control">
+                    <input type="text" value="<?php echo $admin['email']?>" placeholder="MASUKAN NUPTK" id="form-field-1" class="form-control" readonly>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="form-field-1">
-                    NAMA GURU
+                    NAMA ADMIN
                 </label>
                 <div class="col-sm-9">
-                    <input type="text" value="<?php echo $guru['nama_guru']?>" name="nama_guru" placeholder="MASUKAN NAMA GURU" id="form-field-1" class="form-control">
+                    <input type="text" value="<?php echo $admin['nama_lengkap']?>" name="nama_lengkap" placeholder="MASUKAN NAMA ADMIN" id="form-field-1" class="form-control">
                 </div>
             </div>
 
-            <div class="form-group">
-                <label class="col-sm-2 control-label" for="form-field-1">
-                    JENIS KELAMIN
-                </label>
-                <div class="col-sm-9">
-                    <?php echo form_dropdown('gender', array('p' => 'LAKI LAKI', 'w' => 'PEREMPUAN'), $guru['gender'], "class='form-control'") ?>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="form-field-1">
+                        TELEPON
+                    </label>
+                    <div class="col-sm-9">
+                        <input type="text" value="<?php echo $admin['telepon_admin']?>" name="telepon" placeholder="MASUKAN NOMOR TELEPON ADMIN" id="form-field-1" class="form-control">
                 </div>
             </div>
             <div class="form-group">
@@ -61,7 +61,7 @@
                     <button type="submit" name="submit" class="btn btn-danger btn-sm">SIMPAN</button>
                 </div>
                 <div class="col-sm-1">
-                    <?php echo anchor('guru', 'Kembali', array('class' => 'btn btn-info btn-sm')); ?>
+                    <?php echo anchor('admin', 'Kembali', array('class' => 'btn btn-info btn-sm')); ?>
                 </div>
             </div>
             </form>

@@ -26,7 +26,15 @@
             <?php
             echo form_open('guru/add', 'role="form" class="form-horizontal"');
             ?>
-
+            
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="form-field-1">
+                    EMAIL
+                </label>
+                <div class="col-sm-9">
+                    <input type="email" name="username" placeholder="  MASUKAN EMAIL" id="form-field-1" class="form-control">
+                </div>
+            </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="form-field-1">
                     NUPTK

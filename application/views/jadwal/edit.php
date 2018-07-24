@@ -10,19 +10,8 @@
         <div class="panel-heading">
             Edit Jadwal Pelajaran
             <div class="panel-tools">
-                <a class="btn btn-xs btn-link panel-collapse collapses" href="#">
-                </a>
-                <a class="btn btn-xs btn-link panel-config" href="#panel-config" data-toggle="modal">
-                    <i class="fa fa-wrench"></i>
-                </a>
-                <a class="btn btn-xs btn-link panel-refresh" href="#">
-                    <i class="fa fa-refresh"></i>
-                </a>
                 <a class="btn btn-xs btn-link panel-expand" href="#">
-                    <i class="fa fa-resize-full"></i>
-                </a>
-                <a class="btn btn-xs btn-link panel-close" href="#">
-                    <i class="fa fa-times"></i>
+                    <i class="fa fa-search"></i>
                 </a>
             </div>
         </div>
@@ -36,7 +25,7 @@
                 $tahun_akademiq= $pilih->id_tahun_akademik;
                 $celas = $pilih->kelas;
                 $pelajaran = $pilih->id_mapel;
-                $teach = $pilih->id_guru;
+                $teach = $pilih->username_guru;
                 $mulai = $pilih->jam_mulai;
                 $selesai = $pilih->jam_selesai;
                 $room = $pilih->id_ruangan;
@@ -114,7 +103,7 @@
                     <?php foreach($guru as $guru)
                     {
                     ?>
-                        <option value="<?php echo $guru->id_guru?>"<?php if( $guru->id_guru==$teach) echo 'selected="selected"';?>><?php echo $guru->nama_guru?></option>
+                        <option value="<?php echo $guru->username?>"<?php if( $guru->username==$teach) echo 'selected="selected"';?>><?php echo $guru->nama_guru?></option>
                     <?php
                     }
                     ?>

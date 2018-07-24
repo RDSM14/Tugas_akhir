@@ -77,7 +77,7 @@
                     <?php foreach($guru as $guru)
                     {
                     ?>
-                        <option value="<?php echo $guru->id_guru?>"><?php echo $guru->nama_guru?></option>
+                        <option value="<?php echo $guru->username?>"><?php echo $guru->nama_guru?></option>
                     <?php
                     }
                     ?>

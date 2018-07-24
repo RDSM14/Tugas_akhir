@@ -24,44 +24,52 @@
         <div class="panel-body">
 
             <?php
-            echo form_open('guru/edit', 'role="form" class="form-horizontal"');
-            echo form_hidden('username', $guru['username']);
+            echo form_open('admin/add', 'role="form" class="form-horizontal"');
             ?>
+            
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="form-field-1">
+                    EMAIL
+                </label>
+                <div class="col-sm-9">
+                    <input type="email" name="email" placeholder="  MASUKAN EMAIL" id="form-field-1" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="form-field-1">
+                    NAMA ADMIN
+                </label>
+                <div class="col-sm-9">
+                    <input type="text" name="nama_lengkap" placeholder="  MASUKAN NAMA ADMIN" id="form-field-1" class="form-control">
+                </div>
+            </div>
 
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="form-field-1">
-                    NUPTK
+                    TELEPON
                 </label>
                 <div class="col-sm-9">
-                    <input type="text" name="nuptk" value="<?php echo $guru['nuptk']?>" placeholder="MASUKAN NUPTK" id="form-field-1" class="form-control">
+                    <input type="text" name="telepon" placeholder="  MASUKAN TELEPON ADMIN" id="form-field-1" class="form-control">
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="form-field-1">
-                    NAMA GURU
+                    PASSWORD
                 </label>
                 <div class="col-sm-9">
-                    <input type="text" value="<?php echo $guru['nama_guru']?>" name="nama_guru" placeholder="MASUKAN NAMA GURU" id="form-field-1" class="form-control">
+                    <input type="password" name="password" placeholder="  MASUKAN PASSWORD" id="form-field-1" class="form-control">
                 </div>
             </div>
 
-            <div class="form-group">
-                <label class="col-sm-2 control-label" for="form-field-1">
-                    JENIS KELAMIN
-                </label>
-                <div class="col-sm-9">
-                    <?php echo form_dropdown('gender', array('p' => 'LAKI LAKI', 'w' => 'PEREMPUAN'), $guru['gender'], "class='form-control'") ?>
-                </div>
-            </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="form-field-1">
 
                 </label>
                 <div class="col-sm-1">
-                    <button type="submit" name="submit" class="btn btn-danger btn-sm">SIMPAN</button>
+                    <button type="submit" name="submit" class="btn btn-danger  btn-sm">SIMPAN</button>
                 </div>
                 <div class="col-sm-1">
-                    <?php echo anchor('guru', 'Kembali', array('class' => 'btn btn-info btn-sm')); ?>
+                    <?php echo anchor('admin', 'Kembali', array('class' => 'btn btn-info btn-sm')); ?>
                 </div>
             </div>
             </form>

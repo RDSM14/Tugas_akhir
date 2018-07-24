@@ -54,10 +54,10 @@
                     </td></tr>
                 <tr><td>ROMBEL</td><td><div id="showRombel"></div></td></tr>
                 <tr><td colspan="2">
-                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+                       <!-- <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
                             <i class="fa fa-cogs" aria-hidden="true"></i> Generate Jadwal
                         </button>
-                        <button type="submit" name="export_jadwal" class="btn btn-danger btn-sm"><i class="fa fa-print" aria-hidden="true"></i> Cetak PDF</button>
+                        <button type="submit" name="export_jadwal" class="btn btn-danger btn-sm"><i class="fa fa-print" aria-hidden="true"></i> Cetak PDF</button>-->
                         <?php //echo anchor('kurikulum/adddetail/'.$this->uri->segment(3), '<i class="fa fa-pencil-square-o" aria-hidden="true"></i> Tambah Data', "title='Dambah Data' class='btn btn-danger btn-sm'"); ?>
                         <?php //echo anchor('kurikulum', 'Kembali', "class='btn btn-success btn-sm'"); ?>
                     </td></tr>

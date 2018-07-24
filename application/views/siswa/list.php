@@ -51,7 +51,6 @@
                 <thead>
                     <tr>
                         <th>NO</th>
-                        <th>FOTO</th>
                         <th>NISN</th>
                         <th>NIM</th>
                         <th>NAMA</th>
@@ -79,9 +78,6 @@
                         "sClass": "text-center",
                         "orderable": false,
                     },
-                    { "data": "foto",
-                      "width": "120px",
-                      "sClass": "text-center" },
                     {
                         "data": "nisn",
                         "width": "120px",
@@ -92,7 +88,7 @@
                       "sClass": "text-center" },
                     { "data": "nama"  },
                     //{ "data": "tbl_rombel.nama_rombel", "width": "150px" },
-                    { "data": "aksi","width": "75px" },
+                    { "data": "aksi","width": "100px","sClass": "text-center" },
                 ]
             } );
                

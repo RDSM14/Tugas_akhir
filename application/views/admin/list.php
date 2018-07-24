@@ -1,30 +1,30 @@
 <div class="col-md-12">
     <!-- start: DYNAMIC TABLE PANEL -->
-   <?php if($this->session->flashdata('data_guru_masuk'))
+   <?php if($this->session->flashdata('data_admin_masuk'))
     {
     ?>
     <script>
-        alert("Data Guru Telah Disimpan");
+        alert("Data admin Telah Disimpan");
     </script>
         
     <?php
     }
     ?>
-    <?php if($this->session->flashdata('data_guru_change'))
+    <?php if($this->session->flashdata('data_admin_change'))
     {
     ?>
     <script>
-        alert("Data Guru Telah Diubah");
+        alert("Data admin Telah Diubah");
     </script>
         
     <?php
     }
     ?>
-    <?php if($this->session->flashdata('data_guru_hapus'))
+    <?php if($this->session->flashdata('data_admin_hapus'))
     {
     ?>
     <script>
-        alert("Data Guru Telah Dihapus");
+        alert("Data admin Telah Dihapus");
     </script>
       <?php   
     }
@@ -34,7 +34,7 @@
             <i class="fa fa-external-link-square"></i> Dynamic Table
             <div class="panel-tools">
                 <a class="btn btn-xs btn-link panel-collapse collapses" href="#"> </a>
-                <?php echo anchor('guru/add','<i class="fa fa-pencil-square-o" aria-hidden="true"></i>',"title='Dambah Data'");?>
+                <?php echo anchor('admin/add','<i class="fa fa-pencil-square-o" aria-hidden="true"></i>',"title='Dambah Data'");?>
                 <a class="btn btn-xs btn-link panel-refresh" href="#"> <i class="fa fa-refresh"></i> </a>
                 <a class="btn btn-xs btn-link panel-expand" href="#"> <i class="fa fa-search"></i> </a>
             </div>
@@ -44,9 +44,9 @@
                 <thead>
                     <tr>
                         <th>NO</th>
-                        <th>NUPTK</th>
-                        <th>NAMA GURU</th>
-                        <th>JENIS KELAMIN</th>
+                        <th>EMAIL</th>
+                        <th>NAMA ADMIN</th>
+                        <th>TELEPON</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -62,7 +62,7 @@
   <script>
         $(document).ready(function() {
             var t = $('#mytable').DataTable( {
-                "ajax": '<?php echo site_url('guru/data'); ?>',
+                "ajax": '<?php echo site_url('admin/data'); ?>',
                 "order": [[ 2, 'asc' ]],
                 "columns": [
                     {
@@ -72,12 +72,12 @@
                         "orderable": false,
                     },
                     {
-                        "data": "nuptk",
-                        "width": "120px",
+                        "data": "email",
+                        "width": "200px",
                         "sClass": "text-left"
                     },
-                    { "data": "nama_guru" },
-                    { "data": "gender","width": "150px",
+                    { "data": "nama_lengkap" },
+                    { "data": "telepon_admin","width": "150px",
                         "sClass": "text-center"},
                     { "data": "aksi","width": "80px" },
                 ]

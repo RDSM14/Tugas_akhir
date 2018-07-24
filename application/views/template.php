@@ -378,9 +378,14 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="pages_user_profile.html">
-                                        <i class="fa fa-user" aria-hidden="true"></i> &nbsp;My Profile
-                                    </a>
+                                    <?php
+                                    echo anchor('auth/profile/'.$_SESSION['username'].'/'.$_SESSION['id_level_user'], '<i class="fa fa-user" aria-hidden="true"></i> &nbsp;My Profile');
+                                    ?>
+                                </li>
+                                <li>
+                                    <?php
+                                    echo anchor('auth/password/'.$_SESSION['username'].'/'.$_SESSION['id_level_user'], '<i class="fa fa-key" aria-hidden="true"></i> &nbsp;Password');
+                                    ?>
                                 </li>
                                 <li>
 
@@ -653,11 +658,11 @@
             </div>
             <!-- end: MAIN CONTAINER -->
             <!-- start: FOOTER -->
-            <div class="footer clearfix">
+            <!--<div class="footer clearfix">
                 <div class="footer-inner">
                     <script>
                         document.write(new Date().getFullYear())
-                    </script> &copy; clip-one by cliptheme.
+                    </script> 
                 </div>
                 <div class="footer-items">
                     <span class="go-top"><i class="clip-chevron-up"></i></span>

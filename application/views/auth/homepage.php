@@ -18,7 +18,7 @@
 		<title>
 			Sistem Informasi Akademik		</title>
 
-				<!--<link rel="shortcut icon" href="static/images/favicon2016072601.png" type="image/png">
+        <link rel="shortcut icon" href="<?php echo base_url();?>template/font-awesome/images/logo_putih.png" type="image/png">
 
 		<!-- Start CSS Code -->
 			 <link href="<?php echo base_url();?>template/font-awesome/css/gjskin/social_icons.css" rel='stylesheet' type='text/css' media='screen'  id='BNS-Corner-Logo-Style-css' />
@@ -53,9 +53,8 @@
 		<div class="wrap">
 			<div class="header">
 				<div class="logo" style="position:relative">
-					<a href="home.html">
-						<img src="" class="logo_gadjian" alt="" />
-					</a>
+						<img src="<?php echo base_url();?>template/font-awesome/images/logo.png" class="logo_gadjian" alt="" />
+				
 				</div>
 				<div class="cssmenu">
 					<ul id="nav">
@@ -127,52 +126,6 @@
 					</ul>
 				</div>
 				<div class="clear"></div>
-				<div class="top-nav">
-				<nav class="clearfix">
-					<ul>
-						<li class="active" >
-							<a class="btn-website" href="home.html">
-								Beranda							</a>
-						</li>
-					   	<li  >
-							<a class="btn-website" href="features.html">
-								Fitur							</a>
-						</li>
-						<li  >
-							<a class="btn-website" href="integration.html">
-								Integrasi							</a>
-						</li>
-					   	<li  >
-							<a class="btn-website" href="price.html">
-								Biaya							</a>
-						</li>
-					   	<li  >
-							<a class="btn-website" href="blog/index.html">
-								Blog
-							</a>
-						</li>
-						<li  class="not-allowed" >
-							<a class="btn-website not-active" href="https://www.gadjian.com/training_pelatihan_hrd_event/index">
-								Gadjian Academy							</a>
-						</li>
-						<li >
-							<a class="btn-website" href="demo.html">
-								Demo
-							</a>
-						</li>
-					   	<li >
-							<a class="btn-website" href="signup.html">
-								DAFTAR							</a>
-						</li>
-					   	<li>
-							<a class="btn-website btn-login">
-							MASUK							</a>
-						</li>
-
-					</ul>
-						<a href="#" id="pull">Menu</a>
-					</nav>
-				</div>
 			<div class="clear"></div>
 			</div>
 		</div>
@@ -182,7 +135,7 @@
 		<div class="header-bottom">
 			<div class="wrap">
 				<div class="bigtitle">
-					<h2>Sistem Informasi Akademik</h2>
+					<h2>Sistem Informasi Sekolah</h2>
 					<h1 class="desc">
 										</h1>
 				</div>
@@ -441,7 +394,7 @@ $(document).ready(function() {
       	<div class="modal-content">
       		<div class="modal-header">
       			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<!--<img src="static/images/gadjian_logo_tosca.png" alt="" class="center-block logo_gadjian">-->
+				<img src="<?php echo base_url();?>template/font-awesome/images/logo_putih.png" alt="" class="center-block logo_gadjian">
       		</div>
       		<div class="modal-body">
       			<div>
@@ -485,7 +438,7 @@ $(document).ready(function() {
 				          			<div class="form-group">
 				              			<div class="col-xs-12">
                                             <br><br>
-						              		<input type="text" class="form-control" name="sekolah_username" id="sekolah_username" placeholder="Email / NIP / NUPTK" id="user_username">
+						              		<input type="text" class="form-control" name="sekolah_username" id="sekolah_username" placeholder="Email" id="user_username">
                                             <div class="sekolah_username_message" style="color:red">
                                         Username tidak boleh kosong
                                         </div>
@@ -541,9 +494,9 @@ $(document).ready(function() {
 						              	</div>
 						            </div>
 						            <div class="row">
-						            	<div class="col-xs-12 text-center">
+						            	<!--<div class="col-xs-12 text-center">
 						            		<p>Belum punya akun ? <a href="signup.html">Daftar sekarang !</a></p>
-						            	</div>
+						            	</div>-->
 						            </div>
 						        </div>
 							</form>

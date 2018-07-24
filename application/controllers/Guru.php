@@ -18,10 +18,10 @@ Class Guru extends CI_Controller {
         // nama tabel
         $table = 'tbl_guru';
         // nama PK
-        $primaryKey = 'id_guru';
+        $primaryKey = 'username';
         // list field
         $columns = array(
-            array('db' => 'id_guru', 'dt' => 'id_guru'),
+            array('db' => 'username', 'dt' => 'username'),
             array('db' => 'nuptk', 'dt' => 'nuptk'),
             array('db' => 'nama_guru', 'dt' => 'nama_guru'),
             array('db' => 'gender', 
@@ -31,7 +31,7 @@ Class Guru extends CI_Controller {
                     return $d=='p'?'Laki Laki':'Wanita';
                 }),
             array(
-                'db' => 'id_guru',
+                'db' => 'username',
                 'dt' => 'aksi',
                 'formatter' => function( $d) {
                     //return "<a href='edit.php?id=$d'>EDIT</a>";
@@ -73,17 +73,17 @@ Class Guru extends CI_Controller {
             $this->session->set_flashdata('data_guru_change', 'Data Telah Dihapus');
             redirect('guru');
         }else{
-            $id_guru      = $this->uri->segment(3);
-            $data['guru'] = $this->db->get_where('tbl_guru',array('id_guru'=>$id_guru))->row_array();
+            $username      = $this->uri->segment(3);
+            $data['guru'] = $this->db->get_where('tbl_guru',array('username'=>$username))->row_array();
             $this->template->load('template', 'guru/edit',$data);
         }
     }
     
     function delete(){
-        $id_guru = $this->uri->segment(3);
-        if(!empty($id_guru)){
+        $username = $this->uri->segment(3);
+        if(!empty($username)){
             // proses delete data
-            $this->db->where('id_guru',$id_guru);
+            $this->db->where('username',$username);
             $this->db->delete('tbl_guru');
             $this->session->set_flashdata('data_guru_hapus', 'Data Telah Dihapus');
         }

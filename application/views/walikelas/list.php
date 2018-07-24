@@ -12,12 +12,8 @@
         <div class="panel-heading">
             <i class="fa fa-external-link-square"></i> Dynamic Table
             <div class="panel-tools">
-                <?php echo anchor('walikelas/add', '<i class="fa fa-pencil-square-o" aria-hidden="true"></i>', "title='Dambah Data'"); ?>
-                <a class="btn btn-xs btn-link panel-collapse collapses" href="#"> </a>
-                <a class="btn btn-xs btn-link panel-config" href="#panel-config" data-toggle="modal"> <i class="fa fa-wrench"></i> </a>
-                <a class="btn btn-xs btn-link panel-refresh" href="#"> <i class="fa fa-refresh"></i> </a>
-                <a class="btn btn-xs btn-link panel-expand" href="#"> <i class="fa fa-resize-full"></i> </a>
-                <a class="btn btn-xs btn-link panel-close" href="#"> <i class="fa fa-times"></i> </a>
+                <?php echo anchor('walikelas/add', '<i class="fa fa-pencil-square-o" aria-hidden="true"></i>', "title='Tambah Data'"); ?>
+                <a class="btn btn-xs btn-link panel-expand" href="#"> <i class="fa fa-search"></i> </a>
             </div>
         </div>
         <div class="panel-body">
@@ -26,10 +22,9 @@
                     <tr>
                         <th>NO</th>
                         <th>ROMBEL</th>
-                        <th>NAMA JURUSAN</th>
                         <th>KELAS</th>
                         <th>NAMA WALIKELAS</th>
-
+                        <th>TAHUN AKADEMIK</th>
                     </tr>
                 </thead>
             </table>
@@ -43,12 +38,13 @@
 
 <script type="text/javascript">
     function updateDataWalikelas(id_walikelas){
-        var id_guru = $("#guru"+id_walikelas).val();
+        var guru = $("#guru"+id_walikelas).val();
         $.ajax({
             type:'GET',
             url :'<?php echo base_url() ?>index.php/walikelas/updateWalikelas',
-            data:'id_walikelas='+id_walikelas+'&id_guru='+id_guru,
+            data:'id_walikelas='+id_walikelas+'&username='+guru,
             success:function(html){
+                //console.log( id_walikelas );
                 //$("#showRombel").html(html);
                 //loadPelajaran();
             }
@@ -70,9 +66,9 @@
                     "orderable": false,
                 },
                 { "data": "nama_rombel" },
-                { "data": "nama_jurusan" },
                 { "data": "kelas" },
                 { "data": "nama_guru" },
+                { "data": "tahun_akademik" },
                     
             ]
         } );

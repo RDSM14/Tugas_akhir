@@ -27,25 +27,7 @@ class Model_jadwal extends CI_Model{
         // ambil tahun akademik aktif
         $tahun_akademik = $this->db->get_where('tbl_tahun_akademik',array('is_aktif'=>'y'))->row_array();
         
-        foreach ($kurikulum_detail->result() as $row){
-            // dapatkan rombel base on jurusan dan kelas
-            $rombel = $this->db->get_where('tbl_rombel',array('kd_jurusan'=>$row->kd_jurusan,'kelas'=>$row->kelas));
-            foreach ($rombel->result() as $row_rombel){
-    
-                $data = array(
-                    'id_tahun_akademik' =>$tahun_akademik['id_tahun_akademik'],
-                    'semester'          => $semester,
-                    'hari'              => '',
-                    'kd_jurusan'        => $row->kd_jurusan,
-                    'kd_mapel'          => $row->kd_mapel,
-                    'kelas'             =>$row->kelas,
-                    'id_guru'           => 2,
-                    'jam'               => '',
-                    'id_rombel'         => $row_rombel->id_rombel,
-                    'kd_ruangan'        => '011');
-            $this->db->insert('tbl_jadwal',$data);
-            }
-        }
+        
     }
     
      function rombel()
@@ -80,7 +62,7 @@ class Model_jadwal extends CI_Model{
     
      function guru()
     {
-        $this->db->select("id_guru, nama_guru");
+        $this->db->select("username, nama_guru");
         $this->db->from("tbl_guru");
         $this->db->where("id_sekolah", $_SESSION['id_sekolah']);
         
@@ -112,7 +94,7 @@ class Model_jadwal extends CI_Model{
     function pilih_jadwal($id)
     {
        
-        $this->db->select("jd.id_jadwal,jd.id_tahun_akademik,jd.kelas,jd.id_mapel as id_mapel,jd.id_guru,jd.jam_mulai,jd.jam_selesai,jd.id_ruangan,jd.semester,jd.hari,jd.id_rombel");
+        $this->db->select("jd.id_jadwal,jd.id_tahun_akademik,jd.kelas,jd.id_mapel as id_mapel,jd.username_guru,jd.jam_mulai,jd.jam_selesai,jd.id_ruangan,jd.semester,jd.hari,jd.id_rombel");
         $this->db->from("tbl_jadwal jd");
         $this->db->where("id_jadwal", $id);
         

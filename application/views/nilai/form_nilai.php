@@ -26,7 +26,7 @@
             
                     echo "<tr>  <td width='140'>$row->nisn</td>
                                 <td>".  strtoupper($row->nama)."</td>
-                                <td width='150'><button class='btn btn-success' data-toggle='modal' data-target='#ModalAngka'>Komponen Nilai</td>
+                                <td width='150'><button class='btn btn-success' href='nilai/rombel/'".$row->nisn.'/'.$row->nisn." data-toggle='modal' data-id = ".$row->nisn." data-mapel = ".$this->uri->segment(4)." data-target='#ModalAngka'>Komponen Nilai</td>
                                     <td width='150'><button class='btn btn-success' data-toggle='modal' data-target='#myModal'>Deskripsi / Catatan</td>
                                 
                                 </tr>";
@@ -105,52 +105,46 @@
   </div>
 </div>
 
-
-
-
 <div class="modal fade" id="ModalAngka" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Komponen Nilai</h4>
+        <h4 class="modal-title" id="myModalLabel">Deskripsi Nilai</h4>
       </div>
       <div class="modal-body">
         
         <?php
         echo form_open_multipart('siswa/add', 'role="form" class="form-horizontal"');
-        foreach ($nilai as $nilai){
-                $id_nilai = $nilai->id_nilai;
-                $sekor = $nilai->skor;
-            echo $sekor;
-        }
         ?>
-          
-          
-          <?php  foreach ($komponen_nilai as $komponen_nilai){
-                
-        //$komponen = array_merge($nilai,$komponen_nilai);
-          //foreach($komponen as $komponen) {
+<?php foreach ($komponen_nilai as $komponen_nilai){
+    
+    foreach ($nilai as $value){
     ?>
-        <div class="form-group">
+        
+       <div class="form-group">
             <label class="col-sm-3 control-label" for="form-field-1">
-                <?php echo $komponen_nilai->nama_komponen ;?>
+                <?php  echo $komponen_nilai->nama_komponen ; ?>
             </label>
            
+           <input type="hidden" id="nisn">
             
+           
+           <script>
+           $("#nisn").val()
+           </script>
 
             <div class="col-sm-9">
-                <input type="text" id="<?php echo $komponen_nilai->nama_komponen ?>" 
-                       value="<?php echo $sekor.$id_nilai ?>" 
-                       onkeyup="update<?php echo $komponen_nilai->id_komponen ?>
-                       (<?php echo $id_nilai?>)" name="nama" 
+                <input type="text" id="<?php echo $komponen_nilai->id_komponen ?>" 
+                       value="<?php echo $value->skor?>" 
+                       onkeyup="updatenilai(<?php echo $value->id_nilai?>)" name="nama" 
                        placeholder="MASUKAN NAMA LENGKAP" id="form-field-1" class="form-control">
-                <!--<textarea name="deskripsi_pengetahuan" id="deskripsi_pengetahuan" class="form-control" onkeyup="updateDeskripsiPengetahuan(<?php echo $desk->id_deskripsi ?>)"><?php echo $desk->deskripsi_pengetahuan ?></textarea>
+                <!--<textarea name="deskripsi_pengetahuan" id="deskripsi_pengetahuan" class="form-control" onkeyup="updateDeskripsiPengetahuan</textarea>
             </div>-->
             </div>
-        </div>  
-<?php 
-}?>
+        </div> 
+                
+<?php }} ?>
         
         </form>
 
@@ -161,6 +155,8 @@
     </div>
   </div>
 </div>
+
+
 <!--END OF MODAL-->
 
 <script type="text/javascript">
@@ -218,6 +214,19 @@ $.ajax({
 }
     
 function updateDeskripsiPengetahuan(id_deskripsi){
+var deskripsi_pengetahuan = $("#deskripsi_pengetahuan").val();
+
+$.ajax({
+        type:'GET',
+        url :'<?php echo base_url() ?>index.php/nilai/update_deskripsi_pengetahuan',
+        data:'id_deskripsi='+id_deskripsi+'&deskripsi_pengetahuan='+deskripsi_pengetahuan,
+        success:function(html){
+
+        }
+    })
+}
+    
+    function updateNilai(id_deskripsi){
 var deskripsi_pengetahuan = $("#deskripsi_pengetahuan").val();
 
 $.ajax({
