@@ -23,10 +23,10 @@
             <table class="table table-bordered">
                 <tr><th>NIS</th><th>NAMA</th><th></th><th></th>
                 <?php foreach ($siswa as $row){
-            
+                    //href='nilai/rombel/'".$row->nisn.'/'.$row->nisn." 
                     echo "<tr>  <td width='140'>$row->nisn</td>
                                 <td>".  strtoupper($row->nama)."</td>
-                                <td width='150'><button class='btn btn-success' href='nilai/rombel/'".$row->nisn.'/'.$row->nisn." data-toggle='modal' data-id = ".$row->nisn." data-mapel = ".$this->uri->segment(4)." data-target='#ModalAngka'>Komponen Nilai</td>
+                                <td width='150'><button class='btn btn-success' data-toggle='modal' data-id = ".$row->nisn." data-mapel = ".$this->uri->segment(4)." data-target='#ModalAngka'>Komponen Nilai</td>
                                     <td width='150'><button class='btn btn-success' data-toggle='modal' data-target='#myModal'>Deskripsi / Catatan</td>
                                 
                                 </tr>";

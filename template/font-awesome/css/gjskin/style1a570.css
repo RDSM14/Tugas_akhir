@@ -82,7 +82,7 @@ video {
     padding: 0;
     border: 0;
     font: inherit;
-    vertical-align: baseline
+    vertical-align: baseline;
 }
 
 article,
@@ -320,7 +320,6 @@ body {
     -o-transition: all .3s ease-out;
     transition: all .3s ease-out
 }
-
 .img-banner {
     position: relative
 }

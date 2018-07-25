@@ -1,6 +1,25 @@
 <!DOCTYPE HTML>
 <html>
-	
+	<?php if($this->session->flashdata('data_daftar_masuk'))
+    {
+    ?>
+    <script>
+        alert("Data Anda Telah Tersimpan");
+    </script>
+        
+    <?php
+    }
+    ?>
+    <?php if($this->session->flashdata('data_daftar_gagal'))
+    {
+    ?>
+    <script>
+        alert("Data Anda Gagal Tersimpan");
+    </script>
+        
+    <?php
+    }
+    ?>
 <!-- Mirrored from www.gadjian.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 10 Jul 2018 09:09:32 GMT -->
 <head>
 		<!-- Meta Tags -->
@@ -16,7 +35,7 @@
 	    </noscript>-->
 
 		<title>
-			Sistem Informasi Akademik		</title>
+			Sistem Informasi Sekolah		</title>
 
         <link rel="shortcut icon" href="<?php echo base_url();?>template/font-awesome/images/logo_putih.png" type="image/png">
 
@@ -29,7 +48,9 @@
             <link href="<?php echo base_url();?>template/font-awesome/css/gjskin/maina9af.css?version=4.3" rel='stylesheet' type='text/css' media='all' />
             <link href="<?php echo base_url();?>template/font-awesome/css/gjskin/price069b.css?version=1.1" rel='stylesheet' type='text/css' media='all' />
             <link href="<?php echo base_url();?>template/font-awesome/css/gjskin/pricing069b.css?version=1.1" rel='stylesheet' type='text/css' media='all' />
-		
+		 
+        <link href="<?php echo base_url();?>template/font-awesome/css/font-awesome.min.css" rel='stylesheet' type='text/css' />
+        
 
 		<!-- End CSS Code -->
 
@@ -59,8 +80,8 @@
 				<div class="cssmenu">
 					<ul id="nav">
 						<li class="current" >
-							<a class="btn-website" href="home.html">
-								Beranda							</a>
+							<!--<a class="btn-website" href="#">
+								Beranda							</a>-->
 						</li>
 					   	<li  >
 					   	       <!-- tambahan fitur-->
@@ -75,8 +96,7 @@
 					   		<!-- tambahan fitur-->
 					   	</li>
 			 		   	<li>
-			 		   		<a href="signup.html">
-			 		   			<button class="btn btn-website btn-warning btn-md btn-gadjian">
+			 		   			<button class="btn btn-website btn-warning btn-md btn-gadjian btn-daftar">
 					 		   		DAFTAR						 		</button>
 						 	</a>
                            
@@ -384,6 +404,10 @@ $(document).ready(function() {
     $('.btn-login').on('click', function(){
     	$('#modal_log_in').modal('show')
     });
+    
+    $('.btn-daftar').on('click', function(){
+    	$('#modal_daftar').modal('show')
+    });
 
 
 });
@@ -634,7 +658,154 @@ $(document).ready(function() {
     </div><!-- end modal-dialog modal-md -->
 </div><!-- end modal fade log_in -->
 
-<div class="modal modal-konfirmasi" id="modalValidasi" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal log_in" role="dialog" aria-labelledby="gridSystemModalLabel" aria-hidden="true" id="modal_daftar">
+    <div class="modal-dialog modal-md">
+      	<div class="modal-content">
+      		<div class="modal-header">
+      			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<img src="<?php echo base_url();?>template/font-awesome/images/logo_putih.png" alt="" class="center-block logo_gadjian">
+      		</div>
+      		<div class="modal-daftar">
+      			<!-- Tab panes -->
+				  	<div class="tab-content margin_tabContent">
+					    <div role="tabpanel" class="tab-pane active" id="masuk_user">
+					    	
+                            <form method="post" action="<?php echo base_url();?>index.php/daftar/add" autocomplete="off" novalidate class="form_daftar">
+
+										
+					<!-- Start The First Part of The Form -->
+						<div class="daftar">
+							<div class="col-sm-8 col-sm-offset-2 text-center">
+								<h4>SIGN UP YOUR SCHOOL
+														</h4>
+                            </div>
+						</div>
+						<div class="daftar">
+							<div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+								<div class="form-group">
+									<div class="input-group">
+									  	<span class="input-group-addon" id="basic-addon1">
+									  		<i class="fa fa-user"></i>
+									  	</span>
+									  	<!-- pattern="^[a-zA-Z1-9\' \-.]+$"  -->
+										 <input name="nama_lengkap" pattern="^[A-Za-z\' \-.]+$" data-validation-pattern-message="<i>&#xf071;</i> Maaf, karakter yang Anda masukkan tidak valid " placeholder="Nama lengkap" required data-validation-required-message="<i>&#xf071;</i> Tolong isi kotak di atas" type="text" class="form-control">
+									</div>
+									<p class="help-block text-right"></p>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="daftar">
+							<div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+								<div class="form-group">
+									<div class="input-group">
+									  	<span class="input-group-addon" id="basic-addon1">
+									  		<i class="fa fa-envelope"></i>
+									  	</span>
+									  	<input name="email" type="email" autocomplete="off" class="form-control" id="email" placeholder="Email" aria-describedby="basic-addon1" required data-validation-required-message="<i>&#xf071;</i> Tolong isi kotak di atas" data-validation-ajax-ajax="https://user.gadjian.com/cek-email/" data-validation-ajax-message="" data-validation-email-message="<i>&#xf071;</i> Alamat email tidak valid">
+									</div>
+									<p class="help-block text-right"></p>
+								</div>
+							</div>
+						</div>
+
+						<div class="daftar">
+							<div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+								<div class="form-group">
+									<div class="input-group">
+									  	<span class="input-group-addon" id="basic-addon1">
+									  		<i class="fa fa-key"></i>
+									  	</span>
+									  	<input type="password" class="form-control" autocomplete="off" name="password" id="password" placeholder="Password" aria-describedby="basic-addon1" minlength="6" required data-validation-required-message="<i>&#xf071;</i> Tolong isi kotak di atas" data-validation-minlength-message="<i>&#xf071;</i> Terlalu pendek: Minimal '6' karakter">
+									</div>
+									<p class="help-block text-right"></p>
+								</div>
+							</div>
+						</div>
+
+						<div class="daftar">
+							<div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+								<div class="form-group">
+									<div class="input-group">
+									  	<span class="input-group-addon" id="basic-addon1">
+									  		<i class="fa fa-key"></i>
+									  	</span>
+									  	<input name="password_confirm" type="password" class="form-control" id="confirm_password" placeholder="Confirm password" aria-describedby="basic-addon1" data-validation-match-match="password" data-validation-match-message="<i>&#xf071;</i> Kedua password harus sama" required data-validation-required-message="<i>&#xf071;</i> Tolong isi kotak di atas">
+									</div>
+									<p class="help-block text-right"></p>
+								</div>
+							</div>
+						</div>
+
+						<div class="daftar">
+							<div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+								<div class="form-group">
+									<div class="input-group">
+									  	<span class="input-group-addon" id="basic-addon1">
+									  		<i class="fa fa-building"></i>
+									  	</span>
+									  	<input name="school_name"  type="text" class="form-control" id="school_name" pattern="^[a-zA-Z].*" minlength="3" placeholder="Nama Sekolah" aria-describedby="basic-addon1" required data-validation-required-message="<i>&#xf071;</i> Tolong isi kotak di atas"
+								data-validation-minlength-message="<i>&#xf071;</i> Terlalu pendek: Minimal '3' karakter"
+								data-validation-pattern-message="<i>&#xf071;</i> Karakter pertama harus huruf">
+									</div>
+									<p class="help-block text-right"></p>
+								</div>
+							</div>
+						</div>
+
+						<div class="daftar">
+							<div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+								<div class="form-group">
+									<div class="input-group">
+										<span class="input-group-addon" id="basic-addon1">
+									  		<i class="fa fa-building"></i>
+									  	</span>
+										<select name="jenjang" class="form-control">
+											<option value="">Jenjang Sekolah</option>
+											<option value="4">TK</option>
+											<option value="1">SD/MI</option>
+											<option value="2">SMP/MTs</option>
+											<option value="3">SMA/MA</option>
+										</select>
+										<p class="help-block text-right"></p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="daftar">
+							<div class="col-md-4 col-md-offset-4 col-sm-9 col-sm-offset-3">
+								<div class="form-group">
+									<div class="input-group">
+										<span class="input-group-addon" id="basic-addon1">
+									  		+<span class="kodeNegara">62</span>
+									  	</span>
+									  	<input name="no_hp" type="text" class="form-control hanyaAngka" id="no_tlp2" pattern="^[0-9]*$" data-validation-pattern-message="Maaf, karakter yang Anda masukkan tidak valid" placeholder="No. Handphone									  	" required data-validation-required-message="<i>&#xf071;</i> Tolong isi kotak di atas" aria-describedby="basic-addon1">
+									</div>
+									<p class="help-block text-right"></p>
+								</div>
+							</div>
+						</div>
+
+					<!-- End The First Part of The Form -->
+						<div class="daftar">
+							<div class="col-md-2 col-md-offset-5 col-sm-4 col-sm-offset-4 col-xs-6 col-xs-offset-3">
+								<button type="submit" name="submit" class="btn btn-warning btn-block btn-gadjian">
+									Buat akun								</button>
+							</div>
+						</div>
+					<!-- End The Second Part of The Form -->
+				</form>
+					    </div>
+				  	</div>
+				</div>
+      		</div>
+      	</div><!-- end modal-content -->
+    </div><!-- end modal-dialog modal-md -->
+</div>
+
+
+<!--<div class="modal modal-konfirmasi" id="modalValidasi" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-md">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -649,7 +820,7 @@ $(document).ready(function() {
 			<div class="modal-footer"></div>
 		</div>
 	</div>
-</div>
+</div>-->
     
     <input type="hidden" id="valueModal" value="0">
 
@@ -978,12 +1149,13 @@ $(document).ready(function() {
 		<!-- Start Javascript Code -->
 
 			<!-- Start Javascript Plugin -->
-				<script src="<?php echo base_url();?>template/font-awesome/js/easyResponsiveTabs"> </script>
+				<script src="<?php echo base_url();?>template/font-awesome/js/easyResponsiveTabs"  type="text/javascript"> </script>
+                <script src="<?php echo base_url();?>template/font-awesome/js/jqBootstrapValidation"  type="text/javascript"> </script>
 			<!-- End Javascript Plugin -->
 
 			<!-- Start Javascript that Mahesa M. Elba made -->
-				<script src="<?php echo base_url();?>template/font-awesome/js/appjs.min069b.js?version=1.1"> </script>
-
+				<script src="<?php echo base_url();?>template/font-awesome/js/global.js"  type="text/javascript"> </script>
+                <script src="<?php echo base_url();?>template/font-awesome/js/sign_up.js"  type="text/javascript"> </script>
 				<script>
 					$(document).ready(function() {
 				         $('.carousel').carousel({

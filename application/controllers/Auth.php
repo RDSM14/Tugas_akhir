@@ -50,7 +50,7 @@ class Auth extends CI_Controller {
                 $this->session->set_userdata($session);
                 //$this->session->set_userdata($loginUser);
                 $this->session->set_flashdata('message_name', 'This is my message');
-                redirect('users/rule');
+                redirect('sekolah');
             } elseif (!empty($loginTU)) {
                 // sukses login user
                  $session = array(

@@ -7,8 +7,8 @@
     <!--<![endif]-->
 
     <head>
-        <title>SISFO AKADEMIK</title>
-        <link rel="shortcut icon" href="favicon.ico" />
+        <title>Sistem Informasi Sekolah</title>
+         <link rel="shortcut icon" href="<?php echo base_url();?>template/font-awesome/images/logo_putih.png" type="image/png">
         <!-- start: META -->
         <meta charset="utf-8" />
         <!--[if IE]><meta http-equiv='X-UA-Compatible' content="IE=edge,IE=9,IE=8,chrome=1" /><![endif]-->
@@ -51,8 +51,8 @@
                     </button>
                     <!-- end: RESPONSIVE MENU TOGGLER -->
                     <!-- start: LOGO -->
-                    <a class="navbar-brand" href="index.html">
-                        SISFO AKADEMIK
+                    <a class="navbar-brand" >
+                        Sistem Informasi Sekolah
                     </a>
                     <!-- end: LOGO -->
                 </div>
