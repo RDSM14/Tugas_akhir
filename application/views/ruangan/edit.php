@@ -25,7 +25,7 @@
 
             <?php
             echo form_open('ruangan/edit', 'role="form" class="form-horizontal"');
-            echo form_hidden('kd_ruangan', $ruangan['kd_ruangan']);
+            echo form_hidden('id_ruangan', $ruangan['id_ruangan']);
             ?>
 
             <div class="form-group">

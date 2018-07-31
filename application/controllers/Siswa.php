@@ -55,7 +55,7 @@ Class Siswa extends CI_Controller {
         );
         $where = "id_sekolah =".$_SESSION['id_sekolah']."";
         echo json_encode(
-                SSP::simple($_GET, $sql_details, $table, $primaryKey, $columns,$where,null)
+                SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns,$where,null)
         );
     }
 
@@ -65,12 +65,14 @@ Class Siswa extends CI_Controller {
 
     function add() {
         if (isset($_POST['submit'])) {
-            $uploadFoto = $this->upload_foto_siswa();
-            $this->Model_siswa->save($uploadFoto);
+            //$uploadFoto = $this->upload_foto_siswa();
+            $this->Model_siswa->save();
             $this->session->set_flashdata('data_siswa_masuk', '');
             redirect('siswa');
         } else {
-            $this->template->load('template', 'siswa/add');
+            $id_sekolah         =   "SELECT id_rombel,nama_rombel FROM tbl_rombel WHERE id_sekolah = ".$_SESSION['id_sekolah'];
+            $data['id_sekolah'] = $this->db->query($id_sekolah)->result(); 
+            $this->template->load('template', 'siswa/add',$data);
         }
     }
     
@@ -81,8 +83,12 @@ Class Siswa extends CI_Controller {
             $this->session->set_flashdata('data_siswa_change', 'Data');
             redirect('siswa');
         }else{
-            $nisn           = $this->uri->segment(3);
+            $nisn            = $this->uri->segment(3);
+            $id_sekolah      =   "SELECT id_rombel,nama_rombel FROM tbl_rombel WHERE id_sekolah = ".$_SESSION['id_sekolah'];
+            $data['id_sekolah'] = $this->db->query($id_sekolah)->result(); 
+            $data['ulang'] = $this->db->query($id_sekolah)->result(); 
             $data['siswa'] = $this->db->get_where('tbl_siswa',array('nisn'=>$nisn))->row_array();
+            $data['ortu'] = $this->db->get_where('tbl_orang_tua',array('nisn'=>$nisn))->row_array();
             $this->template->load('template', 'siswa/edit',$data);
         }
     }

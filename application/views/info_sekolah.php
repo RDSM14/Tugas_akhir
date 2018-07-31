@@ -135,12 +135,12 @@
         $(".min_d_message").hide();
         
         $("#submit").click(function(){
-                   var nilai_max    = $("#nilai_max").val();
-                   var nilai_min    = $("#nilai_min").val();
-                   var min_a        = $("#min_a").val();
-                   var min_b        = $("#min_b").val();
-                   var min_c        = $("#min_c").val();
-                   var min_d        = $("#min_d").val();
+                   var nilai_max    = parseFloat($("#nilai_max").val());
+                   var nilai_min    = parseFloat($("#nilai_min").val());
+                   var min_a        = parseFloat($("#min_a").val());
+                   var min_b        = parseFloat($("#min_b").val());
+                   var min_c        = parseFloat($("#min_c").val());
+                   var min_d        = parseFloat($("#min_d").val());
 
 
                      if(nilai_max<=min_a)

@@ -6,11 +6,11 @@ class Nilai extends CI_Controller{
         
         if($_SESSION['id_sekolah'] == null)
         {
-            redirect('');
+            redirect('auth');
         }
         if($this->session->userdata('id_level_user')==4||$this->session->userdata('id_level_user')==5){
             // load daftar ngajar guru
-            $sql = "SELECT tj.id_rombel,tj.id_jadwal as id_jadwal,tj.kelas,tm.nama_mapel,tm.id_mapel,tj.jam_mulai,tj.jam_selesai,tr.nama_ruangan,tj.hari,tj.semester,tb.nama_rombel
+            $sql = "SELECT tj.id_rombel,tj.id_jadwal as id_jadwal,tm.nama_mapel,tm.id_mapel,tj.jam_mulai,tj.jam_selesai,tr.nama_ruangan,tj.hari,tj.semester,tb.nama_rombel
                     FROM tbl_jadwal as tj,tbl_ruangan as tr,tbl_mapel as tm,tbl_rombel as tb
                     WHERE tj.id_mapel=tm.id_mapel and tj.id_ruangan=tr.id_ruangan and tb.id_rombel=tj.id_rombel and tj.username_guru='".$_SESSION['username']."'";
         $data['jadwal'] = $this->db->query($sql); 
@@ -54,6 +54,176 @@ class Nilai extends CI_Controller{
         $this->template->load('template','nilai/form_nilai',$data);
     }
     
+    
+    ///////////
+    
+    function inputNilai($nisn, $id_mapel){
+      
+        $komponen_nilai =   "SELECT * FROM tbl_nilai as t1
+RIGHT JOIN tbl_komponen_nilai as t2 ON t1.id_komponen = t2.id_komponen
+WHERE t1.id_komponen IS NULL AND t2.id_mapel ='$id_mapel'";
+        
+        /*SELECT * FROM tbl_nilai as t1
+RIGHT JOIN tbl_komponen_nilai as t2 ON t1.id_komponen = t2.id_komponen
+WHERE t1.id_komponen IS NULL AND t2.id_mapel = 5 AND IF (nisn = 456789011, 1, 0) = 0*/
+        //$nilai          =   "SELECT * FROM tbl_nilai,tbl_komponen_nilai WHERE nisn = '$nisn' AND tbl_nilai.id_mapel = '$id_mapel' AND tbl_nilai.id_komponen=tbl_komponen_nilai.id_komponen ";
+        
+        
+
+        //$nilai = "SELECT * FROM tbl_komponen_nilai tkn, tbl_nilai tn WHERE  nisn = '$nisn' AND tkn.id_mapel = '$id_mapel' AND tn.id_mapel='$id_mapel'";
+        
+        //$data['nilai']  =   $this->db->query($nilai)->result();
+        $data['komponen_nilai']  =   $this->db->query($komponen_nilai)->result();
+        $mapel = "SELECT nama_mapel FROM tbl_mapel WHERE id_mapel = '$id_mapel'";
+        $data['mapel']  =   $this->db->query($mapel)->result();
+       
+        $this->template->load('template','nilai/update_nilai', $data);
+   }
+    
+    function lihatNilai($nisn, $id_mapel){
+      
+        //$komponen_nilai =   "SELECT DISTINCT * FROM tbl_komponen_nilai tkn, tbl_mapel tm WHERE tkn.id_mapel= tm.id_mapel AND tm.id_mapel='$id_mapel'";
+            
+        //$nilai          =   "SELECT * FROM tbl_nilai,tbl_komponen_nilai WHERE nisn = '$nisn' AND tbl_nilai.id_mapel = '$id_mapel' AND tbl_nilai.id_komponen=tbl_komponen_nilai.id_komponen ";
+
+        $nilai = "SELECT * FROM tbl_komponen_nilai tkn, tbl_nilai tn WHERE  nisn = '$nisn' AND tn.id_mapel = '$id_mapel' AND tkn.id_komponen=tn.id_komponen";
+        $mapel = "SELECT nama_mapel FROM tbl_mapel WHERE id_mapel = '$id_mapel'";
+        $deskripsi      =   "SELECT deskripsi_pengetahuan,deskripsi_spiritual,deskripsi_keterampilan,deskripsi_sosial FROM tbl_deskripsi_nilai tdn WHERE tdn.nisn = '$nisn' AND tdn.id_mapel = '$id_mapel'";
+        
+        //$result = $query->row();
+        $data['nilai']  =   $this->db->query($nilai)->result();
+        $data['deskripsi']  =   $this->db->query($deskripsi)->result();
+        $data['mapel']  =   $this->db->query($mapel)->result();
+       
+
+        $this->template->load('template','nilai/see_nilai', $data);
+   }
+    function deskripsiNilai($nisn, $id_mapel){
+      
+        //$komponen_nilai =   "SELECT DISTINCT * FROM tbl_komponen_nilai tkn, tbl_mapel tm WHERE tkn.id_mapel= tm.id_mapel AND tm.id_mapel='$id_mapel'";
+            
+        //$nilai          =   "SELECT * FROM tbl_nilai,tbl_komponen_nilai WHERE nisn = '$nisn' AND tbl_nilai.id_mapel = '$id_mapel' AND tbl_nilai.id_komponen=tbl_komponen_nilai.id_komponen ";
+
+        $nilai = "SELECT * FROM tbl_komponen_nilai tkn, tbl_nilai tn WHERE  nisn = '$nisn' AND tn.id_mapel = '$id_mapel' AND tkn.id_komponen=tn.id_komponen";
+        $mapel = "SELECT nama_mapel FROM tbl_mapel WHERE id_mapel = '$id_mapel'";
+        $deskripsi      =   "SELECT id_deskripsi,deskripsi_pengetahuan,deskripsi_spiritual,deskripsi_keterampilan,deskripsi_sosial FROM tbl_deskripsi_nilai tdn WHERE tdn.nisn = '$nisn' AND tdn.id_mapel = '$id_mapel'";
+        
+        //$result = $query->row();
+        $data['nilai']  =   $this->db->query($nilai)->result();
+        $data['deskripsi']  =   $this->db->query($deskripsi)->result();
+        $data['mapel']  =   $this->db->query($mapel)->result();
+       
+
+        $this->template->load('template','nilai/deskripsi_nilai', $data);
+   }
+    function getData()
+     {
+        echo $this->input->post('nisn');
+        echo $this->input->post('mapel');
+             if (!empty($this->input->post('nisn'))) { 
+             //$data['listsambutanketua']=$this->sambutanketua_model->get_sambutanketua($this->input->post('ids')); 
+             $nilai = "SELECT * FROM tbl_komponen_nilai tkn, tbl_nilai tn WHERE  nisn = '".$this->input->post('nisn')."' AND tn.id_mapel = '".$this->input->post('mapel')."' AND tkn.id_komponen=tn.id_komponen";
+             $data['nilai']  =   $this->db->query($nilai)->row();
+             foreach($data as $item){
+             echo 'ID :'.$item->nisn.'<br>';
+             echo 'ID_Mapel :'.$item->id_mapel.'<br>';
+             echo 'ANGKA :'.$item->skor.'<br>';
+             echo 'id _komponen :<p><i>'.$item->id_komponen.'</i></p><br>';
+             }
+         } 
+        
+     }
+    
+    function masuk()
+    {
+       $id_komponen = $this->input->post('id_komponen');
+        //echo  count($id_komponen);
+       $nilai = $this->input->post('nilai');
+        //echo  count($nilai)."/";
+       $id_mapel = $this->input->post('id_mapel');
+        //echo  $id_mapel."/";
+       $id_jadwal = $this->input->post('id_jadwal');
+       //echo  $id_jadwal."/";
+       $nisn = $this->input->post('nisn');
+       //echo  $nisn."/";
+        
+        for($k=0 ; $k < count($id_komponen) ; $k++)
+        {   
+            // $id_mapel = $this->input->post('id_mapel');
+              echo  $k."=pengulangan/ ";
+              echo  $id_mapel."=id_mapel/ ";
+             //$id_jadwal = $this->input->post('id_jadwal');
+             echo  $id_jadwal."=id_jadwal/ ";
+             //$nisn = $this->input->post('nisn');
+             echo  $nisn."=nisn/ ";
+             echo $id_komponen[$k]."=id_komponen/ ";
+            
+            if (($nilai[$k] != "")||($nilai[$k] != NULL))
+            {
+                $parameter = array('nisn'=>$nisn,'id_jadwal'=>$id_jadwal, 'id_mapel'=>$id_mapel,'skor'=>$nilai[$k], 'id_komponen'=>$id_komponen[$k]);            
+                     
+            }
+            
+            $val = array('nisn'=>$nisn,'id_jadwal'=>$id_jadwal, 'id_mapel'=>$id_mapel, 'id_komponen'=>$id_komponen[$k]);
+            //print_r $validasi.'/';
+            $chek = $this->db->get_where('tbl_nilai',$val);
+            echo $chek->num_rows()."= ada apa nggak table? /";
+                
+            if($chek->num_rows()>0){
+                    $this->db->where('id_komponen', $id_komponen[$k]);
+                    $this->db->where('id_mapel', $id_mapel);
+                    $this->db->where('id_jadwal', $id_jadwal);
+                    $this->db->where('nisn', $nisn);
+                    if (($nilai[$k]!="")||($nilai[$k]!=NULL)){
+                        //$this->db->update('tbl_nilai', array('skor' => $nilai[$i]));    
+                    }
+                    
+                    echo "               ++             nilai ada   <br> ";
+                
+            }
+           else
+            {   if (($nilai[$k]!="")||($nilai[$k]!=NULL)){
+                        //echo count($nilai[$k])."/";
+              //      $this->db->insert('tbl_nilai',$parameter);
+                }
+                
+                    
+                echo "                  --             nilai gak ada ";
+            }
+            
+        }
+        
+        
+    }
+    
+    
+    function deskripsi(){
+        $id_deskripsi = $this->input->post('id_deskripsi');
+        $id_mapel = $this->input->post('id_mapel');
+        $nisn = $this->input->post('nisn');
+        $deskripsi_spiritual = $this->input->post('deskripsi_spiritual');
+        $deskripsi_sosial = $this->input->post('deskripsi_sosial');
+        $deskripsi_pengetahuan = $this->input->post('deskripsi_pengetahuan');
+        $deskripsi_keterampilan = $this->input->post('deskripsi_keterampilan');
+        $parameters_update = array('nisn'=>$nisn,'id_deskripsi'=>$id_deskripsi,'id_mapel'=>$id_mapel,'deskripsi_spiritual'=>$deskripsi_spiritual,'deskripsi_sosial'=>$deskripsi_sosial,'deskripsi_pengetahuan'=>$deskripsi_pengetahuan,'deskripsi_keterampilan'=>$deskripsi_keterampilan);
+        $parameters_insert = array('nisn'=>$nisn,'id_deskripsi'=>$id_deskripsi,'id_mapel'=>$id_mapel,'deskripsi_spiritual'=>$deskripsi_spiritual,'deskripsi_sosial'=>$deskripsi_sosial,'deskripsi_pengetahuan'=>$deskripsi_pengetahuan,'deskripsi_keterampilan'=>$deskripsi_keterampilan);
+        
+       if(($id_deskripsi!='')||($id_deskripsi!=NULL)){
+            // proses update
+           
+            $this->db->where('id_deskripsi',$id_deskripsi);
+            $this->db->update('tbl_deskripsi_nilai',$parameters_update);
+        }else{
+            // proses insert
+            $this->db->insert('tbl_deskripsi_nilai',$parameters_insert);
+            
+        }
+        $this->session->set_flashdata('data_deskripsi', 'Data');
+        redirect('nilai');
+    }
+    
+    //////////
+    
     function update_nilai(){
         $nisn        = $_GET['nisn'];
         $id_jadwal  = $_GET['id_jadwal'];
@@ -75,6 +245,7 @@ class Nilai extends CI_Controller{
             echo "data sudah masuk";
         }
     }
+    
     
     function update_nilai_spiritual(){
         $nisn        = $_GET['nisn'];

@@ -7,17 +7,8 @@
             <div class="panel-tools">
                 <a class="btn btn-xs btn-link panel-collapse collapses" href="#">
                 </a>
-                <a class="btn btn-xs btn-link panel-config" href="#panel-config" data-toggle="modal">
-                    <i class="fa fa-wrench"></i>
-                </a>
-                <a class="btn btn-xs btn-link panel-refresh" href="#">
-                    <i class="fa fa-refresh"></i>
-                </a>
                 <a class="btn btn-xs btn-link panel-expand" href="#">
-                    <i class="fa fa-resize-full"></i>
-                </a>
-                <a class="btn btn-xs btn-link panel-close" href="#">
-                    <i class="fa fa-times"></i>
+                    <i class="fa fa-search"></i>
                 </a>
             </div>
         </div>
@@ -79,22 +70,23 @@
                     ?>
                 </div>
             </div>
+            
             <div class="form-group">
                 <label class="col-sm-3 control-label" for="form-field-1">
-                    Foto
-                </label>
-                <div class="col-sm-2">
-                    <input type="file" name="userfile">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label" for="form-field-1">
-                    Alamat
+                    ALAMAT
                 </label>
                 <div class="col-sm-9">
                     <textarea class="form-control" name="alamat_siswa"></textarea>
                 </div>
                
+            </div>
+             <div class="form-group">
+                <label class="col-sm-3 control-label" for="form-field-1">
+                    Password untuk Siswa 
+                </label>
+                <div class="col-sm-9">
+                    <input type="text" name="password_siswa" placeholder="MASUKAN PASSWORD UNTUK AKUN SISWA" id="form-field-1" class="form-control">
+                </div>
             </div>
 
             <!--<div class="form-group">
@@ -122,7 +114,16 @@
                      Diterima di Kelas
                 </label>
                 <div class="col-sm-6">
-                    <?php echo cmb_dinamis('rombel', 'tbl_rombel', 'nama_rombel', 'id_rombel') ?>
+                    <select class="form-control" name="rombel" >
+                    <?php foreach($id_sekolah as $id_sekolah)
+                    {
+                    ?>
+                        <option value="<?php echo $id_sekolah->id_rombel; ?>"><?php echo $id_sekolah->nama_rombel; ?></option>
+                        
+                    <?php
+                    }
+                    ?>
+                    </select >
                 </div>
             </div>
              <div class="form-group">
@@ -154,12 +155,32 @@
             </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label" for="form-field-1">
-                    Data Orang Tua 
+                    Nama Ayah
                 </label>
                 <div class="col-sm-9">
-                    <input type="text" name="ortu" placeholder="Masukkan data ortu" id="form-field-1" class="form-control">
+                    <input type="text" name="nama_ayah" placeholder="MASUKKAN NAMA AYAH SISWA" id="form-field-1" class="form-control">
                 </div>
                 <input type="hidden" name="id_sekolah" value="<?php echo $_SESSION['id_sekolah'] ?>">
+            </div>
+            
+          
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="form-field-1">
+                    Nama Ibu
+                </label>
+                <div class="col-sm-9">
+                    <input type="text" name="nama_ibu" placeholder="MASUKKAN NAMA IBU SISWA" id="form-field-1" class="form-control">
+                </div>
+                <input type="hidden" name="id_sekolah" value="<?php echo $_SESSION['id_sekolah'] ?>">
+            </div>
+            
+             <div class="form-group">
+                <label class="col-sm-3 control-label" for="form-field-1">
+                    Password untuk Orang Tua / Wali Murid 
+                </label>
+                <div class="col-sm-9">
+                    <input type="text" name="password_ortu" placeholder="MASUKAN PASSWORD UNTUK AKUN ORANG TUA / WALI MURID " id="form-field-1" class="form-control">
+                </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="form-field-1">

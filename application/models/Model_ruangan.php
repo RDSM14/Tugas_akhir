@@ -6,6 +6,7 @@ class Model_ruangan extends CI_Model {
     
     function save() {
         $data = array(
+            'id_sekolah'    => $_SESSION['id_sekolah'],
             'kd_ruangan'    => $this->input->post('kd_ruangan', TRUE),
             'nama_ruangan'  => $this->input->post('nama_ruangan', TRUE)
         );
@@ -17,8 +18,8 @@ class Model_ruangan extends CI_Model {
             //'kd_ruangan'    => $this->input->post('kd_ruangan', TRUE),
             'nama_ruangan'  => $this->input->post('nama_ruangan', TRUE)
         );
-        $kd_ruangan   = $this->input->post('kd_ruangan');
-        $this->db->where('kd_ruangan',$kd_ruangan);
+        $kd_ruangan   = $this->input->post('id_ruangan');
+        $this->db->where('id_ruangan',$kd_ruangan);
         $this->db->update($this->table,$data);
     }
 

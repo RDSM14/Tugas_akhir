@@ -11,7 +11,8 @@ class Model_mapel extends CI_Model {
             'min_a'         => $this->input->post('min_a', TRUE),
             'min_b'         => $this->input->post('min_b', TRUE),
             'min_c'         => $this->input->post('min_c', TRUE),
-            'min_d'         => $this->input->post('min_d', TRUE)
+            'min_d'         => $this->input->post('min_d', TRUE),
+            'id_sekolah'    => $_SESSION['id_sekolah']
             
         );
         $this->db->insert($this->table,$data);
@@ -24,7 +25,9 @@ class Model_mapel extends CI_Model {
             'min_a'         => $this->input->post('min_a', TRUE),
             'min_b'         => $this->input->post('min_b', TRUE),
             'min_c'         => $this->input->post('min_c', TRUE),
-            'min_d'         => $this->input->post('min_d', TRUE)
+            'min_d'         => $this->input->post('min_d', TRUE),
+            'id_sekolah'    => $_SESSION['id_sekolah']
+            
         );
         $id_mapel   = $this->input->post('id_mapel');
         $this->db->where('id_mapel',$id_mapel);

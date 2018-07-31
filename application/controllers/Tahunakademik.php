@@ -59,6 +59,7 @@ Class Tahunakademik extends CI_Controller {
             $this->Model_tahunakademik->save();
             $idTahunAkademik = $this->db->insert_id();
             
+            $this->session->set_flashdata('data_ta_masuk', 'Data');
             // setup data dumy walikelas
             //$this->load->model('Model_walikelas');
             //$this->Model_walikelas->setup_walikelas($idTahunAkademik);
@@ -71,6 +72,7 @@ Class Tahunakademik extends CI_Controller {
     function edit() {
         if (isset($_POST['submit'])) {
             $this->Model_tahunakademik->update();
+            $this->session->set_flashdata('data_ta_change', 'Data');
             redirect('tahunakademik');
         } else {
             $Id_tahun_akademik = $this->uri->segment(3);
@@ -85,6 +87,7 @@ Class Tahunakademik extends CI_Controller {
             // proses delete data
             $this->db->where('id_tahun_akademik', $id_tahun_akademik);
             $this->db->delete('tbl_tahun_akademik');
+            $this->session->set_flashdata('data_ta_hapus', 'Data');
         }
         redirect('tahunakademik');
     }

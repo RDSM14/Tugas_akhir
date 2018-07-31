@@ -26,7 +26,7 @@
                 foreach ($jadwal->result() as $row){
                     echo "<tr>
                         <td>$no</td>
-                        <td>KELAS $row->kelas $row->nama_rombel</td>
+                        <td> $row->nama_rombel</td>
                         <td>$row->nama_mapel</td>
                         <td>$row->hari</td>
                         <td>$row->jam_mulai</td>

@@ -23,7 +23,6 @@
             <?php foreach ($jadwal as $pilih)
             {
                 $tahun_akademiq= $pilih->id_tahun_akademik;
-                $celas = $pilih->kelas;
                 $pelajaran = $pilih->id_mapel;
                 $teach = $pilih->username_guru;
                 $mulai = $pilih->jam_mulai;
@@ -53,24 +52,6 @@
                     ?>
                 </select>
            </div>
-            </div>
-
-            <div class="form-group" >
-                <label class="col-sm-3 control-label" for="form-field-1">
-                    Kelas 
-                </label>
-   
-                <div class="col-sm-2">
-                    <select class="form-control" name="kelas" >
-                        <?php for($i=1;$i<=$kelas['jumlah_kelas'];$i++)
-                        {
-                        ?>
-                            <option value="<?php echo $i?>"<?php if($i==$celas) echo 'selected="selected"';?>><?php echo $i?></option>
-                        <?php
-                        }
-                        ?>
-                    </select>
-                </div>
             </div>
 
             <div class="form-group">

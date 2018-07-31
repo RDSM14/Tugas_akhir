@@ -1,16 +1,41 @@
 <div class="col-md-12">
     <!-- start: DYNAMIC TABLE PANEL -->
-   
+   <?php if($this->session->flashdata('data_ruang_masuk'))
+    {
+    ?>
+    <script>
+        alert("Data Ruangan Telah Disimpan");
+    </script>
+        
+    <?php
+    }
+    ?>
+    <?php if($this->session->flashdata('data_ruang_change'))
+    {
+    ?>
+    <script>
+        alert("Data Ruangan Telah Diubah");
+    </script>
+        
+    <?php
+    }
+    ?>
+    <?php if($this->session->flashdata('data_ruang_hapus'))
+    {
+    ?>
+    <script>
+        alert("Data Ruangan Telah Dihapus");
+    </script>
+      <?php   
+    }
+    ?>
     <div class="panel panel-default">
         <div class="panel-heading">
             <i class="fa fa-external-link-square"></i> Dynamic Table
             <div class="panel-tools">
                 <?php echo anchor('ruangan/add','<i class="fa fa-pencil-square-o" aria-hidden="true"></i>',"title='Dambah Data'");?>
                 <a class="btn btn-xs btn-link panel-collapse collapses" href="#"> </a>
-                <a class="btn btn-xs btn-link panel-config" href="#panel-config" data-toggle="modal"> <i class="fa fa-wrench"></i> </a>
-                <a class="btn btn-xs btn-link panel-refresh" href="#"> <i class="fa fa-refresh"></i> </a>
-                <a class="btn btn-xs btn-link panel-expand" href="#"> <i class="fa fa-resize-full"></i> </a>
-                <a class="btn btn-xs btn-link panel-close" href="#"> <i class="fa fa-times"></i> </a>
+                <a class="btn btn-xs btn-link panel-expand" href="#"> <i class="fa fa-search"></i> </a>
             </div>
         </div>
         <div class="panel-body">
@@ -50,7 +75,7 @@
                         "sClass": "text-center"
                     },
                     { "data": "nama_ruangan" },
-                    { "data": "aksi","width": "80px" },
+                    { "data": "aksi","width": "100px" },
                 ]
             } );
                

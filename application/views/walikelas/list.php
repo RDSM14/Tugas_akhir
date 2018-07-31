@@ -1,3 +1,13 @@
+ <?php if($this->session->flashdata('data_deskripsi'))
+    {
+    ?>
+    <script>
+        alert("Nilai Deskripsi Telah Disimpan");
+    </script>
+        
+    <?php
+    }
+    ?>
 <div class="col-md-12">
     <table class="table table-bordered">
         <tr><td width='200'>TAHUN AKADEMIK</td><td> : <?php echo get_tahun_akademik_aktif('tahun_akademik') ?></td></tr>

@@ -105,12 +105,12 @@
         $(".min_d_message_mapel_edit").hide();
         
         $("#submit_edit_mapel").click(function(){
-                   var nilai_max    = $("#nilai_max_mapel_edit").val();
-                   var nilai_min    = $("#nilai_min_mapel_edit").val();
-                   var min_a        = $("#min_a_mapel_edit").val();
-                   var min_b        = $("#min_b_mapel_edit").val();
-                   var min_c        = $("#min_c_mapel_edit").val();
-                   var min_d        = $("#min_d_mapel_edit").val();
+                   var nilai_max    = parseFloat($("#nilai_max_mapel_edit").val());
+                   var nilai_min    = parseFloat($("#nilai_min_mapel_edit").val());
+                   var min_a        = parseFloat($("#min_a_mapel_edit").val());
+                   var min_b        = parseFloat($("#min_b_mapel_edit").val());
+                   var min_c        = parseFloat($("#min_c_mapel_edit").val());
+                   var min_d        = parseFloat($("#min_d_mapel_edit").val());
 
 
                      if(nilai_max<=min_a)

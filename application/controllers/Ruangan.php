@@ -16,13 +16,13 @@ Class Ruangan extends CI_Controller {
         // nama tabel
         $table = 'tbl_ruangan';
         // nama PK
-        $primaryKey = 'kd_ruangan';
+        $primaryKey = 'id_ruangan';
         // list field
         $columns = array(
             array('db' => 'kd_ruangan', 'dt' => 'kd_ruangan'),
             array('db' => 'nama_ruangan', 'dt' => 'nama_ruangan'),
             array(
-                'db' => 'kd_ruangan',
+                'db' => 'id_ruangan',
                 'dt' => 'aksi',
                 'formatter' => function( $d) {
                     //return "<a href='edit.php?id=$d'>EDIT</a>";
@@ -51,6 +51,7 @@ Class Ruangan extends CI_Controller {
     function add() {
         if (isset($_POST['submit'])) {
             $this->Model_ruangan->save();
+            $this->session->set_flashdata('data_ruang_masuk', 'Data');
             redirect('ruangan');
         } else {
             $this->template->load('template', 'ruangan/add');
@@ -60,20 +61,22 @@ Class Ruangan extends CI_Controller {
     function edit(){
         if(isset($_POST['submit'])){
             $this->Model_ruangan->update();
+            $this->session->set_flashdata('data_ruang_change', 'Data');
             redirect('ruangan');
         }else{
-            $kd_ruangan      = $this->uri->segment(3);
-            $data['ruangan'] = $this->db->get_where('tbl_ruangan',array('kd_ruangan'=>$kd_ruangan))->row_array();
+            $id_ruangan      = $this->uri->segment(3);
+            $data['ruangan'] = $this->db->get_where('tbl_ruangan',array('id_ruangan'=>$id_ruangan))->row_array();
             $this->template->load('template', 'ruangan/edit',$data);
         }
     }
     
     function delete(){
-        $kd_ruangan = $this->uri->segment(3);
-        if(!empty($kd_ruangan)){
+        $id_ruangan = $this->uri->segment(3);
+        if(!empty($id_ruangan)){
             // proses delete data
-            $this->db->where('kd_ruangan',$kd_ruangan);
+            $this->db->where('id_ruangan',$id_ruangan);
             $this->db->delete('tbl_ruangan');
+            $this->session->set_flashdata('data_ruang_hapus', 'Data');
         }
         redirect('ruangan');
     }

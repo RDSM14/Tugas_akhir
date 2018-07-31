@@ -104,9 +104,8 @@ class Model_jadwal extends CI_Model{
     function save() {
         $data = array(
             'id_tahun_akademik'             => $this->input->post('ta', TRUE),
-            'kelas'                         => $this->input->post('kelas', TRUE),
             'id_mapel'                      => $this->input->post('mapel', TRUE),
-            'id_guru'                       => $this->input->post('guru', TRUE),
+            'username_guru'                 => $this->input->post('guru', TRUE),
             'jam_mulai'                     => $this->input->post('mulai', TRUE),
             'jam_selesai'                   => $this->input->post('selesai', TRUE),
             'id_ruangan'                    => $this->input->post('ruangan', TRUE),
@@ -121,9 +120,8 @@ class Model_jadwal extends CI_Model{
     function update() {
         $data = array(
             'id_tahun_akademik'             => $this->input->post('ta', TRUE),
-            'kelas'                         => $this->input->post('kelas', TRUE),
             'id_mapel'                      => $this->input->post('mapel', TRUE),
-            'id_guru'                       => $this->input->post('guru', TRUE),
+            'username_guru'                 => $this->input->post('guru', TRUE),
             'jam_mulai'                     => $this->input->post('mulai', TRUE),
             'jam_selesai'                   => $this->input->post('selesai', TRUE),
             'id_ruangan'                    => $this->input->post('ruangan', TRUE),

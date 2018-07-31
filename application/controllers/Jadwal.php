@@ -16,9 +16,9 @@ Class jadwal extends CI_Controller{
         if($this->session->userdata('id_level_user')==4 || $this->session->userdata('id_level_user')==5){
             // load daftar ngajar guru
             $username = $this->session->userdata('username');
-            $sql = "SELECT tj.id_jadwal,tj.kelas,tm.nama_mapel,tj.jam_mulai,tj.jam_selesai,tr.nama_ruangan,tj.hari,tj.semester
-                    FROM tbl_jadwal as tj,tbl_ruangan as tr,tbl_mapel as tm
-                    WHERE tj.id_mapel=tm.id_mapel and tj.id_ruangan=tr.id_ruangan and tj.username_guru='$username'";
+            $sql = "SELECT tj.id_jadwal,tm.nama_mapel,tj.jam_mulai,tj.jam_selesai,tr.nama_ruangan,tj.hari,tj.semester,tl.nama_rombel
+                    FROM tbl_jadwal as tj,tbl_ruangan as tr,tbl_mapel as tm,tbl_rombel as tl
+                    WHERE tj.id_mapel=tm.id_mapel and tj.id_rombel=tl.id_rombel and tj.id_ruangan=tr.id_ruangan and tj.username_guru='$username'";
             $data['jadwal'] = $this->db->query($sql); 
             $this->template->load('template','jadwal/jadwal_ajar_guru',$data);
         }elseif($this->session->userdata('id_level_user')==6 || $this->session->userdata('id_level_user')==7){
@@ -28,9 +28,10 @@ Class jadwal extends CI_Controller{
             $data['jadwal'] = $this->db->query($sql); 
             $this->template->load('template','jadwal/jadwal_ajar_siswa',$data);
         }else{
+        $id_sekolah = $_SESSION['id_sekolah'];
         $infoSekolah = "SELECT js.jumlah_kelas
                         FROM tbl_jenjang_sekolah as js,tbl_sekolah_info as si 
-                        WHERE js.id_jenjang=si.id_jenjang_sekolah";
+                        WHERE js.id_jenjang=si.id_jenjang_sekolah AND id_sekolah=".$id_sekolah;
         $data['info']= $this->db->query($infoSekolah)->row_array();
         $this->template->load('template','jadwal/list',$data);
         }
@@ -45,14 +46,9 @@ Class jadwal extends CI_Controller{
     
     function dataJadwal(){
         $id_sekolah     = $_SESSION['id_sekolah'];
-        $kelas          = $_GET['kelas'];
-        $id_kurikulum   = $_GET['id_kurikulum'];
+        //$kelas          = $_GET['kelas'];
+        //$id_kurikulum   = $_GET['id_kurikulum'];
         $rombel         = $_GET['rombel'];
-        if($kelas=='semua_kelas'){
-            $selected_kelas = '';
-        }else{
-            $selected_kelas="and id.kelas='$kelas'";
-        }
         echo "<table class='table table-striped table-bordered table-hover table-full-width dataTable'>
                 <thead>
                     <tr>
@@ -69,8 +65,7 @@ Class jadwal extends CI_Controller{
         
         $sql = "SELECT  tj.hari,tj.id_jadwal,tm.nama_mapel,tg.username,tg.nama_guru,tr.nama_ruangan,tj.hari,tj.jam_mulai,tj.jam_selesai
                 FROM tbl_jadwal as tj, tbl_mapel as tm, tbl_ruangan as tr, tbl_guru as tg,tbl_rombel as tb
-                WHERE tj.id_mapel=tm.id_mapel and tj.id_ruangan=tr.id_ruangan and tg.username=tj.username_guru and tb.id_rombel=tj.id_rombel
-                and tj.kelas='$kelas' and tj.id_rombel='$rombel' and tb.id_sekolah='$id_sekolah'";
+                WHERE tj.id_mapel=tm.id_mapel and tj.id_ruangan=tr.id_ruangan and tg.username=tj.username_guru and tb.id_rombel=tj.id_rombel and tj.id_rombel='$rombel' and tb.id_sekolah='$id_sekolah'";
         $jadwal = $this->db->query($sql)->result();
         $no=1;
         foreach ($jadwal as $row){
@@ -90,7 +85,8 @@ Class jadwal extends CI_Controller{
     
     function show_rombel(){
         echo "<select id='rombel' name='rombel' class='form-control' onchange='loadPelajaran()'>";
-        $where  = array ('kelas'=>$_GET['kelas']);
+        $id_sekolah = $_SESSION['id_sekolah'];
+        $where  = array ('kelas'=>$_GET['kelas'],'id_sekolah'=>$id_sekolah);
         $rombel = $this->db->get_where('tbl_rombel',$where);
         foreach ($rombel->result() as $row){
             echo "<option value='$row->id_rombel'>$row->nama_rombel</option>";

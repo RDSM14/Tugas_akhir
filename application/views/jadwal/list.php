@@ -110,15 +110,14 @@
     }
     
     function loadPelajaran(){
-        var kelas   =$("#kelas").val();
-        var jurusan =$("#jurusan").val();
         var rombel  =$("#rombel").val();
         $.ajax({
             type:'GET',
             url :'<?php echo base_url() ?>index.php/jadwal/dataJadwal',
-            data:'kelas='+kelas+'&rombel='+rombel+'&id_kurikulum=<?php echo $this->uri->segment(3) ?>',
+            data:'rombel='+rombel,
             success:function(html){
                 $("#tabel").html(html);
+               console.log(rombel);
                 //loadRombel();
             }
         })

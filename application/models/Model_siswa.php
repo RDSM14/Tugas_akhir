@@ -13,7 +13,6 @@ class Model_siswa extends CI_Model {
             'tanggal_lahir' => $this->input->post('tanggal_lahir', TRUE),
             'tempat_lahir'  => $this->input->post('tempat_lahir', TRUE),
             'gender'        => $this->input->post('gender', TRUE),
-            'foto'          => $foto,
             'id_rombel'     => $this->input->post('rombel',TRUE),
             'alamat_siswa'  => $this->input->post('alamat_siswa', TRUE),
             'status_keluarga'=> $this->input->post('status_keluarga', TRUE),
@@ -21,15 +20,24 @@ class Model_siswa extends CI_Model {
             'asal_sekolah'  => $this->input->post('asal_sekolah', TRUE),
             'kelas_terima'  => $this->input->post('rombel', TRUE),
             'id_sekolah'    => $this->input->post('id_sekolah', TRUE),
-            'tanggal_terima'=> $this->input->post('tanggal_terima', TRUE)
+            'tanggal_terima'=> $this->input->post('tanggal_terima', TRUE),
+            'password'=> md5($this->input->post('password_siswa', TRUE)),
             
         );
         $this->db->insert($this->table,$data);
+        $ortu = array(
+            'nisn'          => $this->input->post('nisn', TRUE),
+            'nama_ayah'  => $this->input->post('nama_ayah', TRUE),
+            'nama_ibu'  => $this->input->post('nama_ibu', TRUE),
+            'password_orangtua'=>md5($this->input->post('password_ortu', TRUE))
+            
+        );
+        $this->db->insert('tbl_orang_tua',$ortu);
         
         $tahun_akademik = $this->db->get_where('tbl_tahun_akademik',array('is_aktif'=>'y'))->row_array();
         
         $history =  array(
-            'nim'                 =>  $this->input->post('nim', TRUE),
+            
             'nisn'                => $this->input->post('nisn', TRUE),
             'id_tahun_akademik'   =>  $tahun_akademik['id_tahun_akademik'],
             'id_rombel'           =>  $this->input->post('rombel', TRUE)
@@ -74,9 +82,17 @@ class Model_siswa extends CI_Model {
             'tanggal_terima'=> $this->input->post('tanggal_terima', TRUE)
         );
         }
-        $nim   = $this->input->post('nim');
-        $this->db->where('nim',$nim);
+        $nisn   = $this->input->post('nisn');
+        $this->db->where('nisn',$nisn);
         $this->db->update($this->table,$data);
+        
+        $value = array(
+            'nama_ayah'     => $this->input->post('nama_ayah', TRUE),
+            'nama_ibu'      => $this->input->post('nama_ibu', TRUE)
+        );
+        $nisn   = $this->input->post('nisn');
+        $this->db->where('nisn',$nisn);
+        $this->db->update('tbl_orang_tua',$value);
     }
     
     function chekLogin($username,$password){

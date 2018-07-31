@@ -7,17 +7,8 @@
             <div class="panel-tools">
                 <a class="btn btn-xs btn-link panel-collapse collapses" href="#">
                 </a>
-                <a class="btn btn-xs btn-link panel-config" href="#panel-config" data-toggle="modal">
-                    <i class="fa fa-wrench"></i>
-                </a>
-                <a class="btn btn-xs btn-link panel-refresh" href="#">
-                    <i class="fa fa-refresh"></i>
-                </a>
                 <a class="btn btn-xs btn-link panel-expand" href="#">
-                    <i class="fa fa-resize-full"></i>
-                </a>
-                <a class="btn btn-xs btn-link panel-close" href="#">
-                    <i class="fa fa-times"></i>
+                    <i class="fa fa-search"></i>
                 </a>
             </div>
         </div>
@@ -26,7 +17,14 @@
             <?php
             echo form_open('tu/add', 'role="form" class="form-horizontal"');
             ?>
-
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="form-field-1">
+                    EMAIL TU
+                </label>
+                <div class="col-sm-9">
+                    <input type="email" name="email" placeholder="  MASUKAN EMAIL" id="form-field-1" class="form-control">
+                </div>
+            </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="form-field-1">
                     NIP

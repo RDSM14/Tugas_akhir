@@ -7,17 +7,8 @@
             <div class="panel-tools">
                 <a class="btn btn-xs btn-link panel-collapse collapses" href="#">
                 </a>
-                <a class="btn btn-xs btn-link panel-config" href="#panel-config" data-toggle="modal">
-                    <i class="fa fa-wrench"></i>
-                </a>
-                <a class="btn btn-xs btn-link panel-refresh" href="#">
-                    <i class="fa fa-refresh"></i>
-                </a>
                 <a class="btn btn-xs btn-link panel-expand" href="#">
-                    <i class="fa fa-resize-full"></i>
-                </a>
-                <a class="btn btn-xs btn-link panel-close" href="#">
-                    <i class="fa fa-times"></i>
+                    <i class="fa fa-search"></i>
                 </a>
             </div>
         </div>
@@ -80,19 +71,19 @@
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="form-field-1">
-                    Foto
-                </label>
-                <div class="col-sm-2">
-                    <input type="file" name="userfile">
-                    <img src="<?php echo base_url()."/uploads/".$siswa['foto']?>" width="200">
-                </div>
-            </div>
-                        <div class="form-group">
-                <label class="col-sm-2 control-label" for="form-field-1">
                     PILIH ROMBEL
                 </label>
-                <div class="col-sm-2">
-                   <?php echo cmb_dinamis('rombel', 'tbl_rombel', 'nama_rombel', 'id_rombel',$siswa['id_rombel'])?>
+                <div class="col-sm-6">
+                    <select class="form-control" name="rombel" >
+                    <?php foreach($id_sekolah as $id_sekolah)
+                        {
+                        ?>
+                            <option value="<?php echo $id_sekolah->id_rombel; ?>" <?php if($id_sekolah->id_rombel==$siswa['id_rombel']) echo 'selected="selected"';?>><?php echo $id_sekolah->nama_rombel; ?></option>
+
+                        <?php
+                        }
+                        ?>
+                    </select>
                 </div>
             </div>
             <div class="form-group">
@@ -115,8 +106,18 @@
                 <label class="col-sm-2 control-label" for="form-field-1">
                     DITERIMA DI KELAS
                 </label>
-                 <div class="col-sm-2">
-                   <?php echo cmb_dinamis('kelas_terima', 'tbl_rombel', 'nama_rombel', 'id_rombel',$siswa['id_rombel'])?>
+                
+                <div class="col-sm-6">
+                    <select class="form-control" name="kelas_terima" >
+                    <?php foreach($ulang as $id_skl)
+                        {
+                        ?>
+                            <option value="<?php echo $id_skl->id_rombel; ?>" <?php if($id_skl->id_rombel==$siswa['kelas_terima']) echo 'selected="selected"';?>><?php echo $id_skl->nama_rombel; ?></option>
+
+                        <?php
+                        }
+                        ?>
+                    </select>
                 </div>
             </div>
              <div class="form-group">
@@ -144,6 +145,22 @@
                     <?php
                     echo form_dropdown('status_keluarga', array('Anak Kandung' => 'Anak Kandung', 'Anak Tiri' => 'Anak Tiri', 'Keponakan' => 'Keponakan'), $siswa['status_keluarga'], "class='form-control'");
                     ?>
+                </div>
+            </div>
+             <div class="form-group">
+                <label class="col-sm-2 control-label" for="form-field-1">
+                    NAMA AYAH
+                </label>
+                <div class="col-sm-6">
+                    <input type="text" name="nama_ayah" value="<?php echo $ortu['nama_ayah'] ?>" id="form-field-1" class="form-control">
+                </div>
+            </div> 
+             <div class="form-group">
+                <label class="col-sm-2 control-label" for="form-field-1">
+                    NAMA IBU
+                </label>
+                <div class="col-sm-6">
+                    <input type="text" name="nama_ibu" value="<?php echo $ortu['nama_ibu'] ?>" id="form-field-1" class="form-control">
                 </div>
             </div> 
                 <label class="col-sm-2 control-label" for="form-field-1">

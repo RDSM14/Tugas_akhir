@@ -55,9 +55,10 @@ Class Rombel extends CI_Controller {
             $this->session->set_flashdata('data_rombel_masuk', 'Data Telah Ditambah');
             redirect('rombel');
         } else {
+            $id_sekolah = $_SESSION['id_sekolah'];
             $infoSekolah = "SELECT js.jumlah_kelas
                         FROM tbl_jenjang_sekolah as js,tbl_sekolah_info as si 
-                        WHERE js.id_jenjang=si.id_jenjang_sekolah";
+                        WHERE js.id_jenjang=si.id_jenjang_sekolah AND id_sekolah=".$id_sekolah;
             $data['info']= $this->db->query($infoSekolah)->row_array();
             $this->template->load('template', 'rombel/add',$data);
         }
@@ -69,9 +70,10 @@ Class Rombel extends CI_Controller {
             $this->session->set_flashdata('data_rombel_change', 'Data Telah Diubah');
             redirect('rombel');
         }else{
+            $id_sekolah = $_SESSION['id_sekolah'];
             $infoSekolah = "SELECT js.jumlah_kelas
                         FROM tbl_jenjang_sekolah as js,tbl_sekolah_info as si 
-                        WHERE js.id_jenjang=si.id_jenjang_sekolah";
+                        WHERE js.id_jenjang=si.id_jenjang_sekolah AND id_sekolah=".$id_sekolah;
             $data['info']= $this->db->query($infoSekolah)->row_array();
             $id_rombel      = $this->uri->segment(3);
             $data['rombel'] = $this->db->get_where('tbl_rombel',array('id_rombel'=>$id_rombel))->row_array();

@@ -372,16 +372,11 @@
                         <!-- start: USER DROPDOWN -->
                         <li class="dropdown current-user">
                             <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" data-close-others="true" href="#">
-                                <img src="http://clipone.nurisakbar.com/assets/images/avatar-1-small.jpg" class="circle-img" alt="">
+                                
                                 <span class="username"><?php echo $this->session->userdata('nama_lengkap') ?></span>
                                 <i class="fa fa-angle-down" aria-hidden="true"></i>
                             </a>
                             <ul class="dropdown-menu">
-                                <li>
-                                    <?php
-                                    echo anchor('auth/profile/'.$_SESSION['username'].'/'.$_SESSION['id_level_user'], '<i class="fa fa-user" aria-hidden="true"></i> &nbsp;My Profile');
-                                    ?>
-                                </li>
                                 <li>
                                     <?php
                                     echo anchor('auth/password/'.$_SESSION['username'].'/'.$_SESSION['id_level_user'], '<i class="fa fa-key" aria-hidden="true"></i> &nbsp;Password');

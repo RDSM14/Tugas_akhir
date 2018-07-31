@@ -21,25 +21,64 @@
         </div>
         <div class="panel-body">
             <table class="table table-bordered">
-                <tr><th>NIS</th><th>NAMA</th><th></th><th></th>
+                <tr><th>NIS</th><th>NAMA</th><th></th><th></th><th></th>
                 <?php foreach ($siswa as $row){
                     //href='nilai/rombel/'".$row->nisn.'/'.$row->nisn." 
+                    /*echo "<tr>  <td width='140'>$row->nisn</td>
+                                <td>".  strtoupper($row->nama)."</td>
+                                <td width='150'><a class='btn btn-success' href='". base_url('index.php/nilai/inputNilai/'.$row->nisn.'/'.$this->uri->segment(4)).'/'.$this->uri->segment(3).'/'.$row->nama."'>Masukkan Nilai Angka</td>
+                                <td width='150'><a class='btn btn-success' href='". base_url('index.php/nilai/lihatNilai/'.$row->nisn.'/'.$this->uri->segment(4)).'/'.$this->uri->segment(3).'/'.$row->nama."'>Lihat Nilai Siswa</td>
+                                <td width='150'><a class='btn btn-success' href='". base_url('index.php/nilai/deskripsiNilai/'.$row->nisn.'/'.$this->uri->segment(4)).'/'.$this->uri->segment(3).'/'.$row->nama."'>Deskripsi Nilai</td>
+                                
+                                </tr>";*/
                     echo "<tr>  <td width='140'>$row->nisn</td>
                                 <td>".  strtoupper($row->nama)."</td>
-                                <td width='150'><button class='btn btn-success' data-toggle='modal' data-id = ".$row->nisn." data-mapel = ".$this->uri->segment(4)." data-target='#ModalAngka'>Komponen Nilai</td>
-                                    <td width='150'><button class='btn btn-success' data-toggle='modal' data-target='#myModal'>Deskripsi / Catatan</td>
+                                 <td width='150'><a class='btn btn-success' href='". base_url('index.php/nilai/inputNilai/'.$row->nisn.'/'.$this->uri->segment(4)).'/'.$this->uri->segment(3).'/'.$row->nama."'>Masukkan Komponen Nilai</td>
+                                <td width='150'><a class='btn btn-success' href='". base_url('index.php/nilai/deskripsiNilai/'.$row->nisn.'/'.$this->uri->segment(4)).'/'.$this->uri->segment(3).'/'.$row->nama."'>Deskripsi Nilai</td>
                                 
                                 </tr>";
-                                
                 }
 ?>
             </table>
         </div>
     </div>
     <!-- end: DYNAMIC TABLE PANEL -->
-    
+    <script type="text/javascript">
+        $(document).on("click", ".btn", function () {
+             var nisn = $(this).data('id'); 
+             var mapel = $(this).data('mapel'); 
+                 $.ajax({
+                 type: 'POST',
+                 url: '<?php echo base_url() ?>index.php/nilai/getData',
+                 data: { 'nisn':nisn,'mapel':mapel},
+                 success: function(response) {
+                     alert(nisn);
+                     console.log(mapel);
+                    $('#result').html(response);
+                 }
+             });
+        });
+    </script>
+    <script type="text/javascript">
+       /* $(document).on("click", ".btn", function () 
+        {
+        e.preventDefault();
+           var nisn = $(this).data('id');
+           var id_mapel = $(this).data('mapel');
+            
+           $.ajax({
+                type:'GET',
+                url :'<?php echo base_url() ?>index.php/nilai/getData',
+                data:'nisn='+nisn+'&id_mapel='+id_mapel,
+                success:function(resp){
+                    console.log(nisn);
+                }
+            });
+        });*/
+    </script>
 </div>
 
+<p id="result"></p>
 
 
 <!-- Modal -->
@@ -105,7 +144,8 @@
   </div>
 </div>
 
-<div class="modal fade" id="ModalAngka" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<?php /* LAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+<div class="modal fade" id="result" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -117,7 +157,7 @@
         <?php
         echo form_open_multipart('siswa/add', 'role="form" class="form-horizontal"');
         ?>
-<?php foreach ($komponen_nilai as $komponen_nilai){
+<?php  foreach ($komponen_nilai as $komponen_nilai){
     
     foreach ($nilai as $value){
     ?>
@@ -155,9 +195,51 @@
     </div>
   </div>
 </div>
-
+*/?>
 
 <!--END OF MODAL-->
+
+<div class="modal fade" id="result" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 class="modal-title" id="myModalLabel">Edit Barang</h3>
+            </div>
+            <form class="form-horizontal">
+                <div class="modal-body">
+ 
+                    <div class="form-group">
+                        <label class="control-label col-xs-3" >Kode Barang</label>
+                        <div class="col-xs-9">
+                            <input name="kobar_edit" id="kode_barang2" class="form-control" type="text" placeholder="Kode Barang" style="width:335px;" readonly>
+                        </div>
+                    </div>
+ 
+                    <div class="form-group">
+                        <label class="control-label col-xs-3" >Nama Barang</label>
+                        <div class="col-xs-9">
+                            <input name="nabar_edit" id="nama_barang2" class="form-control" type="text" placeholder="Nama Barang" style="width:335px;" required>
+                        </div>
+                    </div>
+ 
+                    <div class="form-group">
+                        <label class="control-label col-xs-3" >Harga</label>
+                        <div class="col-xs-9">
+                            <input name="harga_edit" id="harga2" class="form-control" type="text" placeholder="Harga" style="width:335px;" required>
+                        </div>
+                    </div>
+ 
+                </div>
+ 
+                <div class="modal-footer">
+                    <button class="btn" data-dismiss="modal" aria-hidden="true">Tutup</button>
+                    <button class="btn btn-info" id="btn_update">Update</button>
+                </div>
+            </form>
+            </div>
+            </div>
+        </div>
 
 <script type="text/javascript">
 
@@ -278,5 +360,26 @@ $.ajax({
     })
 }
 
+    
+    
+    
+    $('#show_data').on('click','.item_edit',function(){
+            var id=$(this).attr('data');
+            $.ajax({
+                type : "GET",
+                url  : "<?php echo base_url('index.php/barang/getData')?>",
+                dataType : "JSON",
+                data : {id:id},
+                success: function(data){
+                    $.each(data,function(barang_kode, barang_nama, barang_harga){
+                        $('#ModalaEdit').modal('show');
+                        $('[name="kobar_edit"]').val(data.barang_kode);
+                        $('[name="nabar_edit"]').val(data.barang_nama);
+                        $('[name="harga_edit"]').val(data.barang_harga);
+                    });
+                }
+            });
+            return false;
+        });
 </script>
 

@@ -6,7 +6,7 @@ class Model_tu extends CI_Model {
     
     function save() {
         $data = array(
-            'username'      => $this->input->post('username', TRUE),
+            'username'      => $this->input->post('email', TRUE),
             'nip'      => $this->input->post('nip', TRUE),
             'nama_lengkap'  => $this->input->post('nama_lengkap', TRUE),
             'telepon_TU'     => $this->input->post('telepon_TU', TRUE),
@@ -18,7 +18,7 @@ class Model_tu extends CI_Model {
     
     function update() {
         $data = array(
-            'username'      => $this->input->post('username', TRUE),
+            'username'      => $this->input->post('email', TRUE),
             'nama_lengkap'  => $this->input->post('nama_lengkap', TRUE),
             'id_sekolah' => $_SESSION['id_sekolah'],
             'telepon_TU'     => $this->input->post('telepon_TU', TRUE)

@@ -186,5 +186,92 @@ class Auth extends CI_Controller {
         $this->session->sess_destroy();
         redirect('auth');
     }
+    function password(){
+            $this->template->load('template', 'password/ganti');
+    }
+        
+    function agreed(){ 
+            $username            = $this->input->post('username');
+            $password            = md5($this->input->post('password_lama'));
+            $password_baru       = md5($this->input->post('password_baru'));
+            $level_user          = $this->input->post('level_user');
+            $cek_password        = md5($this->input->post('cek_password'));
+            if($password_baru==$cek_password){
+                if($level_user=='2'){
+                    $cekAdmin = $this->Model_user->chekLoginadmin($username, $password);
+                    if (!empty($cekAdmin)) 
+                    {
+                        $data = array(
+                            'password'      => md5($password_baru)
+                        );
+                        
+                        $this->db->where('email',$username);
+                        $this->db->update('tbl_admin',$data);
+                        $this->session->set_flashdata('benar', 'Data');
+                        redirect('auth/password');
+                    }
+                }elseif($level_user=='3'){
+                    $cekTU = $this->Model_user->chekLoginTU($username, $password);
+                    if (!empty($cekTU)) 
+                    {
+                        $data = array(
+                            'password'      => md5($password_baru)
+                        );
+                        
+                        $this->db->where('username',$username);
+                        $this->db->update('tbl_tu',$data);
+                        $this->session->set_flashdata('benar', 'Data');
+                        redirect('auth/password');
+                    }
+                }elseif($level_user=='4' || $level_user=='5'){
+                    $cekGuru= $this->Model_guru->chekLogin($username, $password);
+                    if (!empty($cekGuru)) 
+                    {
+                        $data = array(
+                            'password'      => md5($password_baru)
+                        );
+                        
+                        $this->db->where('username',$username);
+                        $this->db->update('tbl_guru',$data);
+                        $this->session->set_flashdata('benar', 'Data');
+                        redirect('auth/password');
+                    }
+                }elseif($level_user=='6'){
+                    $ceksiswa = $this->Model_siswa->chekLogin($username, $password);
+                    if (!empty($ceksiswa)) 
+                    {
+                        $data = array(
+                            'password'      => md5($password_baru)
+                        );
+                        
+                        $this->db->where('nisn',$username);
+                        $this->db->update('tbl_siswa',$data);
+                        $this->session->set_flashdata('benar', 'Data');
+                        redirect('auth/password');
+                    }
+                }elseif($level_user=='7'){
+                    $cekortu = $this->Model_siswa->chekLoginOrtu($username, $password);
+                    if (!empty($cekortu)) 
+                    {
+                        $data = array(
+                            'password_orangtua'      => md5($password_baru)
+                        );
+                        
+                        $this->db->where('nisn',$username);
+                        $this->db->update('tbl_orang_tua',$data);
+                        $this->session->set_flashdata('benar', 'Data');
+                        redirect('auth/password');
+                    }
+                }
+                 $this->session->set_flashdata('beda_password', 'Data');
+                 redirect('auth/password');
+            }
+            else
+            {
+                    $this->session->set_flashdata('data_gak_sama', 'Data');
+                    redirect('auth/password');
+            }
+    
 
+}
 }
