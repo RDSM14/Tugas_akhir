@@ -40,13 +40,17 @@
                     <tr>
                         <td width='140'><?php echo $row->nisn; ?></td>
                         <td><?php echo strtoupper($row->nama); ?></td>
-                        <td width='150'><button class='btn btn-success' data-toggle="modal" data-target="#modalNilai" onclick="modalData('<?php echo $row->nisn; ?>','<?php echo $this->uri->segment(4); ?>','<?php echo $this->uri->segment(3); ?>')">Masukkan Komponen Nilai</button></td>
-                        <td width='150'><a class='btn btn-success' href='<?=base_url('index.php/nilai/deskripsiNilai/'.$row->nisn.'/'.$this->uri->segment(4)).'/'.$this->uri->segment(3).'/'.$row->nama?>'>Deskripsi Nilai</a></td>
+                        <td width='150'><button class='btn btn-success' data-toggle="modal" data-target="#modalNilai" onclick="modalDataNilai('<?php echo $row->nisn; ?>','<?php echo $this->uri->segment(4); ?>','<?php echo $this->uri->segment(3); ?>')">Masukkan Komponen Nilai</button></td>
+                        <td width='150'><button class='btn btn-success' data-toggle="modal" data-target="#modalDeskripsi" onclick="modalDataDeskripsi('<?php echo $row->nisn; ?>','<?php echo $this->uri->segment(4); ?>')">Deskripsi Nilai</button></td>
                     </tr>
                 <?php } ?>
             </table>
         </div>
     </div>
+
+    <div style="display:none;"><span>NISN: </span><span id="selectedNISN"></span></div>
+    <div style="display:none;"><span>Mapel: </span><span id="selectedMapel"></span></div>
+    <div style="display:none;"><span>Jadwal: </span><span id="selectedJadwal"></span></div>
 
     <div id="modalNilai" class="modal fade" role="dialog">
         <div class="modal-dialog">
@@ -57,9 +61,6 @@
                     <h4 class="modal-title">Komponen Nilai</h4>
                 </div>
                 <div class="modal-body">
-                    <div style="display:none;"><span>NISN: </span><span id="selectedNISN"></span></div>
-                    <div style="display:none;"><span>Mapel: </span><span id="selectedMapel"></span></div>
-                    <div style="display:none;"><span>Jadwal: </span><span id="selectedJadwal"></span></div>
                     <form class="form-horizontal">
                         <div id="formKomponenNilai"></div> <!-- div ini bakal diisi sama fungsi modalData() dibawah -->
                     </form>
@@ -67,6 +68,50 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-success" onclick="submitNilai()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalDeskripsi" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+        <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Input Deskripsi Nilai</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="deskripsi_spiritual" class="col-sm-3">Deskripsi Spiritual: </label>
+                            <div class="col-sm-9">
+                                <textarea name="deskripsi_spiritual" id="deskripsi_spiritual" class="form-control" ></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="deskripsi_sosial" class="col-sm-3">Deskripsi Sosial: </label>
+                            <div class="col-sm-9">
+                                <textarea name="deskripsi_sosial" id="deskripsi_sosial" class="form-control" ></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="deskripsi_pengetahuan" class="col-sm-3">Deskripsi Pengetahuan: </label>
+                            <div class="col-sm-9">
+                                <textarea name="deskripsi_pengetahuan" id="deskripsi_pengetahuan" class="form-control" ></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="deskripsi_keterampilan" class="col-sm-3">Deskripsi Keterampilan: </label>
+                            <div class="col-sm-9">
+                                <textarea name="deskripsi_keterampilan" id="deskripsi_keterampilan" class="form-control" ></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success" onclick="submitDeskripsi()">Submit</button>
                 </div>
             </div>
         </div>
@@ -79,7 +124,7 @@
         });
     });
 
-    function modalData(nisn,mapel,jadwal){
+    function modalDataNilai(nisn,mapel,jadwal){
         console.log(nisn+mapel)
         $("#selectedNISN").html(nisn);
         $("#selectedMapel").html(mapel);
@@ -186,6 +231,54 @@
                 alert(response.message);
                 if(response.hasil){
                     $("#modalNilai").modal("toggle");
+                }
+            }
+        });
+    }
+
+    function modalDataDeskripsi(nisn,mapel){
+        $("#selectedNISN").html(nisn);
+        $("#selectedMapel").html(mapel);
+        $.ajax({
+            url: '<?=base_url()?>index.php/nilai/getDataDeskripsi',
+            type: 'POST',
+            dataType: 'json',
+            data: {'nisn':nisn,'mapel':mapel},
+            success: function(response) {
+                $("#deskripsi_spiritual").val("");
+                $("#deskripsi_sosial").val("");
+                $("#deskripsi_pengetahuan").val("");
+                $("#deskripsi_keterampilan").val("");
+                var data = response.data[0];
+                $("#deskripsi_spiritual").val(data.deskripsi_spiritual);
+                $("#deskripsi_sosial").val(data.deskripsi_sosial);
+                $("#deskripsi_pengetahuan").val(data.deskripsi_pengetahuan);
+                $("#deskripsi_keterampilan").val(data.deskripsi_keterampilan);
+            }
+        });
+    }
+
+    function submitDeskripsi(){
+        var nisn = $("#selectedNISN").html();
+        var mapel = $("#selectedMapel").html();
+        var spiritual = $("#deskripsi_spiritual").val();
+        var sosial = $("#deskripsi_sosial").val();
+        var pengetahuan = $("#deskripsi_pengetahuan").val(); 
+        var keterampilan = $("#deskripsi_keterampilan").val();
+
+        console.log("Submit Deskripsi");
+        console.log(nisn+" "+mapel);
+        console.log(spiritual+" "+sosial+" "+pengetahuan+" "+keterampilan)
+        $.ajax({
+            url: '<?=base_url()?>index.php/nilai/submitDeskripsi',
+            type: 'POST',
+            dataType: 'json',
+            data: {'nisn':nisn,'mapel':mapel, 'spiritual':spiritual, 'sosial':sosial, 'pengetahuan':pengetahuan, 'keterampilan':keterampilan},
+            success: function(response) {
+                console.log(response.hasil);
+                alert(response.message);
+                if(response.hasil){
+                    $("#modalDeskripsi").modal("toggle");
                 }
             }
         });

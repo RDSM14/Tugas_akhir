@@ -118,6 +118,16 @@ WHERE t1.id_komponen IS NULL AND t2.id_mapel = 5 AND IF (nisn = 456789011, 1, 0)
 
         $this->template->load('template','nilai/deskripsi_nilai', $data);
    }
+    
+   	function getDataDeskripsi(){
+        $nisn = $this->input->post('nisn');
+        $mapel = $this->input->post('mapel');
+        $query = $this->db->query("SELECT * FROM tbl_deskripsi_nilai WHERE nisn = '$nisn' AND id_mapel = '$mapel'");
+        $data = $query->result();
+
+        echo json_encode(['data'=>$data]);
+   	}
+
     function getDataKomponen(){
         $mapel = $this->input->post('mapel');
         $query = $this->db->query("SELECT * FROM tbl_komponen_nilai WHERE id_mapel = '$mapel'");
@@ -172,6 +182,47 @@ WHERE t1.id_komponen IS NULL AND t2.id_mapel = 5 AND IF (nisn = 456789011, 1, 0)
         } else {
             $hasil = false;
             $message = "Kolom nilai harus diisi";
+        }
+
+        echo json_encode(['hasil'=>$hasil,'message'=>$message]);
+    }
+
+    function submitDeskripsi(){
+        $nisn = $this->input->post('nisn');
+        $mapel = $this->input->post('mapel');
+        $spiritual = $this->input->post('spiritual');
+        $sosial = $this->input->post('sosial');
+        $pengetahuan = $this->input->post('pengetahuan');
+        $keterampilan = $this->input->post('keterampilan');
+
+        $hasil = "";
+        $message = "";
+        if($spiritual != "" && $sosial != "" && $pengetahuan != "" && $keterampilan != ""){
+        	$query = $this->db->query("SELECT * FROM tbl_deskripsi_nilai 
+                WHERE nisn = '$nisn' 
+                AND id_mapel = '$mapel'");
+
+        	if($query->num_rows() > 0){ // if true maka edit
+                $id_deskripsi = $query->row()->id_deskripsi;
+                $query = $this->db->query("UPDATE tbl_deskripsi_nilai SET 
+                	deskripsi_spiritual = '$spiritual',
+                	deskripsi_sosial = '$sosial',
+                	deskripsi_pengetahuan = '$pengetahuan',
+                	deskripsi_keterampilan = '$keterampilan'
+                	WHERE id_deskripsi = '$id_deskripsi'");
+                $hasil = $query;
+                $message = "Update deskripsi berhasil";
+            } else { // else submit baru
+                $query = $this->db->query("INSERT INTO 
+                	tbl_deskripsi_nilai (nisn,id_mapel,deskripsi_pengetahuan,deskripsi_keterampilan,deskripsi_spiritual,deskripsi_sosial) 
+                	VALUES ('$nisn','$mapel','$pengetahuan','$keterampilan','$spiritual','$sosial') ");
+                $hasil = $query;
+                $message = "Input deskripsi berhasil";
+            }
+
+        } else {
+            $hasil = false;
+            $message = "Semua kolom harus diisi";
         }
 
         echo json_encode(['hasil'=>$hasil,'message'=>$message]);
