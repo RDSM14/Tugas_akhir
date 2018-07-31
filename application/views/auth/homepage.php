@@ -1149,8 +1149,8 @@ $(document).ready(function() {
 		<!-- Start Javascript Code -->
 
 			<!-- Start Javascript Plugin -->
-				<script src="<?php echo base_url();?>template/font-awesome/js/easyResponsiveTabs"  type="text/javascript"> </script>
-                <script src="<?php echo base_url();?>template/font-awesome/js/jqBootstrapValidation"  type="text/javascript"> </script>
+				<script src="<?php echo base_url();?>template/font-awesome/js/easyResponsiveTabs.js"  type="text/javascript"> </script>
+                <script src="<?php echo base_url();?>template/font-awesome/js/jqBootstrapValidation.js"  type="text/javascript"> </script>
 			<!-- End Javascript Plugin -->
 
 			<!-- Start Javascript that Mahesa M. Elba made -->

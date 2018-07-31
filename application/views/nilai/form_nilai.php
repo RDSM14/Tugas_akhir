@@ -23,7 +23,7 @@
             <table class="table table-bordered">
                 <tr><th>NIS</th><th>NAMA</th><th></th><th></th><th></th>
                 <?php foreach ($siswa as $row){
-                    //href='nilai/rombel/'".$row->nisn.'/'.$row->nisn." 
+                    //$href='nilai/rombel/'".$row->nisn.'/'.$row->nisn." 
                     /*echo "<tr>  <td width='140'>$row->nisn</td>
                                 <td>".  strtoupper($row->nama)."</td>
                                 <td width='150'><a class='btn btn-success' href='". base_url('index.php/nilai/inputNilai/'.$row->nisn.'/'.$this->uri->segment(4)).'/'.$this->uri->segment(3).'/'.$row->nama."'>Masukkan Nilai Angka</td>
@@ -31,33 +31,165 @@
                                 <td width='150'><a class='btn btn-success' href='". base_url('index.php/nilai/deskripsiNilai/'.$row->nisn.'/'.$this->uri->segment(4)).'/'.$this->uri->segment(3).'/'.$row->nama."'>Deskripsi Nilai</td>
                                 
                                 </tr>";*/
-                    echo "<tr>  <td width='140'>$row->nisn</td>
+                    /*echo "<tr>  <td width='140'>$row->nisn</td>
                                 <td>".  strtoupper($row->nama)."</td>
                                  <td width='150'><a class='btn btn-success' href='". base_url('index.php/nilai/inputNilai/'.$row->nisn.'/'.$this->uri->segment(4)).'/'.$this->uri->segment(3).'/'.$row->nama."'>Masukkan Komponen Nilai</td>
                                 <td width='150'><a class='btn btn-success' href='". base_url('index.php/nilai/deskripsiNilai/'.$row->nisn.'/'.$this->uri->segment(4)).'/'.$this->uri->segment(3).'/'.$row->nama."'>Deskripsi Nilai</td>
                                 
-                                </tr>";
-                }
-?>
+                                </tr>";*/ ?>
+                    <tr>
+                        <td width='140'><?php echo $row->nisn; ?></td>
+                        <td><?php echo strtoupper($row->nama); ?></td>
+                        <td width='150'><button class='btn btn-success' data-toggle="modal" data-target="#modalNilai" onclick="modalData('<?php echo $row->nisn; ?>','<?php echo $this->uri->segment(4); ?>','<?php echo $this->uri->segment(3); ?>')">Masukkan Komponen Nilai</button></td>
+                        <td width='150'><a class='btn btn-success' href='<?=base_url('index.php/nilai/deskripsiNilai/'.$row->nisn.'/'.$this->uri->segment(4)).'/'.$this->uri->segment(3).'/'.$row->nama?>'>Deskripsi Nilai</a></td>
+                    </tr>
+                <?php } ?>
             </table>
+        </div>
+    </div>
+
+    <div id="modalNilai" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+        <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Komponen Nilai</h4>
+                </div>
+                <div class="modal-body">
+                    <div style="display:none;"><span>NISN: </span><span id="selectedNISN"></span></div>
+                    <div style="display:none;"><span>Mapel: </span><span id="selectedMapel"></span></div>
+                    <div style="display:none;"><span>Jadwal: </span><span id="selectedJadwal"></span></div>
+                    <form class="form-horizontal">
+                        <div id="formKomponenNilai"></div> <!-- div ini bakal diisi sama fungsi modalData() dibawah -->
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success" onclick="submitNilai()">Submit</button>
+                </div>
+            </div>
         </div>
     </div>
     <!-- end: DYNAMIC TABLE PANEL -->
     <script type="text/javascript">
-        $(document).on("click", ".btn", function () {
-             var nisn = $(this).data('id'); 
-             var mapel = $(this).data('mapel'); 
-                 $.ajax({
-                 type: 'POST',
-                 url: '<?php echo base_url() ?>index.php/nilai/getData',
-                 data: { 'nisn':nisn,'mapel':mapel},
-                 success: function(response) {
-                     alert(nisn);
-                     console.log(mapel);
-                    $('#result').html(response);
-                 }
-             });
+    $(document).ready(function(){
+        $('#formKomponenNilai').on('change',"#selectKomponen", function(){
+            selectKomponen(document.getElementById("selectKomponen").value);
         });
+    });
+
+    function modalData(nisn,mapel,jadwal){
+        console.log(nisn+mapel)
+        $("#selectedNISN").html(nisn);
+        $("#selectedMapel").html(mapel);
+        $("#selectedJadwal").html(jadwal);
+        document.getElementById("formKomponenNilai").innerHTML = "";
+        $.ajax({
+            url: '<?=base_url()?>index.php/nilai/getDataKomponen',
+            type: 'POST',
+            dataType: 'json',
+            data: {'nisn':nisn,'mapel':mapel},
+            success: function(response) {
+                var data = response.data;
+                console.log(data);
+
+                //form-group komponen
+                var div = document.createElement("div");
+                div.className = "form-group";
+                var label = document.createElement("label");
+                var attr = document.createAttribute("for");
+                attr.value = "selectKomponen";
+                label.setAttributeNode(attr);
+                label.appendChild(document.createTextNode("Komponen:"))
+                label.className = "col-sm-2 control-label";
+                var select = document.createElement("select");
+                select.id = "selectKomponen";
+                for (var i = 0; i < data.length; i++) {
+                    var option = document.createElement("option");
+                    option.value = data[i].id_komponen;
+                    option.appendChild(document.createTextNode(data[i].nama_komponen));
+                    select.appendChild(option);
+                }
+                div.appendChild(label);
+                var div2 = document.createElement("div");
+                div2.className = "col-sm-10";
+                div2.appendChild(select);
+                div.appendChild(div2);
+                document.getElementById("formKomponenNilai").appendChild(div);
+
+                //form-group Nilai
+                var div = document.createElement("div");
+                div.className = "form-group";
+                var input = document.createElement("input");
+                var label = document.createElement("label");
+                var attr = document.createAttribute("for");
+                attr.value = "inputNilai";
+                label.setAttributeNode(attr);
+                label.appendChild(document.createTextNode("Nilai:"));
+                label.className = "col-sm-2 control-label";
+                var attr = document.createAttribute("type");
+                attr.value = "text";
+                input.setAttributeNode(attr);
+                var attr = document.createAttribute("id");
+                attr.value = "inputNilai";
+                input.setAttributeNode(attr);
+                input.className = "form-control";
+                div.appendChild(label);
+                var div2 = document.createElement("div");
+                div2.className = "col-sm-10";
+                div2.appendChild(input);
+                div.appendChild(div2);
+                document.getElementById("formKomponenNilai").appendChild(div);
+
+                selectKomponen(document.getElementById("selectKomponen").value); //buat refresh kolom nilai
+            }
+        });
+    }
+
+    function selectKomponen(id_komponen){
+        console.log("ID Komponen yang dipilih: "+id_komponen);
+        var nisn = $("#selectedNISN").html();
+        var mapel = $("#selectedMapel").html();
+        $.ajax({
+            url: '<?=base_url()?>index.php/nilai/getDataNilai',
+            type: 'POST',
+            dataType: 'json',
+            data: {'nisn':nisn,'mapel':mapel, 'id_komponen':id_komponen},
+            success: function(response) {
+                var data = response.data[0];
+                if(data != undefined){
+                    console.log(data);
+                    document.getElementById("inputNilai").value = data.skor;
+                } else {
+                    document.getElementById("inputNilai").value = "";
+                }
+            }
+        });
+    }
+
+    function submitNilai(){
+        var nisn = $("#selectedNISN").html();
+        var mapel = $("#selectedMapel").html();
+        var jadwal = $("#selectedJadwal").html();
+        var komponen = document.getElementById("selectKomponen").value;
+        var nilai = document.getElementById("inputNilai").value;
+
+        console.log("Submit Nilai");
+        $.ajax({
+            url: '<?=base_url()?>index.php/nilai/submitNilai',
+            type: 'POST',
+            dataType: 'json',
+            data: {'nisn':nisn,'mapel':mapel, 'id_komponen':komponen, 'nilai':nilai, 'jadwal':jadwal},
+            success: function(response) {
+                console.log(response.hasil);
+                alert(response.message);
+                if(response.hasil){
+                    $("#modalNilai").modal("toggle");
+                }
+            }
+        });
+    }
     </script>
     <script type="text/javascript">
        /* $(document).on("click", ".btn", function () 

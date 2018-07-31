@@ -60,8 +60,10 @@ class Nilai extends CI_Controller{
     function inputNilai($nisn, $id_mapel){
       
         $komponen_nilai =   "SELECT * FROM tbl_nilai as t1
-RIGHT JOIN tbl_komponen_nilai as t2 ON t1.id_komponen = t2.id_komponen
-WHERE t1.id_komponen IS NULL AND t2.id_mapel ='$id_mapel'";
+            RIGHT JOIN tbl_komponen_nilai as t2 ON t1.id_komponen = t2.id_komponen
+            WHERE t1.id_komponen IS NULL AND t2.id_mapel ='$id_mapel'";
+
+
         
         /*SELECT * FROM tbl_nilai as t1
 RIGHT JOIN tbl_komponen_nilai as t2 ON t1.id_komponen = t2.id_komponen
@@ -116,23 +118,64 @@ WHERE t1.id_komponen IS NULL AND t2.id_mapel = 5 AND IF (nisn = 456789011, 1, 0)
 
         $this->template->load('template','nilai/deskripsi_nilai', $data);
    }
-    function getData()
-     {
-        echo $this->input->post('nisn');
-        echo $this->input->post('mapel');
-             if (!empty($this->input->post('nisn'))) { 
-             //$data['listsambutanketua']=$this->sambutanketua_model->get_sambutanketua($this->input->post('ids')); 
-             $nilai = "SELECT * FROM tbl_komponen_nilai tkn, tbl_nilai tn WHERE  nisn = '".$this->input->post('nisn')."' AND tn.id_mapel = '".$this->input->post('mapel')."' AND tkn.id_komponen=tn.id_komponen";
-             $data['nilai']  =   $this->db->query($nilai)->row();
-             foreach($data as $item){
-             echo 'ID :'.$item->nisn.'<br>';
-             echo 'ID_Mapel :'.$item->id_mapel.'<br>';
-             echo 'ANGKA :'.$item->skor.'<br>';
-             echo 'id _komponen :<p><i>'.$item->id_komponen.'</i></p><br>';
-             }
-         } 
-        
-     }
+    function getDataKomponen(){
+        $mapel = $this->input->post('mapel');
+        $query = $this->db->query("SELECT * FROM tbl_komponen_nilai WHERE id_mapel = '$mapel'");
+        $data = $query->result();
+
+        echo json_encode(['data'=>$data]);
+    }
+
+    function getDataNilai(){
+        $nisn = $this->input->post('nisn');
+        $mapel = $this->input->post('mapel');
+        $komponen = $this->input->post('id_komponen');
+        $data = "";
+        if (!empty($nisn)) {
+            $query = $this->db->query("SELECT * FROM tbl_komponen_nilai tkn, tbl_nilai tn 
+                WHERE nisn = '$nisn' 
+                AND tn.id_mapel = '$mapel'
+                AND tn.id_komponen = '$komponen'
+                AND tkn.id_komponen=tn.id_komponen");
+            $data =  $query->result();
+        }
+        echo json_encode(['data'=>$data]);
+    }
+
+    function submitNilai(){
+        $nisn = $this->input->post('nisn');
+        $mapel = $this->input->post('mapel');
+        $komponen = $this->input->post('id_komponen');
+        $nilai = $this->input->post('nilai');
+        $jadwal = $this->input->post('jadwal');
+
+        $hasil = "";
+        $message = "";
+
+        if(is_numeric($nilai) && $nilai != ""){
+            $query = $this->db->query("SELECT * FROM tbl_nilai 
+                WHERE nisn = '$nisn' 
+                AND id_mapel = '$mapel'
+                AND id_komponen = '$komponen'
+                AND id_jadwal = '$jadwal' ");
+
+            if($query->num_rows() > 0){ // if true maka edit
+                $id_nilai = $query->row()->id_nilai;
+                $query = $this->db->query("UPDATE tbl_nilai SET skor = '$nilai' WHERE id_nilai = '$id_nilai'");
+                $hasil = $query;
+                $message = "Update nilai berhasil";
+            } else { // else submit baru
+                $query = $this->db->query("INSERT INTO tbl_nilai (id_jadwal,id_mapel,nisn,id_komponen,skor) VALUES ('$jadwal','$mapel','$nisn','$komponen','$nilai') ");
+                $hasil = $query;
+                $message = "Input nilai berhasil";
+            }
+        } else {
+            $hasil = false;
+            $message = "Kolom nilai harus diisi";
+        }
+
+        echo json_encode(['hasil'=>$hasil,'message'=>$message]);
+    }
     
     function masuk()
     {
