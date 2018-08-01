@@ -42,13 +42,30 @@ class Model_mapel extends CI_Model {
     }
     
     function save_komponen() {
-        $data = array(
-            'nama_komponen'      => $this->input->post('nama_komponen', TRUE),
-            'id_jenis_nilai'    => $this->input->post('jenis_nilai', TRUE),
-            'id_mapel'         => $this->input->post('id_mapel', TRUE)
-            
-        );
-        $this->db->insert('tbl_komponen_nilai',$data);
+        $id_mapel = $this->input->post('id_mapel');
+        $nama_komponen = $this->input->post('nama_komponen');
+        $jenis_nilai = $this->input->post('jenis_nilai');
+        $porsi = $this->input->post('porsi');
+
+        $query = $this->db->query("SELECT sum(porsi) as subtotal FROM tbl_komponen_nilai WHERE id_jenis_nilai = '$jenis_nilai' AND id_mapel = '$id_mapel'");
+        $subtotal = $query->row()->subtotal;
+        $total = $subtotal + $porsi;
+        $hasil = "";
+        $message = "";
+        if( $total > 100){
+            $hasil = $total;
+            $message = "Insert GAGAL !! Proporsi nilai sudah lebih dari 100%";
+        } else {
+            $query = $this->db->query("INSERT INTO tbl_komponen_nilai (nama_komponen,id_jenis_nilai,id_mapel,porsi) VALUES('$nama_komponen','$jenis_nilai','$id_mapel','$porsi') ");
+            if($query){
+                $hasil = true;
+                $message = "Tambah komponen nilai berhasil.";
+            } else {
+                $hasil = $query->result();
+                $message = "Insert gagal";
+            }
+        }
+        echo json_encode(['hasil'=>$hasil,'message'=>$message]);
     }
     function ubah_komponen() {
             $mapel = $this->input->post('id_mapel', TRUE);
