@@ -1,11 +1,10 @@
 <div class="col-md-12">
     <table class="table table-bordered">
-        <tr><td width="200">NISN</td><td>  <?php echo $_SESSION['username'];?></td></tr>
-        <tr><td>NAMA</td><td><?php echo $_SESSION['nama_lengkap']; ?></td></tr>
+        <tr><td>NAMA</td><td><?php foreach ($siswa as $murid){echo $murid->nama; }?></td></tr>
         <tr><td>MATA PELAJARAN</td><td><?php foreach ($mapel as $mapell){ echo $mapell->nama_mapel; }?></td></tr>
     </table>
     <!-- start: DYNAMIC TABLE PANEL -->
-     
+        
         <h2>Nilai :</h2>
         <table class="table table-bordered">
               <?php
@@ -24,6 +23,7 @@
 
             <?php } ?>
         </table>
+      
         <h2>Deskripsi Nilai :</h2>
         <table class="table table-bordered">
         

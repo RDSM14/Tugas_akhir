@@ -1,8 +1,18 @@
- <?php if($this->session->flashdata('data_deskripsi'))
+ <?php if($this->session->flashdata('data_wali_ubah'))
     {
     ?>
     <script>
-        alert("Nilai Deskripsi Telah Disimpan");
+        alert("Wali Kelas Telah Di-ubah");
+    </script>
+        
+    <?php
+    }
+    ?>
+    <?php if($this->session->flashdata('data_wali_masuk'))
+    {
+    ?>
+    <script>
+        alert("Wali Kelas Telah Di-Set");
     </script>
         
     <?php

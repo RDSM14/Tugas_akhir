@@ -4,6 +4,7 @@ class Walikelas extends CI_Controller{
     function __construct() {
         parent::__construct();
         $this->load->library('ssp');
+        $this->load->model('Model_walikelas');
         if($_SESSION['id_sekolah'] == null)
         {
             redirect('');
@@ -13,7 +14,7 @@ class Walikelas extends CI_Controller{
     
     function data() {
         // nama tabel
-        $table = 'v_walikelas';
+        $table = 'v_wali_kelas';
         // nama PK
         $primaryKey = 'id_walikelas';
         // list field
@@ -39,7 +40,7 @@ class Walikelas extends CI_Controller{
         );
         
         //$where = 'tahun_akademik='.get_tahun_akademik_aktif('tahun_akademik');
-        $where = "tahun_akademik='".get_tahun_akademik_aktif('tahun_akademik')."'";
+        $where = "id_sekolah=".$_SESSION['id_sekolah']."";
         echo json_encode(
                 SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns,$where)
         );
@@ -56,6 +57,20 @@ class Walikelas extends CI_Controller{
         $username        =   $_GET['username'];
         $this->db->where('id_walikelas',$id_walikelas);
         $this->db->update('tbl_walikelas',array('username_guru'=>$username));
+        $this->session->set_flashdata('data_wali_ubah', 'Data Telah Disimpan');
     }
+    function add() {
+        if (isset($_POST['submit'])) {
+            $this->Model_walikelas->save();
+            $this->session->set_flashdata('data_wali_masuk', 'Data Telah Disimpan');
+            redirect('walikelas');
+        } else {
+            $data['tahun_akademik'] =  $this->Model_walikelas->tahun_akademik();
+            $data['guru'] = $this->Model_walikelas->guru();
+            $data['rombel'] = $this->Model_walikelas->rombel();
+            $this->template->load('template', 'walikelas/add', $data);
+        }
+    }
+    
     
 }
