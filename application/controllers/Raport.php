@@ -223,9 +223,8 @@ class Raport extends CI_Controller{
        
         $pdf->Cell(1,10,'DESKRIPSI ',0,1);
         $pdf->Cell( 8,5,'NO',1,0,'C');
-        $pdf->Cell(60,5,'Mata Pelajaran',1,0,'C');
-        $pdf->Cell(40,5,'Kompetensi',1,0,'C');
-        $pdf->Cell(80,5,'Catatan',1,1,'C');
+        $pdf->Cell(80,5,'Mata Pelajaran',1,0,'C');
+        $pdf->Cell(100,5,'Kompetensi : Catatan',1,1,'L');
        
         $pdf->SetFont('Arial','',6);
         $sqlMapel_desk = "SELECT DISTINCT tm.nama_mapel,tj.id_jadwal,tm.min_a,tm.min_b,tm.min_c,tm.min_d,tn.nisn, tdn.deskripsi_pengetahuan,tdn.deskripsi_keterampilan,tdn.deskripsi_spiritual,tdn.deskripsi_sosial
@@ -238,11 +237,112 @@ class Raport extends CI_Controller{
             $hitung_n_sos = round($this->nilai_sosial($d->id_jadwal),2);
             
             $pdf->Cell(8,15,$no,1,0,'C');
-            $pdf->Cell(60,15,$d->nama_mapel,1,0,'L');
-            $pdf->Cell(40,15, "Pengetahuan",1,0,'C');
-            $pdf->MultiCell(80,15,"Pengetahuan" /*$d->deskripsi_pengetahuan*/,1,1,'L',false) ;
+            $pdf->Cell(80,15,$d->nama_mapel,1,0,'L');
+            //$pdf->Cell(40,15, "Pengetahuan",1,0,'C');
             
-                          
+            $cellWidth=100;//wrapped cell width
+	        $cellHeight=5;//normal one-line cell height
+            if($pdf->GetStringWidth($d->deskripsi_pengetahuan) < $cellWidth){
+                //if not, then do nothing
+                $line=1;
+            }else{
+                    $textLength=strlen($d->deskripsi_pengetahuan);
+                    $errMargin=10;		//cell width error margin, just in case
+                    $startChar=0;		//character start position for each line
+                    $maxChar=0;			//maximum character in a line, to be incremented later
+                    $textArray=array();	//to hold the strings for each line
+                    $tmpString="";		//to hold the string for a line (temporary)
+               while($startChar < $textLength){ //loop until end of text
+                    //loop until maximum character reached
+                    while( 
+                    $pdf->GetStringWidth( $tmpString ) < ($cellWidth-$errMargin) &&
+                    ($startChar+$maxChar) < $textLength ) {
+                        $maxChar++;
+                        $tmpString=substr($d->deskripsi_pengetahuan,$startChar,$maxChar);
+                    }
+                    //move startChar to next line
+                    $startChar=$startChar+$maxChar;
+                    //then add it into the array so we know how many line are needed
+                    array_push($textArray,$tmpString);
+                    //reset maxChar and tmpString
+                    $maxChar=0;
+                    $tmpString='';
+
+              }
+            //get number of line
+            $line=count($textArray);
+            }
+	
+	//write the cells
+	       //$pdf->Cell(10,($line * $cellHeight),$d->deskripsi_pengetahuan,1,0); //adapt height to number of lines
+	       //$pdf->Cell(60,($line * $cellHeight),$d->deskripsi_pengetahuan,1,0); //adapt height to number of lines
+	
+	//use MultiCell instead of Cell
+	//but first, because MultiCell is always treated as line ending, we need to 
+	//manually set the xy position for the next cell to be next to it.
+	//remember the x and y position before writing the multicell
+            $xPos=$pdf->GetX();
+            $yPos=$pdf->GetY();
+            $pdf->MultiCell($cellWidth,$cellHeight,"Pengetahuan : ".$d->deskripsi_pengetahuan,1);
+
+            //return the position for next cell next to the multicell
+            //and offset the x with multicell width
+            $pdf->SetXY($xPos + $cellWidth , $yPos);
+
+            //$pdf->Cell(40,($line * $cellHeight),$d->deskripsi_pengetahuan,1,1); //adapt height to number of lines
+	        
+            $cellWidth=100;//wrapped cell width
+	        $cellHeight=5;//normal one-line cell height
+            if($pdf->GetStringWidth($d->deskripsi_keterampilan) < $cellWidth){
+                //if not, then do nothing
+                $line=1;
+            }else{
+                    $textLength=strlen($d->deskripsi_keterampilan);
+                    $errMargin=10;		//cell width error margin, just in case
+                    $startChar=0;		//character start position for each line
+                    $maxChar=0;			//maximum character in a line, to be incremented later
+                    $textArray=array();	//to hold the strings for each line
+                    $tmpString="";		//to hold the string for a line (temporary)
+               while($startChar < $textLength){ //loop until end of text
+                    //loop until maximum character reached
+                    while( 
+                    $pdf->GetStringWidth( $tmpString ) < ($cellWidth-$errMargin) &&
+                    ($startChar+$maxChar) < $textLength ) {
+                        $maxChar++;
+                        $tmpString=substr($d->deskripsi_keterampilan,$startChar,$maxChar);
+                    }
+                    //move startChar to next line
+                    $startChar=$startChar+$maxChar;
+                    //then add it into the array so we know how many line are needed
+                    array_push($textArray,$tmpString);
+                    //reset maxChar and tmpString
+                    $maxChar=0;
+                    $tmpString='';
+
+              }
+            //get number of line
+            $line=count($textArray);
+            }
+	
+	//write the cells
+	       //$pdf->Cell(10,($line * $cellHeight),$d->deskripsi_keterampilan,1,0); //adapt height to number of lines
+	       //$pdf->Cell(60,($line * $cellHeight),$d->deskripsi_keterampilan,1,0); //adapt height to number of lines
+	
+	//use MultiCell instead of Cell
+	//but first, because MultiCell is always treated as line ending, we need to 
+	//manually set the xy position for the next cell to be next to it.
+	//remember the x and y position before writing the multicell
+            $xPos=$pdf->GetX();
+            $yPos=$pdf->GetY();
+            $pdf->MultiCell($cellWidth,$cellHeight,"Keterampilan : ".$d->deskripsi_keterampilan,1);
+
+            //return the position for next cell next to the multicell
+            //and offset the x with multicell width
+            $pdf->SetXY($xPos + $cellWidth , $yPos);
+
+            //$pdf->Cell(40,($line * $cellHeight),$d->deskripsi_keterampilan,1,1); //adapt height to number of lines
+	        
+            $pdf->Cell(40,15, "",0,1,'C');              
             $no++;
         }
        
