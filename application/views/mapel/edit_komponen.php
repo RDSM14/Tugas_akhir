@@ -9,6 +9,7 @@
                 $id_komponen = $nilai_edit_komponen->id_komponen;
                 $nama_komponen = $nilai_edit_komponen->nama_komponen;
                 $id_jenis_nilai = $nilai_edit_komponen->id_jenis_nilai;
+                $porsi = $nilai_edit_komponen->porsi;
                 $id_mapel = $nilai_edit_komponen->id_mapel;
             }
             ?>
@@ -49,7 +50,7 @@
                     PROPORSI (%)
                 </label>
                 <div class="col-sm-3">
-                    <input type="number" name="porsi"  value="<?php echo $nama_komponen ?>" placeholder="PROPORSI KOMPONEN" id="form-field-1" class="form-control">
+                    <input type="text" name="porsi"  value="<?php echo $porsi ?>" placeholder="PROPORSI KOMPONEN" id="form-field-1" class="form-control">
                 </div>
             </div>
             <div class="form-group">

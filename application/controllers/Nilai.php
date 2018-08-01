@@ -44,8 +44,8 @@ class Nilai extends CI_Controller{
                             FROM tbl_jadwal AS j,tbl_jurusan as jr, tbl_rombel as rb,tbl_mapel as mp
                             WHERE j.kd_jurusan=jr.kd_jurusan and rb.id_rombel=j.id_rombel and mp.kd_mapel=j.kd_mapel 
                             and j.id_jadwal=13='$id_rombel'";*/
-        $rombel         = "SELECT DISTINCT *,tbl_mapel.id_mapel as id_mapel FROM tbl_history_kelas,tbl_jadwal,tbl_rombel,tbl_siswa,tbl_mapel WHERE tbl_jadwal.id_rombel=tbl_rombel.id_rombel AND tbl_rombel.id_rombel=tbl_siswa.id_rombel AND id_jadwal='$id_jadwal' AND tbl_mapel.id_mapel='$id_mapel' AND tbl_siswa.nisn=tbl_history_kelas.nisn AND tbl_history_kelas.id_tahun_akademik='$id_ta'";
-        $siswa          =   "SELECT DISTINCT *,tbl_mapel.id_mapel as id_mapel FROM tbl_history_kelas,tbl_jadwal,tbl_rombel,tbl_siswa,tbl_mapel WHERE tbl_jadwal.id_rombel=tbl_rombel.id_rombel AND tbl_rombel.id_rombel=tbl_siswa.id_rombel AND id_jadwal='$id_jadwal' AND tbl_mapel.id_mapel='$id_mapel' AND tbl_siswa.nisn=tbl_history_kelas.nisn AND tbl_history_kelas.id_tahun_akademik='$id_ta'";
+        $rombel         = "SELECT DISTINCT *,tbl_mapel.id_mapel as id_mapel FROM tbl_history_kelas,tbl_jadwal,tbl_rombel,tbl_siswa,tbl_mapel WHERE tbl_jadwal.id_rombel=tbl_rombel.id_rombel AND tbl_rombel.id_rombel=tbl_siswa.id_rombel AND id_jadwal='$id_jadwal' AND tbl_mapel.id_mapel='$id_mapel' AND tbl_siswa.nisn=tbl_history_kelas.nisn AND tbl_history_kelas.id_tahun_akademik='$id_ta' AND tbl_history_kelas.id_rombel=tbl_siswa.id_rombel";
+        $siswa          =   "SELECT DISTINCT *,tbl_mapel.id_mapel as id_mapel FROM tbl_history_kelas,tbl_jadwal,tbl_rombel,tbl_siswa,tbl_mapel WHERE tbl_jadwal.id_rombel=tbl_rombel.id_rombel AND tbl_rombel.id_rombel=tbl_siswa.id_rombel AND id_jadwal='$id_jadwal' AND tbl_mapel.id_mapel='$id_mapel' AND tbl_siswa.nisn=tbl_history_kelas.nisn AND tbl_history_kelas.id_tahun_akademik='$id_ta' AND tbl_history_kelas.id_rombel=tbl_siswa.id_rombel";
         
         $deskripsi      =   "SELECT * FROM tbl_deskripsi_nilai tdn, tbl_nilai tn WHERE tdn.id_mapel = tn.id_mapel";
         

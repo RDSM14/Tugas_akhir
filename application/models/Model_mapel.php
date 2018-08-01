@@ -51,39 +51,47 @@ class Model_mapel extends CI_Model {
         $this->db->insert('tbl_komponen_nilai',$data);
     }
     function ubah_komponen() {
-             $mapel = $this->input->post('id_mapel', TRUE);
-            $this->db->select('porsi');
+            $mapel = $this->input->post('id_mapel', TRUE);
+            $jenis_nilai = $this->input->post('jenis_nilai', TRUE);
+            $this->db->select_sum('porsi');
             $this->db->from('tbl_komponen_nilai'); 
             $this->db->where('id_mapel', $mapel);
+            $this->db->where('id_jenis_nilai', $jenis_nilai);
             $query = $this->db->get();
-            $result = $query->row();
-            //$id_rombel = $result->id_rombel;
-            for ($i=0; $i<count($result); $i++){
-                $total = $result[i]+ result[i+1];    
+            $result = $query->result();
+            //$total_porsi = $result->porsi;
+            $total = 0;  
+            foreach($result as $row){
+                $total = $total + $row->porsi;  
             }
-            $porsi_baru = $this->input->post('porsi', TRUE);
-            $hasil = $porsi_baru + $total;
+            
+            if(is_numeric($total)){
+                $porsi_baru = $this->input->post('porsi', TRUE);
+                $hasil = $porsi_baru + $total;
+                if ($hasil > 100){
+                    $this->session->set_flashdata('data_komponen_change_gagal', 'Data Telah Diubah');
+                }
+                else{
 
-            if ($hasil > 100){
-                $this->session->set_flashdata('data_komponen_change_gagal', 'Data Telah Diubah');
-            }
-            else{
                 $data = array(
-                'nama_komponen'     => $this->input->post('nama_komponen', TRUE),
-                'id_jenis_nilai'    => $this->input->post('jenis_nilai', TRUE),
-                'porsi'             => $this->input->post('porsi', TRUE),
-                'id_mapel'          => $this->input->post('id_mapel', TRUE)
+                    'nama_komponen'     => $this->input->post('nama_komponen', TRUE),
+                    'id_jenis_nilai'    => $this->input->post('jenis_nilai', TRUE),
+                    'porsi'             => $this->input->post('porsi', TRUE),
+                    'id_mapel'          => $this->input->post('id_mapel', TRUE)
 
-            );
-                $id     = $this->input->post('id_komponen');
-                $this->db->where('id_komponen',$id);
-                //$this->db->update('tbl_komponen_nilai',$data);
-                $this->session->set_flashdata('data_komponen_change', 'Data Telah Diubah');
-            } 
+                );
+                    $id     = $this->input->post('id_komponen');
+                    $this->db->where('id_komponen',$id);
+                    $this->db->update('tbl_komponen_nilai',$data);
+                    $this->session->set_flashdata('data_komponen_change', 'Data Telah Diubah');
+                }
+            }
+            
+                    
 
     }
     function nilai_edit_komponen($id_komponen){
-         $this->db->select('a.id_komponen,a.nama_komponen,a.id_jenis_nilai,a.id_mapel');
+         $this->db->select('a.id_komponen,a.nama_komponen,a.id_jenis_nilai,a.id_mapel,a.porsi');
             $this->db->from('tbl_komponen_nilai a'); 
             $this->db->where('a.id_komponen',$id_komponen);
             $query = $this->db->get(); 

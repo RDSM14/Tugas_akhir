@@ -24,7 +24,7 @@
     {
     ?>
     <script>
-        alert("Data Mata Pelajaran Telah Dihapus");
+        alert("Data Komponen Nilai Telah Dihapus");
     </script>
         
     <?php
@@ -35,7 +35,7 @@
     {
     ?>
     <script>
-        alert("Data Mata Pelajaran Telah Disimpan");
+        alert("Data Komponen Nilai Telah Disimpan");
     </script>
         
     <?php
@@ -45,7 +45,17 @@
     {
     ?>
     <script>
-        alert("Data Mata Pelajaran Telah Diubah");
+        alert("Data Komponen Nilai Telah Diubah");
+    </script>
+        
+    <?php
+    }
+    ?>
+    <?php if($this->session->flashdata('data_komponen_change_gagal'))
+    {
+    ?>
+    <script>
+        alert("Data Komponen Nilai Telah Gagal Diubah, Proporsi Lebih dari 100%");
     </script>
         
     <?php
