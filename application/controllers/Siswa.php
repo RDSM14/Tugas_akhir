@@ -99,6 +99,11 @@ Class Siswa extends CI_Controller {
             // proses delete data
             $this->db->where('nisn',$nisn);
             $this->db->delete('tbl_siswa');
+            
+            $this->db->where('nisn',$nisn);
+            $this->db->delete('tbl_orang_tua');
+            
+            
         }
         $this->session->set_flashdata('data_siswa_hapus', 'Data Telah Dihapus');
         redirect('siswa');

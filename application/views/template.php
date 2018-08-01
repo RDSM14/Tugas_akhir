@@ -408,7 +408,10 @@
         <div class="main-container">
             <div class="navbar-content">
                 <!-- start: SIDEBAR -->
-                <div class="main-navigation navbar-collapse collapse">
+                <div class="main-navigation navbar-collapse collapse" style="
+    padding-right: 0px;
+    padding-left: 0px;
+">
                     <!-- start: MAIN MENU TOGGLER BUTTON -->
                     <div class="navigation-toggler">
                         <i class="fa fa-angle-left" aria-hidden="true"></i>  

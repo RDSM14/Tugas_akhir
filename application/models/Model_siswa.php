@@ -46,6 +46,24 @@ class Model_siswa extends CI_Model {
     }
     
     function update($foto) {
+        $nisin = $this->input->post('nisn', TRUE);
+        $this->db->select('id_rombel');
+        $this->db->from('tbl_siswa'); 
+        $this->db->where('nisn', $nisin);
+        $query = $this->db->get();
+        $result = $query->row();
+        $id_rombel = $result->id_rombel;
+        $tahun_akademik = $this->db->get_where('tbl_tahun_akademik',array('is_aktif'=>'y'))->row_array();
+        if ($this->input->post('rombel',TRUE)!=$id_rombel){
+            //echo $id_rombel;
+            $history =  array(
+            
+                'nisn'                =>  $this->input->post('nisn', TRUE),
+                'id_tahun_akademik'   =>  $tahun_akademik['id_tahun_akademik'],
+                'id_rombel'           =>  $this->input->post('rombel', TRUE)
+            );
+            $this->db->insert('tbl_history_kelas',$history);
+        }
         if(empty($foto)){
             // update without foto
             $data = array(
@@ -60,7 +78,7 @@ class Model_siswa extends CI_Model {
             'telepon_siswa' => $this->input->post('telepon_siswa', TRUE),
             'asal_sekolah'  => $this->input->post('asal_sekolah', TRUE),
             'id_sekolah'   => $_SESSION['id_sekolah'],
-            //'kelas_terima'  => $this->input->post('kelas_terima', TRUE),
+            'kelas_terima'  => $this->input->post('kelas_terima', TRUE),
             'tanggal_terima'=> $this->input->post('tanggal_terima', TRUE)
         );
         }else{
@@ -78,7 +96,7 @@ class Model_siswa extends CI_Model {
             'telepon_siswa' => $this->input->post('telepon_siswa', TRUE),
             'asal_sekolah'  => $this->input->post('asal_sekolah', TRUE),
             'id_sekolah'   => $_SESSION['id_sekolah'],    
-            //'kelas_terima'  => $this->input->post('kelas_terima', TRUE),
+            'kelas_terima'  => $this->input->post('kelas_terima', TRUE),
             'tanggal_terima'=> $this->input->post('tanggal_terima', TRUE)
         );
         }

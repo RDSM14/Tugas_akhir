@@ -21,7 +21,7 @@
         </div>
         <div class="panel-body">
             <table class="table table-bordered">
-                <tr><th>NIS</th><th>NAMA</th><th></th><th></th><th></th>
+                <tr><th>NIS</th><th>NAMA</th><th></th><th></th>
                 <?php foreach ($siswa as $row){
                     //$href='nilai/rombel/'".$row->nisn.'/'.$row->nisn." 
                     /*echo "<tr>  <td width='140'>$row->nisn</td>
@@ -40,7 +40,7 @@
                     <tr>
                         <td width='140'><?php echo $row->nisn; ?></td>
                         <td><?php echo strtoupper($row->nama); ?></td>
-                        <td width='150'><button class='btn btn-success' data-toggle="modal" data-target="#modalNilai" onclick="modalDataNilai('<?php echo $row->nisn; ?>','<?php echo $this->uri->segment(4); ?>','<?php echo $this->uri->segment(3); ?>')">Masukkan Komponen Nilai</button></td>
+                        <td width='150'><button class='btn btn-success' data-toggle="modal" data-target="#modalNilai" onclick="modalDataNilai('<?php echo $row->nisn; ?>','<?php echo $this->uri->segment(4); ?>','<?php echo $this->uri->segment(3); ?>')">Masukkan Nilai Angka</button></td>
                         <td width='150'><button class='btn btn-success' data-toggle="modal" data-target="#modalDeskripsi" onclick="modalDataDeskripsi('<?php echo $row->nisn; ?>','<?php echo $this->uri->segment(4); ?>')">Deskripsi Nilai</button></td>
                     </tr>
                 <?php } ?>
