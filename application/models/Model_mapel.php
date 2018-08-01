@@ -67,45 +67,39 @@ class Model_mapel extends CI_Model {
         }
         echo json_encode(['hasil'=>$hasil,'message'=>$message]);
     }
-    function ubah_komponen() {
-            $mapel = $this->input->post('id_mapel', TRUE);
-            $jenis_nilai = $this->input->post('jenis_nilai', TRUE);
-            $this->db->select_sum('porsi');
-            $this->db->from('tbl_komponen_nilai'); 
-            $this->db->where('id_mapel', $mapel);
-            $this->db->where('id_jenis_nilai', $jenis_nilai);
-            $query = $this->db->get();
-            $result = $query->result();
-            //$total_porsi = $result->porsi;
-            $total = 0;  
-            foreach($result as $row){
-                $total = $total + $row->porsi;  
+    function ubah_komponen(){
+        $id_mapel = $this->input->post('id_mapel');
+        $id_komponen = $this->input->post('id_komponen');
+        $nama_komponen = $this->input->post('nama_komponen');
+        $jenis_nilai = $this->input->post('jenis_nilai');
+        $porsi = $this->input->post('porsi');
+
+        $query = $this->db->query("SELECT sum(porsi) as subtotal FROM tbl_komponen_nilai WHERE id_jenis_nilai = '$jenis_nilai' AND id_mapel = '$id_mapel'");
+        $query2 = $this->db->query("SELECT * FROM tbl_komponen_nilai WHERE id_jenis_nilai = '$jenis_nilai' AND id_mapel = '$id_mapel' AND id_komponen = '$id_komponen'");
+        $subtotal = $query->row()->subtotal;
+        $editedPorsi = $query2->row()->porsi;
+        $total = $subtotal + $porsi - $editedPorsi;
+        $hasil = "";
+        $message = "";
+        if( $total > 100){
+            $hasil = $total;
+            $message = "Update GAGAL !! Proporsi nilai sudah lebih dari 100%";
+        } else {
+            $query = $this->db->query("UPDATE tbl_komponen_nilai SET 
+                nama_komponen = '$nama_komponen', 
+                id_jenis_nilai = '$jenis_nilai',
+                id_mapel = '$id_mapel', 
+                porsi = '$porsi'
+                WHERE id_komponen = '$id_komponen'");
+            if($query){
+                $hasil = true;
+                $message = "Tambah komponen nilai berhasil.";
+            } else {
+                $hasil = $query->result();
+                $message = "Insert gagal";
             }
-            
-            if(is_numeric($total)){
-                $porsi_baru = $this->input->post('porsi', TRUE);
-                $hasil = $porsi_baru + $total;
-                if ($hasil > 100){
-                    $this->session->set_flashdata('data_komponen_change_gagal', 'Data Telah Diubah');
-                }
-                else{
-
-                $data = array(
-                    'nama_komponen'     => $this->input->post('nama_komponen', TRUE),
-                    'id_jenis_nilai'    => $this->input->post('jenis_nilai', TRUE),
-                    'porsi'             => $this->input->post('porsi', TRUE),
-                    'id_mapel'          => $this->input->post('id_mapel', TRUE)
-
-                );
-                    $id     = $this->input->post('id_komponen');
-                    $this->db->where('id_komponen',$id);
-                    $this->db->update('tbl_komponen_nilai',$data);
-                    $this->session->set_flashdata('data_komponen_change', 'Data Telah Diubah');
-                }
-            }
-            
-                    
-
+        }
+        echo json_encode(['hasil'=>$hasil,'message'=>$message]);
     }
     function nilai_edit_komponen($id_komponen){
          $this->db->select('a.id_komponen,a.nama_komponen,a.id_jenis_nilai,a.id_mapel,a.porsi');
