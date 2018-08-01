@@ -106,7 +106,7 @@ Class Users extends CI_Controller {
                     <tr>
                         <th width='10'>NO</th>
                         <th>NAMA MODULE</th>
-                        <th>LINK</th>
+                        <th>DETAIL MODULE</th>
                         <th width='100'>HAK AKSES</th>
                     </tr>";
         
@@ -116,7 +116,7 @@ Class Users extends CI_Controller {
             echo "<tr>
                 <td>$no</td>
                 <td>".  strtoupper($row->nama_menu)."</td>
-                <td>$row->link</td>
+                <td>$row->detail</td>
                 <td align='center'><input type='checkbox' ";
             $this->chek_akses($level_user, $row->id,$id_sekolah);
              echo " onclick='addRule($row->id)'></td>
