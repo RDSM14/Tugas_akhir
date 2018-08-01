@@ -69,11 +69,10 @@ class Raport extends CI_Controller{
         
         
         // BLOCK NILAI SISWA ------------------------
-        $pdf->Cell(1,10,'',0,1);
+        $pdf->Cell(1,10,'CAPAIAN KOMPETENSI ',0,1);
         $pdf->Cell( 8,15,'NO',1,0,'C');
         $pdf->Cell(100,15,'Mata Pelajaran',1,0,'C');
         $pdf->Cell(40,5,'Pengetahuan',1,0,'C');
-        
         $pdf->Cell(40,5,'Keterampilan',1,1,'C');
         $pdf->Cell(108,5,'',0,0,'C');
         $pdf->Cell(20,5,'Angka',1,0,'C');
@@ -91,8 +90,8 @@ class Raport extends CI_Controller{
         //$pdf->Cell(lebar 37,tinggi 5,titel: 'Catatan',frame (true1,false 0 ) 1,(enter 1,spasi 0) 1, align: c center,l left,r right'C');
         $pdf->SetFont('Arial','',9);
         $sqlMapel = "SELECT DISTINCT tm.nama_mapel,tj.id_jadwal,tm.min_a,tm.min_b,tm.min_c,tm.min_d 
-                    FROM tbl_jadwal as tj,tbl_mapel as tm
-                    WHERE tj.id_mapel=tm.id_mapel and tj.id_rombel='$id_rombels'";
+                    FROM tbl_jadwal as tj,tbl_mapel as tm, tbl_nilai as tn
+                    WHERE tj.id_mapel=tm.id_mapel and tj.id_rombel='$id_rombels' AND tn.nisn ='".$this->uri->segment(3)."'";
         $mapel = $this->db->query($sqlMapel)->result();
         $no=1;
         foreach ($mapel as $m){
@@ -114,6 +113,51 @@ class Raport extends CI_Controller{
         $pdf->Cell(200,5,'',0,1,'C');
         // END BLOCK NILAI SISWA NILAI PENGETAHUAN DAN KETERAMPILAN--------------------------------
         
+       
+        /// BLOK NILAI ESKUL
+        $pdf->SetFont('Arial','B',8);
+       
+        $pdf->Cell( 8,5,'NO',1,0,'C');
+        $pdf->Cell(80,5,'Ekstra Kurikuler',1,0,'C');
+        $pdf->Cell(100,5,'Keterangan dalam Kegiatan',1,1,'C');
+        $pdf->Cell( 8,5,'1',1,0,'C');
+        $pdf->Cell(80,5,' ',1,0,'C');
+        $pdf->Cell(100,5,' ',1,1,'C');
+        $pdf->Cell( 8,5,'2',1,0,'C');
+        $pdf->Cell(80,5,' ',1,0,'C');
+        $pdf->Cell(100,5,' ',1,1,'C');
+        $pdf->Cell( 8,5,'3',1,0,'C');
+        $pdf->Cell(80,5,' ',1,0,'C');
+        $pdf->Cell(100,5,' ',1,1,'C');
+        $pdf->Cell( 8,5,'4',1,0,'C');
+        $pdf->Cell(80,5,' ',1,0,'C');
+        $pdf->Cell(100,5,' ',1,1,'C');
+       
+       /// END BLOK NILAI ESKUL
+       
+       
+        $pdf->Cell(200,5,'',0,1,'C');
+        $pdf->Cell(200,5,'',0,1,'C');
+       /// BLOK NILAI KEHADIRAN
+        $pdf->SetFont('Arial','B',8);
+       
+        $pdf->Cell( 30,5,'Kehadiran',1,1,'C');
+        $pdf->Cell( 8,5,'NO',1,0,'C');
+        $pdf->Cell(50,5,'Ekstra Kurikuler',1,0,'C');
+        $pdf->Cell(60,5,'Keterangan dalam Kegiatan',1,1,'C');
+        $pdf->Cell( 8,5,'1',1,0,'C');
+        $pdf->Cell(50,5,'Sakit ',1,0,'L');
+        $pdf->Cell(60,5,' Hari',1,1,'C');
+        $pdf->Cell( 8,5,'2',1,0,'C');
+        $pdf->Cell(50,5,'Izin ',1,0,'L');
+        $pdf->Cell(60,5,' Hari',1,1,'C');
+        $pdf->Cell( 8,5,'3',1,0,'C');
+        $pdf->Cell(50,5,'Tanpa Keterangan ',1,0,'L');
+        $pdf->Cell(60,5,' Hari',1,1,'C');
+       /// END BLOK NILAI KEHADIRAN
+       
+        $pdf->Cell(200,5,'',0,1,'C');
+        $pdf->Cell(200,5,'',0,1,'C');
         /* Tambahan Tabel
         $pdf->Cell(190,5,'',0,1);
         $pdf->Cell(8, 5, 'No', 1,0);
@@ -124,17 +168,95 @@ class Raport extends CI_Controller{
         $pdf->Cell(36, 5, 'Catatan Khusus', 1,1);
         */
         $pdf->Cell(190,5,'',0,1);
-        $pdf->Cell(45, 15, 'Mengetahui,', 0,0,'C');
+        $pdf->Cell(45, 15, '', 0,0,'C');
         $pdf->Cell(87, 5, '', 0,0,'c');
         $pdf->Cell(25, 5, 'Diberikan Di', 0,0,'c');
         $pdf->Cell(33, 5, ': ', 0,1,'L');
-        $pdf->Cell(45, 15, 'Orang Tua / Wali', 0,0,'C');
+        $pdf->Cell(45, 15, '', 0,0,'C');
         $pdf->Cell(87, 5, '', 0,0,'c');
         $pdf->Cell(25, 5, 'Pada', 0,0,'c');
         $pdf->Cell(33, 5, ': ', 0,1,'L');
         $pdf->Cell(132, 5, '', 0,0,'c');
-        $pdf->Cell(25, 5, 'Wali Kelas', 0,0,'c');
-        $pdf->Cell(33, 5, ': ', 0,1,'L');
+        $pdf->Cell(33, 5, ' ', 0,1,'L');
+        $pdf->Cell(45, 5, 'Mengetahui,', 0,0,'C');
+        $pdf->Cell(80, 5, '', 0,0,'L');
+        $pdf->Cell(45, 5, '..........................,....................20.......', 0,1,'C');
+        $pdf->Cell(45, 5, 'Orang Tua / Wali', 0,0,'C');
+        $pdf->Cell(80, 5, '', 0,0,'L');
+        $pdf->Cell(45, 5, 'Wali Kelas,', 0,1,'C');
+        
+        $pdf->Cell(200,5,'',0,1,'C');
+        $pdf->Cell(200,5,'',0,1,'C');
+        $pdf->Cell(200,5,'',0,1,'C');
+        $pdf->Cell(45, 5, '', 0,0,'C');
+        $pdf->Cell(80, 5, '', 0,0,'L');
+        $pdf->Cell(45, 5, ''.$_SESSION['nama_lengkap'], 0,0,'C');
+        ///////////////END of FIRST PAGE
+        // SECOND PAGE
+        $pdf->AddPage();
+        $pdf->SetFont('Arial','B',12);
+        
+        $pdf->Cell(190,5,'Raport Siswa',1,1,'C');
+        $pdf->SetFont('Arial','B',14);
+        $pdf->Cell(190,7,''.$sekolah_info['nama_sekolah'],1,1,'C');
+        $pdf->SetFont('Arial','',8);
+        $pdf->Cell(190,5,''.$sekolah_info['alamat_sekolah'].', Telpon : '.$sekolah_info['telpon'].', email: '.$sekolah_info['email'],1,1,'C');
+         
+        $pdf->Cell(190,5,'',0,1);
+        
+        $pdf->SetFont('Arial','B',9);
+        // BLOCK INFO SISWA
+        $pdf->Cell(30,5,'NISN / NIS',0,0,'L');
+        $pdf->Cell(88,5,': '.$siswa['nisn'].' / '.$siswa['nim'],0,0,'L');
+        $pdf->Cell(30,5,'KELAS',0,0,'L');
+        $pdf->Cell(40,5,': '.$siswa['nama_rombel'],0,1,'L');
+        //$pdf->AddPage(); MENAMBAHKAN PAGE BARU
+        $pdf->Cell(30,5,'NAMA',0,0,'L');
+        $pdf->Cell(88,5,': '.$siswa['nama_siswa'],0,0,'L');
+        $pdf->Cell(30,5,'TAHUN AJARAN',0,0,'L');
+        $pdf->Cell(40,5,': '.  get_tahun_akademik_aktif('tahun_akademik'),0,1,'L');
+        
+        $pdf->Cell(30,5,'KELAS',0,0,'L');
+        $pdf->Cell(88,5,': '.$siswa['nama_rombel'],0,0,'L');
+        $pdf->Cell(30,5,'SEMESTER',0,0,'L');
+        $pdf->Cell(40,5,': '.  get_tahun_akademik_aktif('semester_aktif').' ('.Terbilang(get_tahun_akademik_aktif('semester_aktif')).' )',0,1,'L');
+       
+        $pdf->Cell(1,10,'DESKRIPSI ',0,1);
+        $pdf->Cell( 8,5,'NO',1,0,'C');
+        $pdf->Cell(60,5,'Mata Pelajaran',1,0,'C');
+        $pdf->Cell(40,5,'Kompetensi',1,0,'C');
+        $pdf->Cell(80,5,'Catatan',1,1,'C');
+       
+        $pdf->SetFont('Arial','',6);
+        $sqlMapel_desk = "SELECT DISTINCT tm.nama_mapel,tj.id_jadwal,tm.min_a,tm.min_b,tm.min_c,tm.min_d,tn.nisn, tdn.deskripsi_pengetahuan,tdn.deskripsi_keterampilan,tdn.deskripsi_spiritual,tdn.deskripsi_sosial
+                    FROM tbl_jadwal as tj,tbl_mapel as tm,tbl_nilai as tn,tbl_deskripsi_nilai as tdn
+                    WHERE tj.id_mapel=tm.id_mapel AND tn.id_jadwal=tj.id_jadwal AND tm.id_mapel=tdn.id_mapel AND tj.id_rombel='$id_rombels' AND tn.nisn ='".$this->uri->segment(3)."'";
+        $desk = $this->db->query($sqlMapel_desk)->result();
+        $no=1;
+        foreach ($desk as $d){
+            $hitung_n_sp = round($this->nilai_spiritual($d->id_jadwal),2);
+            $hitung_n_sos = round($this->nilai_sosial($d->id_jadwal),2);
+            
+            $pdf->Cell(8,15,$no,1,0,'C');
+            $pdf->Cell(60,15,$d->nama_mapel,1,0,'L');
+            $pdf->Cell(40,15, "Pengetahuan",1,0,'C');
+            $pdf->MultiCell(80,15,"Pengetahuan" /*$d->deskripsi_pengetahuan*/,1,1,'L',false) ;
+            
+                          
+            $no++;
+        }
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
         $pdf->Output();
     }
     
