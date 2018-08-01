@@ -112,11 +112,8 @@ Class Mapel extends CI_Controller {
     }
     
     function add_komponen() {
-        if (isset($_POST['submit'])) {
+        if (null !== $this->input->post('submit')) {
             $this->Model_mapel->save_komponen();
-            //$id_mapel = $this->uri->segment(3);
-            $this->session->set_flashdata('data_komponen_masuk', 'Data Telah Disimpan');
-            redirect('mapel');
         } else {
             //$this->load->library('uri');
             $this->data['id_mapel'] = $this->uri->segment(3);
@@ -125,7 +122,7 @@ Class Mapel extends CI_Controller {
         }
     }
     function edit_komponen($id_komponen) {
-        if (isset($_POST['submit'])) {
+        if (null !== $this->input->post('submit')) {
             $this->Model_mapel->ubah_komponen();
             redirect('mapel');
         } else {
