@@ -14,7 +14,7 @@
         
         <div class="panel-body">
             <table class="table table-bordered">
-                <tr><th>NO</th><th>KOMPONEN NILAI</th><th >JENIS NILAI</th><th style="width: 50px"></th>
+                <tr><th>NO</th><th>KOMPONEN NILAI</th><th >JENIS NILAI</th><th >PROPORSI</th><th style="width: 50px"></th>
                 <?php
                 $no=1;;
                 foreach ($komponen as $row){
@@ -22,6 +22,7 @@
                         <td>$no</td>
                         <td>$row->nama_komponen </td>
                         <td>$row->nama_jenis_nilai</td>
+                        <td>$row->porsi %</td>
                         <td >".anchor('mapel/edit_komponen/'.$row->id_komponen,'<i class="fa fa-pencil" title="Edit Komponen"></i>')."                           ".anchor('mapel/hapus_komponen/'.$row->id_komponen,'<i class="fa fa-trash-o" title="Hapus Komponen"></i>')."                             </td>
                         </tr>";
                         

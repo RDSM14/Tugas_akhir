@@ -1,5 +1,5 @@
 <?php
-Class jadwal extends CI_Controller{
+Class Jadwal extends CI_Controller{
     
     function __construct() {
         parent::__construct();

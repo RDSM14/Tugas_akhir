@@ -45,6 +45,14 @@
                 </div>
             </div>
             <div class="form-group">
+                <label class="col-sm-3 control-label" for="form-field-1">
+                    PROPORSI (%)
+                </label>
+                <div class="col-sm-3">
+                    <input type="number" name="porsi"  value="<?php echo $nama_komponen ?>" placeholder="PROPORSI KOMPONEN" id="form-field-1" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
                 <label class="col-sm-2 control-label" for="form-field-1">
 
                 </label>

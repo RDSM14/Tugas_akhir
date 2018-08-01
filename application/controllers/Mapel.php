@@ -101,7 +101,7 @@ Class Mapel extends CI_Controller {
        $id_mapel      = $this->uri->segment(3);
            
             //$data['mapel'] = $this->db->get_where('tbl_mapel',array('id_mapel'=>$id_mapel))->row_array();
-            $this->db->select('a.id_komponen,a.nama_komponen,a.id_jenis_nilai,a.id_mapel,b.id_mapel,b.nama_mapel,c.id_jenis_nilai,c.nama_jenis_nilai');
+            $this->db->select('a.id_komponen,a.porsi,a.nama_komponen,a.id_jenis_nilai,a.id_mapel,b.id_mapel,b.nama_mapel,c.id_jenis_nilai,c.nama_jenis_nilai');
             $this->db->from('tbl_komponen_nilai a'); 
             $this->db->join('tbl_mapel b', 'b.id_mapel=a.id_mapel', 'left');
             $this->db->join('tbl_jenis_nilai c', 'c.id_jenis_nilai=a.id_jenis_nilai', 'left');
@@ -127,7 +127,6 @@ Class Mapel extends CI_Controller {
     function edit_komponen($id_komponen) {
         if (isset($_POST['submit'])) {
             $this->Model_mapel->ubah_komponen();
-            $this->session->set_flashdata('data_komponen_change', 'Data Telah Diubah');
             redirect('mapel');
         } else {
             $this->data['jenis_nilai'] =  $this->Model_mapel->komponen_jenis_nilai();
