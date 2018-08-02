@@ -191,18 +191,19 @@ class Auth extends CI_Controller {
     }
         
     function agreed(){ 
-            $username            = $this->input->post('username');
-            $password            = md5($this->input->post('password_lama'));
-            $password_baru       = md5($this->input->post('password_baru'));
-            $level_user          = $this->input->post('level_user');
-            $cek_password        = md5($this->input->post('cek_password'));
+            $username            = $this->input->post('username',TRUE);
+            $password            = $this->input->post('password_lama',TRUE);
+            $password_baru       = md5($this->input->post('password_baru',TRUE));
+            $level_user          = $this->input->post('level_user',TRUE);
+            $cek_password        = md5($this->input->post('cek_password',TRUE));
+            
             if($password_baru==$cek_password){
                 if($level_user=='2'){
-                    $cekAdmin = $this->Model_user->chekLoginadmin($username, $password);
+                    $cekAdmin = $this->Model_user->chekadmin($username, $password);
                     if (!empty($cekAdmin)) 
-                    {
+                    { 
                         $data = array(
-                            'password'      => md5($password_baru)
+                            'password'      => $password_baru
                         );
                         
                         $this->db->where('email',$username);
@@ -210,12 +211,17 @@ class Auth extends CI_Controller {
                         $this->session->set_flashdata('benar', 'Data');
                         redirect('auth/password');
                     }
+                    else
+                    {
+                        $this->session->set_flashdata('beda_password', 'Data');
+                        redirect('auth/password');
+                    }
                 }elseif($level_user=='3'){
                     $cekTU = $this->Model_user->chekLoginTU($username, $password);
                     if (!empty($cekTU)) 
                     {
                         $data = array(
-                            'password'      => md5($password_baru)
+                            'password'      => $password_baru
                         );
                         
                         $this->db->where('username',$username);
@@ -223,12 +229,17 @@ class Auth extends CI_Controller {
                         $this->session->set_flashdata('benar', 'Data');
                         redirect('auth/password');
                     }
+                    else
+                    {
+                        $this->session->set_flashdata('beda_password', 'Data');
+                        redirect('auth/password');
+                    }
                 }elseif($level_user=='4' || $level_user=='5'){
                     $cekGuru= $this->Model_guru->chekLogin($username, $password);
                     if (!empty($cekGuru)) 
                     {
                         $data = array(
-                            'password'      => md5($password_baru)
+                            'password'      => $password_baru
                         );
                         
                         $this->db->where('username',$username);
@@ -236,12 +247,17 @@ class Auth extends CI_Controller {
                         $this->session->set_flashdata('benar', 'Data');
                         redirect('auth/password');
                     }
+                    else
+                    {
+                        $this->session->set_flashdata('beda_password', 'Data');
+                        redirect('auth/password');
+                    }
                 }elseif($level_user=='6'){
                     $ceksiswa = $this->Model_siswa->chekLogin($username, $password);
                     if (!empty($ceksiswa)) 
                     {
                         $data = array(
-                            'password'      => md5($password_baru)
+                            'password'      => $password_baru
                         );
                         
                         $this->db->where('nisn',$username);
@@ -249,12 +265,18 @@ class Auth extends CI_Controller {
                         $this->session->set_flashdata('benar', 'Data');
                         redirect('auth/password');
                     }
+                    else
+                    {
+                        $this->session->set_flashdata('beda_password', 'Data');
+                        redirect('auth/password');
+                    }
+                    
                 }elseif($level_user=='7'){
                     $cekortu = $this->Model_siswa->chekLoginOrtu($username, $password);
                     if (!empty($cekortu)) 
                     {
                         $data = array(
-                            'password_orangtua'      => md5($password_baru)
+                            'password_orangtua'      => $password_baru
                         );
                         
                         $this->db->where('nisn',$username);
@@ -262,9 +284,13 @@ class Auth extends CI_Controller {
                         $this->session->set_flashdata('benar', 'Data');
                         redirect('auth/password');
                     }
+                    else
+                    {
+                        $this->session->set_flashdata('beda_password', 'Data');
+                        redirect('auth/password');
+                    }
                 }
-                 $this->session->set_flashdata('beda_password', 'Data');
-                 redirect('auth/password');
+                 
             }
             else
             {

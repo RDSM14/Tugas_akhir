@@ -19,7 +19,7 @@
     <?php
     }
     ?>
-<?php if($this->session->flashdata('data_gak_sama'))
+<?php if($this->session->flashdata('beda_password'))
     {
     ?>
     <script>
@@ -52,7 +52,7 @@
                     MASUKKAN PASSWORD LAMA ANDA
                 </label>
                 <div class="col-sm-9">
-                    <input type="text" name="password_lama" placeholder="MASUKAN PASSWORD LAMA ANDA" id="form-field-1" class="form-control">
+                    <input type="password" name="password_lama" placeholder="MASUKAN PASSWORD LAMA ANDA" id="form-field-1" class="form-control">
                 </div>
             </div>
 
@@ -61,7 +61,7 @@
                     MASUKKAN PASSWORD YANG INGIN DIGUNAKAN
                 </label>
                 <div class="col-sm-9">
-                    <input type="text" name="password_baru" placeholder="MASUKAN PASSWORD BARU ANDA" id="form-field-1" class="form-control">
+                    <input type="password" name="password_baru" placeholder="MASUKAN PASSWORD BARU ANDA" id="form-field-1" class="form-control">
                 </div>
             </div>
             
@@ -70,7 +70,7 @@
                     MASUKKAN ULANG PASSWORD YANG INGIN DIGUNAKAN
                 </label>
                 <div class="col-sm-9">
-                    <input type="text" name="cek_password" placeholder="MASUKAN ULANG PASSWORD BARU ANDA" id="form-field-1" class="form-control">
+                    <input type="password" name="cek_password" placeholder="MASUKAN ULANG PASSWORD BARU ANDA" id="form-field-1" class="form-control">
                 </div>
             </div>
 

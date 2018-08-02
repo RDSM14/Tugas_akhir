@@ -23,13 +23,15 @@ class Walikelas extends CI_Controller{
             array('db' => 'kelas', 'dt' => 'kelas'),
             array('db' => 'nama_guru', 'dt' => 'nama_guru'),
             array('db' => 'tahun_akademik', 'dt' => 'tahun_akademik'),
-            array('db' => 'id_walikelas', 
-                  'dt' => 'nama_guru',
-                  'formatter' => function( $d) {
-                    $walikelas = $this->db->get_where('tbl_walikelas',array('id_walikelas'=>$d))->row_array();
-
-                    return cmb_dinamis('guru', 'tbl_guru', 'nama_guru', 'username',$walikelas['username_guru'],"id='guru$d' onchange='updateDataWalikelas($d)'");
-                }),
+            array(
+                'db' => 'id_walikelas',
+                'dt' => 'aksi',
+                'formatter' => function( $d) {
+                    //return "<a href='edit.php?id=$d'>EDIT</a>";
+                    return anchor('walikelas/edit/'.$d,'<i class="fa fa-edit"></i>','class="btn btn-xs btn-teal tooltips" data-placement="top" data-original-title="Edit"').' 
+                        '.anchor('walikelas/delete/'.$d,'<i class="fa fa-trash-o"></i>','class="btn btn-xs btn-danger tooltips" data-placement="top" data-original-title="Delete"');
+                }
+            )
         );
 
         $sql_details = array(
@@ -70,6 +72,32 @@ class Walikelas extends CI_Controller{
             $data['rombel'] = $this->Model_walikelas->rombel();
             $this->template->load('template', 'walikelas/add', $data);
         }
+    }
+    function edit() {
+        if (isset($_POST['submit'])) {
+            $this->Model_walikelas->update();
+            $this->session->set_flashdata('data_wali_ubah', 'Data Telah Disimpan');
+            redirect('walikelas');
+        } else {
+            $d           = $this->uri->segment(3);
+            $data['tahun_akademik'] =  $this->Model_walikelas->tahun_akademik();
+            $data['guru'] = $this->Model_walikelas->guru();
+            $data['rombel'] = $this->Model_walikelas->rombel();
+            $data['wali'] = $this->db->get_where('tbl_walikelas',array('id_walikelas'=>$d))->row_array();
+            $this->template->load('template', 'walikelas/edit', $data);
+        }
+    }
+    function delete(){
+        $d = $this->uri->segment(3);
+        if(!empty($d)){
+            // proses delete data
+            $this->db->where('id_walikelas',$d);
+            $this->db->delete('tbl_walikelas');
+            
+            
+        }
+        $this->session->set_flashdata('data_wali_hapus', 'Data Telah Dihapus');
+        redirect('walikelas');
     }
     
     

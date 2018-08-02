@@ -18,6 +18,16 @@
     <?php
     }
     ?>
+    <?php if($this->session->flashdata('data_wali_hapus'))
+    {
+    ?>
+    <script>
+        alert("Wali Kelas Telah Dihapus");
+    </script>
+        
+    <?php
+    }
+    ?>
 <div class="col-md-12">
     <table class="table table-bordered">
         <tr><td width='200'>TAHUN AKADEMIK</td><td> : <?php echo get_tahun_akademik_aktif('tahun_akademik') ?></td></tr>
@@ -45,6 +55,7 @@
                         <th>KELAS</th>
                         <th>NAMA WALIKELAS</th>
                         <th>TAHUN AKADEMIK</th>
+                        <th></th>
                     </tr>
                 </thead>
             </table>
@@ -89,6 +100,7 @@
                 { "data": "kelas" },
                 { "data": "nama_guru" },
                 { "data": "tahun_akademik" },
+                { "data": "aksi","width": "100px","sClass": "text-center" },
                     
             ]
         } );
