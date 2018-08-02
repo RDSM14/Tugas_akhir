@@ -55,7 +55,7 @@ Class Jadwal extends CI_Controller{
                         <th>NO</th>
                         <th>MATA PELAJARAN</th>
                         <th>GURU</th>
-                        <th>RUANGAN</th>
+                        <th>RUANGAN ".get_tahun_akademik_aktif('id_tahun_akademik')."</th>
                         <th>HARI</th>
                         <th>JAM MULAI</th>
                         <th>JAM SELESAI</th>

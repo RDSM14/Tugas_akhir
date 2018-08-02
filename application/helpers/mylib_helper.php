@@ -16,6 +16,7 @@ function cmb_dinamis($name, $table, $field, $pk, $selected = null, $extra = null
 function get_tahun_akademik_aktif($field) {
     $ci = & get_instance();
     $ci->db->where('is_aktif', 'y');
+    $ci->db->where('id_sekolah', $_SESSION['id_sekolah']);
     $tahun = $ci->db->get('tbl_tahun_akademik')->row_array();
     return $tahun[$field];
 }

@@ -117,7 +117,7 @@
             data:'rombel='+rombel,
             success:function(html){
                 $("#tabel").html(html);
-               console.log(rombel);
+                console.log(rombel);
                 //loadRombel();
             }
         })
@@ -130,6 +130,7 @@
             url :'<?php echo base_url() ?>index.php/jadwal/updateGuru',
             data:'id_guru='+guru+'&id_jadwal='+id,
             success:function(html){
+                cosole.log(nisn);
                 loadData();
             }
         })
