@@ -121,9 +121,10 @@ Class Mapel extends CI_Controller {
             $this->template->load('template', 'mapel/add_komponen', $this->data);
         }
     }
-    function edit_komponen($id_komponen=NULL) {
+    function edit_komponen($id_komponen) {
         if (null !== $this->input->post('submit')) {
             $this->Model_mapel->ubah_komponen();
+            redirect('mapel');
         } else {
             $this->data['jenis_nilai'] =  $this->Model_mapel->komponen_jenis_nilai();
             $this->data['nilai_edit_komponen'] =  $this->Model_mapel->nilai_edit_komponen($id_komponen);

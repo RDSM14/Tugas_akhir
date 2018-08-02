@@ -57,6 +57,7 @@ CREATE TABLE `tbl_admin` (
 --
 
 INSERT INTO `tbl_admin` (`email`, `nama_lengkap`, `password`, `telepon_admin`, `id_sekolah`) VALUES
+('riefqayx@hotmail.com', 'Rifqi Dhiyaulhaq Sami Miru', '6c8dab289527fc0927aa7e6507898bdd', '085692288145', 5),
 ('riefqayx@yahoo.com', 'Rifqi Dhiyaulhaq Sami Miru', '6c8dab289527fc0927aa7e6507898bdd', '085692288145', 3),
 ('rifqi@gmail.com', 'Rifqi', '6c8dab289527fc0927aa7e6507898bdd', '081234567', 2),
 ('rifqi@mail.com', 'Rifqi Dhiyaulhaq Sami Miru', '6c8dab289527fc0927aa7e6507898bdd', '085692288145', 4),
@@ -155,6 +156,7 @@ INSERT INTO `tbl_guru` (`username`, `nuptk`, `nama_guru`, `gender`, `password`, 
 ('irma@yahoo.com', '345678910', 'irma muliana sst mpd', 'w', '3af4c9341e31bce1f4262a326285170d', 1),
 ('nuris@yahoo.com', '012345678910', 'nuris akbar mkom', 'p', '3af4c9341e31bce1f4262a326285170d', 1),
 ('riefqayx@email.com', '0312302130123021', 'Rifqi aja', 'p', '3af4c9341e31bce1f4262a326285170d', 4),
+('riefqayx@tumblr.com', '802321232131', 'Rifqi DSM', 'p', '9310f83135f238b04af729fec041cca8', 5),
 ('rifqi@email.com', '45678910', 'Rifqi', 'p', '3af4c9341e31bce1f4262a326285170d', 1),
 ('rifqi@mail.co.id', '123456789010101', 'Rifqi', 'p', '6c8dab289527fc0927aa7e6507898bdd', 4),
 ('udin@gmail.com', '2345678910', 'syamsuddin', 'p', '3af4c9341e31bce1f4262a326285170d', 1);
@@ -180,7 +182,11 @@ INSERT INTO `tbl_history_kelas` (`id_history`, `id_rombel`, `nisn`, `id_tahun_ak
 (7, 6, '456789011', 1),
 (8, 7, '2130123013', 1),
 (18, 6, '2130123013', 1),
-(19, 7, '987654321', 1);
+(19, 7, '987654321', 1),
+(20, 11, '0987654321', 11),
+(21, 11, '90987654321', 11),
+(22, 11, '9876543210', 11),
+(23, 11, '02132131231', 11);
 
 -- --------------------------------------------------------
 
@@ -210,7 +216,8 @@ INSERT INTO `tbl_jadwal` (`id_jadwal`, `id_tahun_akademik`, `id_mapel`, `usernam
 (13, 1, 5, 'rifqi@email.com', '08:00', '10:00', 2, 1, 'SELASA', 6, 1),
 (17, 1, 4, 'irma@yahoo.com', '10:00', '10:45', 4, 1, 'JUMAT', 7, 1),
 (21, 1, 3, 'udin@gmail.com', '11:00', '12:00', 4, 1, 'KAMIS', 6, 1),
-(22, 10, 8, 'rifqi@mail.co.id', '07:10', '10:10', 7, 1, 'SELASA', 8, 4);
+(22, 10, 8, 'rifqi@mail.co.id', '07:10', '10:10', 7, 1, 'SELASA', 8, 4),
+(26, 11, 9, 'riefqayx@tumblr.com', '07:10', '10:10', 8, 1, 'SENIN', 11, 5);
 
 -- --------------------------------------------------------
 
@@ -324,7 +331,8 @@ INSERT INTO `tbl_komponen_nilai` (`id_komponen`, `nama_komponen`, `id_jenis_nila
 (6, 'Ulangan Harian 1', 3, 4, 50),
 (7, 'Ulangan Harian 2', 3, 4, 50),
 (8, 'Ulangan Harian 1', 3, 3, 50),
-(9, 'Ulangan Harian 2', 3, 3, 50);
+(9, 'Ulangan Harian 2', 3, 3, 50),
+(10, 'Ulangan Tengah Semester', 3, 9, 100);
 
 -- --------------------------------------------------------
 
@@ -422,7 +430,8 @@ INSERT INTO `tbl_mapel` (`id_mapel`, `kd_mapel`, `nama_mapel`, `min_a`, `min_b`,
 (4, 'IPS', 'ILMU PENGETAHUAN SOSIAL', 3.25, 2.5, 2, 0, 1, 0),
 (5, 'MTK', 'MATEMATIKA', 3.25, 2.5, 2, 0, 1, 0),
 (6, 'TIK', 'TEKNOLOGI INFORMASI KOMPUTER', 3.25, 2.5, 2, 0, 1, 0),
-(8, 'BID', 'BAHASA INDONESIAS', 4, 3, 2, 1, 4, 0);
+(8, 'BID', 'BAHASA INDONESIAS', 4, 3, 2, 1, 4, 0),
+(9, 'TIK', 'Teknologi Informasi Komputer', 90, 80, 70, 60, 5, 0);
 
 -- --------------------------------------------------------
 
@@ -469,8 +478,12 @@ CREATE TABLE `tbl_orang_tua` (
 --
 
 INSERT INTO `tbl_orang_tua` (`nisn`, `nama_ayah`, `nama_ibu`, `password_orangtua`) VALUES
+('02132131231', 'AYAH', 'IBUK', '6c7965183d28e64754302e7764f4f12a'),
+('0987654321', 'AYAH', 'IBU', '6c7965183d28e64754302e7764f4f12a'),
 ('2130123013', 'Agus', 'Ani', '6c8dab289527fc0927aa7e6507898bdd'),
-('987654321', 'AYAH', 'IBU', '6c7965183d28e64754302e7764f4f12a');
+('90987654321', 'AYAHI', 'IBUK', '6c7965183d28e64754302e7764f4f12a'),
+('987654321', 'AYAH', 'IBU', '6c7965183d28e64754302e7764f4f12a'),
+('9876543210', 'AYAH', 'IBUK', '6c7965183d28e64754302e7764f4f12a');
 
 -- --------------------------------------------------------
 
@@ -536,7 +549,8 @@ INSERT INTO `tbl_rombel` (`id_rombel`, `nama_rombel`, `kelas`, `id_sekolah`) VAL
 (6, 'X IPA 1', 1, 1),
 (7, 'X IPS 1', 1, 1),
 (8, 'Kelas 5', 5, 4),
-(9, 'X IPA 2', 1, 1);
+(9, 'X IPA 2', 1, 1),
+(11, 'Kelas 1', 1, 5);
 
 -- --------------------------------------------------------
 
@@ -560,7 +574,8 @@ INSERT INTO `tbl_ruangan` (`kd_ruangan`, `nama_ruangan`, `id_ruangan`, `id_sekol
 ('01A', 'RUANGAN KELAS 1 A', 2, 1),
 ('01B', 'RUANGAN KELAS 1B', 3, 1),
 ('01C', 'RUANGAN KELAS 1 C', 4, 1),
-('010', 'Ruang 10', 7, 4);
+('010', 'Ruang 10', 7, 4),
+('009', 'Ruang 009 ', 8, 5);
 
 -- --------------------------------------------------------
 
@@ -591,7 +606,8 @@ INSERT INTO `tbl_sekolah_info` (`id_sekolah`, `nama_sekolah`, `id_jenjang_sekola
 (1, 'MA Ummul Qura', 2, 'Pondok Cabe', 'ummulquro@sch.id', '02134235', 4, 0, 3.25, 2.5, 2, 0),
 (2, 'MA Ummul Quro', 3, 'Pondok Cabe', 'ummulquro@sch.id', '081234567', 4, 0, 3.25, 3, 2.5, 0),
 (3, 'TKIT Ummul Quro', 4, 'Pondok Cabe', 'ummulquro@sch.id', '0217912345', 5, 0, 4, 3, 2.5, 0),
-(4, 'SD Al-Azhar', 1, 'Kebayoran', 'info@alazhar.com', '021', 5, 0, 3.5, 3, 2, 1);
+(4, 'SD Al-Azhar', 1, 'Kebayoran', 'info@alazhar.com', '021', 5, 0, 3.5, 3, 2, 1),
+(5, 'SDN 02', 1, '', '', '', 100, 0, 90, 80, 70, 60);
 
 -- --------------------------------------------------------
 
@@ -600,7 +616,7 @@ INSERT INTO `tbl_sekolah_info` (`id_sekolah`, `nama_sekolah`, `id_jenjang_sekola
 --
 
 CREATE TABLE `tbl_siswa` (
-  `nisn` varchar(10) NOT NULL,
+  `nisn` varchar(20) NOT NULL,
   `nim` varchar(20) NOT NULL,
   `nama` varchar(40) NOT NULL,
   `gender` enum('P','W') NOT NULL,
@@ -624,9 +640,12 @@ CREATE TABLE `tbl_siswa` (
 --
 
 INSERT INTO `tbl_siswa` (`nisn`, `nim`, `nama`, `gender`, `tanggal_lahir`, `tempat_lahir`, `kd_agama`, `foto`, `alamat_siswa`, `status_keluarga`, `telepon_siswa`, `asal_sekolah`, `kelas_terima`, `tanggal_terima`, `id_rombel`, `password`, `id_sekolah`) VALUES
+('02132131231', '02132131231', 'jwndjandjandjadn', 'P', '1991-09-09', 'wnendiwanin', '01', '', 'MAMPANG', 'Anak Kandung', '0832132131231', 'Jakarta', '11', '2018-08-02', 11, '7134589c845f4c405fc29e5746e9ad67', 5),
+('0987654321', '0987654321', 'Rifqi Dhiyaulhaq Sami Miru', 'P', '2005-03-10', 'Jakarta Selatan', '01', '', 'Jakarta', 'Anak Kandung', '085692288145', 'TK Nusantara', '11', '2018-08-02', 11, '3afa0d81296a4f17d477ec823261b1ec', 5),
 ('2130123013', '2130123013', 'Rifqi Dhiyaulhaq Sami Miru', 'P', '1999-02-05', 'Jakarta Selatan', '01', '', 'JAKARTA', 'Anak Kandung', '085692288145', 'SMPN 43', '6', '2018-07-02', 6, '6c8dab289527fc0927aa7e6507898bdd', 1),
 ('456789011', '456789011', 'JONO', 'P', '2017-02-18', 'BANDUNG', '01', 'Yaya_yah10.png', '', '', '', '', '', '0000-00-00', 6, '6c8dab289527fc0927aa7e6507898bdd', 1),
-('987654321', '987654321', 'Rifqi Dhiyaulhaq Sami Miru', 'P', '2018-08-08', 'Jakarta Selatan', '01', '', 'Jakarta', 'Anak Kandung', '085692288145', 'AL Azhar', '7', '2018-08-01', 7, '3afa0d81296a4f17d477ec823261b1ec', 1);
+('987654321', '987654321', 'Rifqi Dhiyaulhaq Sami Miru', 'P', '2018-08-08', 'Jakarta Selatan', '01', '', 'Jakarta', 'Anak Kandung', '085692288145', 'AL Azhar', '7', '2018-08-01', 7, '3afa0d81296a4f17d477ec823261b1ec', 1),
+('9876543210', '9876543210', 'Rifqi Dhiyaulhaq Sami Miru', 'P', '2014-05-13', 'Jakarta Selatan', '01', '', 'Jakarta', 'Anak Kandung', '085692288145', 'TARAKANISA', '11', '2013-01-02', 11, '6c8dab289527fc0927aa7e6507898bdd', 5);
 
 -- --------------------------------------------------------
 
@@ -672,7 +691,8 @@ INSERT INTO `tbl_tahun_akademik` (`id_tahun_akademik`, `tahun_akademik`, `is_akt
 (1, '2016/ 2017', 'y', 2, 1),
 (2, '2015/2016', 'n', 1, 1),
 (6, '2017/2018', 'n', 1, 1),
-(10, '2018/2019', 'y', 1, 4);
+(10, '2018/2019', 'y', 1, 4),
+(11, '2018/2018', 'y', 1, 5);
 
 -- --------------------------------------------------------
 
@@ -694,7 +714,8 @@ CREATE TABLE `tbl_tu` (
 --
 
 INSERT INTO `tbl_tu` (`username`, `nip`, `nama_lengkap`, `password`, `telepon_TU`, `id_sekolah`) VALUES
-('rifqi@gmail.com', '0123456789', 'rifqi', '6c8dab289527fc0927aa7e6507898bdd', '021234567', 1);
+('rifqi@gmail.com', '0123456789', 'rifqi', '6c8dab289527fc0927aa7e6507898bdd', '021234567', 1),
+('riefqayx@papa.kilo', '03213021031301', 'Rifqi Dhiyaulhaq Sami Miru', '3915dfc3258691a0ae8f7708a263c3bb', '08123456789', 5);
 
 -- --------------------------------------------------------
 
@@ -813,7 +834,9 @@ INSERT INTO `tbl_user_rule` (`id_rule`, `id_menu`, `id_level_user`, `id_sekolah`
 (122, 2, 3, 4),
 (123, 16, 6, 1),
 (124, 16, 7, 1),
-(125, 26, 5, 1);
+(125, 26, 5, 1),
+(132, 14, 4, 5),
+(133, 16, 4, 5);
 
 -- --------------------------------------------------------
 
@@ -1116,12 +1139,12 @@ ALTER TABLE `tbl_deskripsi_nilai`
 -- AUTO_INCREMENT for table `tbl_history_kelas`
 --
 ALTER TABLE `tbl_history_kelas`
-  MODIFY `id_history` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id_history` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 --
 -- AUTO_INCREMENT for table `tbl_jadwal`
 --
 ALTER TABLE `tbl_jadwal`
-  MODIFY `id_jadwal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id_jadwal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 --
 -- AUTO_INCREMENT for table `tbl_jenis_nilai`
 --
@@ -1146,7 +1169,7 @@ ALTER TABLE `tbl_kelompok_mapel`
 -- AUTO_INCREMENT for table `tbl_komponen_nilai`
 --
 ALTER TABLE `tbl_komponen_nilai`
-  MODIFY `id_komponen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_komponen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `tbl_kurikulum`
 --
@@ -1166,7 +1189,7 @@ ALTER TABLE `tbl_level_user`
 -- AUTO_INCREMENT for table `tbl_mapel`
 --
 ALTER TABLE `tbl_mapel`
-  MODIFY `id_mapel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_mapel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `tbl_nilai`
 --
@@ -1186,12 +1209,12 @@ ALTER TABLE `tbl_phonebook`
 -- AUTO_INCREMENT for table `tbl_rombel`
 --
 ALTER TABLE `tbl_rombel`
-  MODIFY `id_rombel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_rombel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `tbl_ruangan`
 --
 ALTER TABLE `tbl_ruangan`
-  MODIFY `id_ruangan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_ruangan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `tbl_sms_group`
 --
@@ -1201,7 +1224,7 @@ ALTER TABLE `tbl_sms_group`
 -- AUTO_INCREMENT for table `tbl_tahun_akademik`
 --
 ALTER TABLE `tbl_tahun_akademik`
-  MODIFY `id_tahun_akademik` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_tahun_akademik` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `tbl_user`
 --
@@ -1211,7 +1234,7 @@ ALTER TABLE `tbl_user`
 -- AUTO_INCREMENT for table `tbl_user_rule`
 --
 ALTER TABLE `tbl_user_rule`
-  MODIFY `id_rule` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=127;
+  MODIFY `id_rule` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=134;
 --
 -- AUTO_INCREMENT for table `tbl_walikelas`
 --

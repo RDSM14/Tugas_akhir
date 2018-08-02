@@ -34,12 +34,12 @@ class Model_siswa extends CI_Model {
         );
         $this->db->insert('tbl_orang_tua',$ortu);
         
-        $tahun_akademik = $this->db->get_where('tbl_tahun_akademik',array('is_aktif'=>'y'))->row_array();
+        //$tahun_akademik = $this->db->get_where('tbl_tahun_akademik',array('is_aktif'=>'y'))->row_array();
         
         $history =  array(
             
             'nisn'                => $this->input->post('nisn', TRUE),
-            'id_tahun_akademik'   =>  $tahun_akademik['id_tahun_akademik'],
+            'id_tahun_akademik'   =>  get_tahun_akademik_aktif('id_tahun_akademik'),
             'id_rombel'           =>  $this->input->post('rombel', TRUE)
             );
         $this->db->insert('tbl_history_kelas',$history);
@@ -53,13 +53,13 @@ class Model_siswa extends CI_Model {
         $query = $this->db->get();
         $result = $query->row();
         $id_rombel = $result->id_rombel;
-        $tahun_akademik = $this->db->get_where('tbl_tahun_akademik',array('is_aktif'=>'y'))->row_array();
+        //$tahun_akademik = $this->db->get_where('tbl_tahun_akademik',array('is_aktif'=>'y'))->row_array();
         if ($this->input->post('rombel',TRUE)!=$id_rombel){
             //echo $id_rombel;
             $history =  array(
             
                 'nisn'                =>  $this->input->post('nisn', TRUE),
-                'id_tahun_akademik'   =>  $tahun_akademik['id_tahun_akademik'],
+                'id_tahun_akademik'   =>  get_tahun_akademik_aktif('id_tahun_akademik'),
                 'id_rombel'           =>  $this->input->post('rombel', TRUE)
             );
             $this->db->insert('tbl_history_kelas',$history);

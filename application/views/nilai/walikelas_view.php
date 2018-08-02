@@ -27,7 +27,7 @@
                 foreach ($jadwal_siswa->result() as $row){
                     echo "<tr>
                         <td>$no</td>
-                        <td>KELAS $row->nisn</td>
+                        <td>$row->nisn</td>
                         <td>$row->nim</td>
                         <td>$row->nama</td>
                         <td>$row->alamat_siswa</td>
