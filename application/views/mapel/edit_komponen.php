@@ -1,7 +1,7 @@
 <div class="col-sm-12">
     <!-- start: TEXT FIELDS PANEL -->
     <div class="panel panel-default">
-        <div class="panel-heading">Tambah Data Komponen Nilai
+        <div class="panel-heading">Edit Data Komponen Nilai
         </div>
         <div class="panel-body">
             <?php foreach ($nilai_edit_komponen as $nilai_edit_komponen)

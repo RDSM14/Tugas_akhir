@@ -29,9 +29,10 @@
       <?php   
     }
     ?>
+    <?php echo anchor('tahunakademik/add','Input Data Baru',array('class'=>'btn btn-danger btn-sm'))?>
     <div class="panel panel-default">
         <div class="panel-heading">
-            <i class="fa fa-external-link-square"></i> Dynamic Table
+            <i class="fa fa-external-link-square"></i> Data Tahun Akademik
             <div class="panel-tools">
                 <?php echo anchor('tahunakademik/add','<i class="fa fa-pencil-square-o" aria-hidden="true"></i>',"title='Tambah Data'");?>
                 <a class="btn btn-xs btn-link panel-collapse collapses" href="#"> </a>

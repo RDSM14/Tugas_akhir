@@ -72,7 +72,7 @@ class Auth extends CI_Controller {
                     'id_sekolah'    =>  $loginGuru['id_sekolah']);
                 $this->session->set_userdata($session);
                 $this->session->set_flashdata('message_name', 'This is my message');
-                redirect('jadwal');
+                redirect('sekolah');
             }/* elseif (!empty($loginSiswa)) {
                 $session = array(
                     'nama_lengkap'  =>  $loginSiswa['nama'],
@@ -134,7 +134,7 @@ class Auth extends CI_Controller {
                     'id_sekolah'    =>  $loginSiswa['id_sekolah']);
                 $this->session->set_userdata($session);
                 $this->session->set_flashdata('message_name', 'This is my message');
-                redirect('jadwal');
+                redirect('sekolah');
             } 
             else {
                 // gagal login
@@ -168,7 +168,7 @@ class Auth extends CI_Controller {
                     'id_sekolah'    =>  $loginOrtu['id_sekolah']);
                 $this->session->set_userdata($session);
                 $this->session->set_flashdata('message_name', 'This is my message');
-                redirect('jadwal');
+                redirect('sekolah');
             }
             else {
                 // gagal login

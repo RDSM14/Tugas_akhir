@@ -6,7 +6,7 @@
 <div class="col-sm-12">
     <!-- start: TEXT FIELDS PANEL -->
     <div class="panel panel-default">
-        <div class="panel-heading">Tambah Data Jadwal Pelajaran
+        <div class="panel-heading">Edit Data Wali Kelas
         </div>
         <div class="panel-body">
 

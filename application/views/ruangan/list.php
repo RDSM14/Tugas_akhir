@@ -29,9 +29,11 @@
       <?php   
     }
     ?>
+
+    <?php echo anchor('ruangan/add','Input Data Baru',array('class'=>'btn btn-danger btn-sm'))?>
     <div class="panel panel-default">
         <div class="panel-heading">
-            <i class="fa fa-external-link-square"></i> Dynamic Table
+            <i class="fa fa-external-link-square"></i> Data Ruangan Kelas
             <div class="panel-tools">
                 <?php echo anchor('ruangan/add','<i class="fa fa-pencil-square-o" aria-hidden="true"></i>',"title='Dambah Data'");?>
                 <a class="btn btn-xs btn-link panel-collapse collapses" href="#"> </a>

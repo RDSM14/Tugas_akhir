@@ -45,8 +45,8 @@
             <?php
             echo form_open('auth/agreed', 'role="form" class="form-horizontal"');
             ?>
-            <input type="hidden" name="username" value = "<?php echo $this->uri->segment(3);?>"id="form-field-1" class="form-control">
-            <input type="hidden" name="level_user" value = "<?php echo $this->uri->segment(4);?>"id="form-field-1" class="form-control">
+            <input type="hidden" name="username" value = "<?php echo $_SESSION['username'];?>"id="form-field-1" class="form-control">
+            <input type="hidden" name="level_user" value = "<?php echo $_SESSION['id_level_user'];?>"id="form-field-1" class="form-control">
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="form-field-1">
                     MASUKKAN PASSWORD LAMA ANDA
@@ -78,7 +78,7 @@
             <div class="form-group">
                 <div class="col-sm-5">
                     <input type="submit"  value="Submit" >
-                    <input type="button" value="Kembali" onclick="history.back(-1)" >
+                    
                 </div>
             </div>
             </form>

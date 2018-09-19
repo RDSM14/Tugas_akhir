@@ -3,7 +3,7 @@
         
         
         
-        <?php if($this->session->flashdata('data_sekolah_masuk'))
+    <?php if($this->session->flashdata('data_sekolah_masuk'))
     {
     ?>
     <script>
@@ -18,24 +18,17 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             <i class="fa fa-external-link-square"></i>
-            Text Fields
+            Info Sekolah
             <div class="panel-tools">
                 <a class="btn btn-xs btn-link panel-collapse collapses" href="#">
                 </a>
-                <a class="btn btn-xs btn-link panel-config" href="#panel-config" data-toggle="modal">
-                    <i class="fa fa-wrench"></i>
-                </a>
-                <a class="btn btn-xs btn-link panel-refresh" href="#">
-                    <i class="fa fa-refresh"></i>
-                </a>
                 <a class="btn btn-xs btn-link panel-expand" href="#">
-                    <i class="fa fa-resize-full"></i>
-                </a>
-                <a class="btn btn-xs btn-link panel-close" href="#">
-                    <i class="fa fa-times"></i>
+                    <i class="fa fa-search"></i>
                 </a>
             </div>
         </div>
+        <!--untuk admin dan TU -->
+        <?php if($this->session->userdata('id_level_user')==2 || $this->session->userdata('id_level_user')==3){ ?>
         <div class="panel-body">
 
             <?php
@@ -121,6 +114,62 @@
             </div>
             </form>
         </div>
+        <?php }else{ ?>
+        <!--untuk admin dan TU -->
+        
+        <!--untuk SELAIN admin dan TU -->
+        <div class="panel-body">
+            <table style="margin-left:150px; font-family: cursive; ">
+                <tr>
+                    <td style="padding :25px; font-size:xx-large;">Nama Sekolah </td>
+                    <td style="padding :25px; font-size:xx-large;">:</td>
+                    <td style="padding :25px; font-size:xx-large;"><?php echo $info['nama_sekolah'];?></td>
+                </tr>
+                <tr>
+                    <td style="padding :25px; font-size:xx-large;">Alamat Sekolah </td>
+                    <td style="padding :25px; font-size:xx-large;">:</td>
+                    <td style="padding :25px; font-size:xx-large;"><?php echo $info['alamat_sekolah'];?></td>
+                </tr>
+                <tr>
+                    <td style="padding :25px; font-size:xx-large;">E-Mail Sekolah </td>
+                    <td style="padding :25px; font-size:xx-large;">:</td>
+                    <td style="padding :25px; font-size:xx-large;"><?php echo $info['email'];?></td>
+                </tr>
+                <tr>
+                    <td style="padding :25px; font-size:xx-large;">Telepon Sekolah </td>
+                    <td style="padding :25px; font-size:xx-large;">:</td>
+                    <td style="padding :25px; font-size:xx-large;"><?php echo $info['telpon'];?></td>
+                </tr>
+                <tr>
+                    <td style="padding :25px; font-size:xx-large;">Jenjang Sekolah </td>
+                    <td style="padding :25px; font-size:xx-large;">:</td>
+                    <td style="padding :25px; font-size:xx-large;">
+                        <?php $id_jenjang = $info['id_jenjang_sekolah'];
+                        //        echo $info['id_jenjang_sekolah'];
+                                switch ($id_jenjang){
+                                    case "1":
+                                        echo "Sekolah Dasar / Madrasah Ibtidayah (SD/MI)";
+                                        break;
+                                    case "2":
+                                        echo "Sekolah Menengah Pertama / Madrasah Tsanawiyah (SMP/MTs)";
+                                        break;
+                                    case "3":
+                                        echo "Sekolah Menengah Atas / Sekolah Menengah Kejuruan / Madrasah Aliyah (SMA/SMK/MA)";
+                                        break;
+                                    case "4":
+                                        echo "Taman Kanak-Kanak (TK)";
+                                        break;
+                                    
+                                }
+                        
+                        ?>
+                    </td>
+                </tr>
+               
+            </table>
+        </div>
+        <?php } ?>
+        <!--untuk SELAIN admin dan TU -->
     </div>
     <!-- end: TEXT FIELDS PANEL -->
 </div>

@@ -1,7 +1,3 @@
-<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>/template/font-awesome/clocklib/assets/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>/template/font-awesome/clocklib/dist/bootstrap-clockpicker.min.css">
-<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>/template/font-awesome/clocklib/assets/css/github.min.css">
-<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>/template/font-awesome/clocklib/assets/css/clock.css">
 
     <?php if($this->session->flashdata('data_jadwal_masuk'))
     {

@@ -40,7 +40,7 @@
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            <i class="fa fa-external-link-square"></i> Dynamic Table
+            <i class="fa fa-external-link-square"></i> Data Wali Kelas
             <div class="panel-tools">
                 <?php echo anchor('walikelas/add', '<i class="fa fa-pencil-square-o" aria-hidden="true"></i>', "title='Tambah Data'"); ?>
                 <a class="btn btn-xs btn-link panel-expand" href="#"> <i class="fa fa-search"></i> </a>

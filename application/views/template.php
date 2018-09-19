@@ -379,7 +379,7 @@
                             <ul class="dropdown-menu">
                                 <li>
                                     <?php
-                                    echo anchor('auth/password/'.$_SESSION['username'].'/'.$_SESSION['id_level_user'], '<i class="fa fa-key" aria-hidden="true"></i> &nbsp;Password');
+                                    echo anchor('auth/password', '<i class="fa fa-key" aria-hidden="true"></i> &nbsp;Password');
                                     ?>
                                 </li>
                                 <li>

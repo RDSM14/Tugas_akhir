@@ -94,7 +94,7 @@ class Model_jadwal extends CI_Model{
     function pilih_jadwal($id)
     {
        
-        $this->db->select("jd.id_jadwal,jd.id_tahun_akademik,jd.kelas,jd.id_mapel as id_mapel,jd.username_guru,jd.jam_mulai,jd.jam_selesai,jd.id_ruangan,jd.semester,jd.hari,jd.id_rombel");
+        $this->db->select("jd.id_jadwal,jd.id_tahun_akademik,jd.id_mapel as id_mapel,jd.username_guru,jd.jam_mulai,jd.jam_selesai,jd.id_ruangan,jd.semester,jd.hari,jd.id_rombel");
         $this->db->from("tbl_jadwal jd");
         $this->db->where("id_jadwal", $id);
         

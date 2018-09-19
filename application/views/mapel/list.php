@@ -61,12 +61,13 @@
     <?php
     }
     ?>
-
+    
+    <?php echo anchor('mapel/add','Input Data Baru',array('class'=>'btn btn-danger btn-sm'))?>
     <div class="panel panel-default">
         <div class="panel-heading">
             <i class="fa fa-external-link-square"></i> Data Mata Pelajaran
             <div class="panel-tools">
-                <?php echo anchor('mapel/add','<i class="fa fa-pencil-square-o" aria-hidden="true"></i>',"title='Dambah Data'");?>
+                <?php echo anchor('mapel/add','<i class="fa fa-pencil-square-o" aria-hidden="true"></i>',"title='Tambah Data'");?>
                 <a class="btn btn-xs btn-link panel-collapse collapses" href="#"> </a>
                 <a class="btn btn-xs btn-link panel-expand" href="#"> <i class="fa fa-search"></i> </a>
             </div>
