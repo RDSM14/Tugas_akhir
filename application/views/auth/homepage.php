@@ -4,7 +4,7 @@
     {
     ?>
     <script>
-        alert("Data Anda Telah Tersimpan");
+        alert("Data Anda Telah Tersimpan, Verifikasi Email Telah Dikirim untuk Mengaktifkan Akun Anda");
     </script>
         
     <?php
@@ -665,7 +665,7 @@ $(document).ready(function() {
       			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				<img src="<?php echo base_url();?>template/font-awesome/images/logo_putih.png" alt="" class="center-block logo_gadjian">
       		</div>
-      		<div class="modal-daftar">
+      		<div class="modal-daftar" style="top:-60px;">
       			<!-- Tab panes -->
 				  	<div class="tab-content margin_tabContent">
 					    <div role="tabpanel" class="tab-pane active" id="masuk_user">

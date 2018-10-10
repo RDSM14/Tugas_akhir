@@ -5798,10 +5798,10 @@ button.close {
 }
 .modal-daftar {
     position: relative;
-    padding: 10px;
-    max-height: 400px;
+    
+    max-height: 550px;
     max-width: 440px;
-    overflow-y: scroll;
+    overflow-y: -webkit-paged-y;
 }
 
 .modal-footer {

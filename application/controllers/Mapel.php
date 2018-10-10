@@ -17,7 +17,7 @@ Class Mapel extends CI_Controller {
         // nama tabel
         $table = 'tbl_mapel';
         // nama PK
-        $primaryKey = 'kd_mapel';
+        $primaryKey = 'id_mapel';
         // list field
         $columns = array(
             array('db' => 'id_mapel', 'dt' => 'id_mapel'),
@@ -52,7 +52,19 @@ Class Mapel extends CI_Controller {
     }
 
     function index() {
-        $this->template->load('template', 'mapel/list');
+        if($this->session->userdata('id_level_user')==4 || $this->session->userdata('id_level_user')==5){
+            // load daftar ngajar guru
+            $username = $this->session->userdata('username');
+            $id_sekolah = $this->session->userdata('id_sekolah');
+            $sql = "SELECT tbl_mapel.id_mapel,kd_mapel,min_a,min_b,min_c,min_d,nama_mapel
+                    FROM tbl_mapel,tbl_jadwal
+                    WHERE tbl_jadwal.username_guru='$username' AND tbl_jadwal.id_sekolah='$id_sekolah' AND tbl_mapel.id_mapel=tbl_jadwal.id_mapel";
+            $data['mapel'] = $this->db->query($sql); 
+            $this->template->load('template','mapel/mapel_guru',$data);
+        }else
+        {
+            $this->template->load('template', 'mapel/list');
+        }
     }
 
     function add() {

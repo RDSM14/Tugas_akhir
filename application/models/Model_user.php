@@ -4,6 +4,7 @@ class Model_user extends CI_Model{
     function chekLoginadmin($username,$password){
         $this->db->where('email',$username);
         $this->db->where('password',  md5($password));
+        $this->db->where('status',  '1');
         $user = $this->db->get('tbl_admin')->row_array();
         return $user;
     }
@@ -55,7 +56,8 @@ class Model_user extends CI_Model{
             'nama_lengkap'  => $this->input->post('nama_lengkap', TRUE),
             'telepon_admin'     => $this->input->post('no_hp', TRUE),
             'id_sekolah' => $id,
-            'password'   => md5($this->input->post('password', TRUE))
+            'password'   => md5($this->input->post('password', TRUE)),
+            'activation' => md5($this->input->post('email', TRUE)),
         );
         $this->db->insert('tbl_admin',$data);
         
