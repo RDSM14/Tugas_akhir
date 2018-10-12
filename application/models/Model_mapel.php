@@ -12,6 +12,14 @@ class Model_mapel extends CI_Model {
             'min_b'         => $this->input->post('min_b', TRUE),
             'min_c'         => $this->input->post('min_c', TRUE),
             'min_d'         => $this->input->post('min_d', TRUE),
+            'min_a+'                 => $this->input->post('min_aplus', TRUE),
+            'min_b+'                 => $this->input->post('min_bplus', TRUE),
+            'min_c+'                 => $this->input->post('min_cplus', TRUE),
+            'min_d+'                 => $this->input->post('min_dplus', TRUE),
+            'min_a-'                 => $this->input->post('min_amin', TRUE),
+            'min_b-'                 => $this->input->post('min_bmin', TRUE),
+            'min_c-'                 => $this->input->post('min_cmin', TRUE),
+            'min_d-'                 => $this->input->post('min_dmin', TRUE),
             'id_sekolah'    => $_SESSION['id_sekolah']
             
         );
@@ -26,6 +34,14 @@ class Model_mapel extends CI_Model {
             'min_b'         => $this->input->post('min_b', TRUE),
             'min_c'         => $this->input->post('min_c', TRUE),
             'min_d'         => $this->input->post('min_d', TRUE),
+            'min_a+'                 => $this->input->post('min_aplus', TRUE),
+            'min_b+'                 => $this->input->post('min_bplus', TRUE),
+            'min_c+'                 => $this->input->post('min_cplus', TRUE),
+            'min_d+'                 => $this->input->post('min_dplus', TRUE),
+            'min_a-'                 => $this->input->post('min_amin', TRUE),
+            'min_b-'                 => $this->input->post('min_bmin', TRUE),
+            'min_c-'                 => $this->input->post('min_cmin', TRUE),
+            'min_d-'                 => $this->input->post('min_dmin', TRUE),
             'id_sekolah'    => $_SESSION['id_sekolah']            
         );
         $id_mapel   = $this->input->post('id_mapel');

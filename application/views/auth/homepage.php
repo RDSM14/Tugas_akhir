@@ -4,7 +4,7 @@
     {
     ?>
     <script>
-        alert("Data Anda Telah Tersimpan, Verifikasi Email Telah Dikirim untuk Mengaktifkan Akun Anda");
+        alert("Registration successful, please activate email.");
     </script>
         
     <?php
@@ -14,7 +14,27 @@
     {
     ?>
     <script>
-        alert("Data Anda Gagal Tersimpan");
+        alert("Registration Failed");
+    </script>
+        
+    <?php
+    }
+    ?>
+    <?php if($this->session->flashdata('data_email_masuk'))
+    {
+    ?>
+    <script>
+        alert("Your New Password Has been sent to your email");
+    </script>
+        
+    <?php
+    }
+    ?>
+    <?php if($this->session->flashdata('data_email_gagal'))
+    {
+    ?>
+    <script>
+        alert("Email Doesn't Existed");
     </script>
         
     <?php
@@ -408,6 +428,10 @@ $(document).ready(function() {
     $('.btn-daftar').on('click', function(){
     	$('#modal_daftar').modal('show')
     });
+    
+    $('.btn-reset').on('click', function(){
+    	$('#modal_reset').modal('show')
+    });
 
 
 });
@@ -488,8 +512,8 @@ $(document).ready(function() {
 					              		</div>
 					              	</div>
 				              		<div class="row">
-				        				<div class="col-xs-12">
-						        			<a href="https://user.gadjian.com/forgetpass">
+				        				<div class="col-xs-12 ">
+						        			<a class ="btn-reset " href="#">
 						        				<span class="pull-right">Lupa password												</span>
 						        			</a>
 				        				</div>
@@ -688,7 +712,7 @@ $(document).ready(function() {
 									  		<i class="fa fa-user"></i>
 									  	</span>
 									  	<!-- pattern="^[a-zA-Z1-9\' \-.]+$"  -->
-										 <input name="nama_lengkap" pattern="^[A-Za-z\' \-.]+$" data-validation-pattern-message="<i>&#xf071;</i> Maaf, karakter yang Anda masukkan tidak valid " placeholder="Nama lengkap" required data-validation-required-message="<i>&#xf071;</i> Tolong isi kotak di atas" type="text" class="form-control">
+										 <input name="nama_lengkap" pattern="^[A-Za-z\' \-.]+$" data-validation-pattern-message=" Maaf, karakter yang Anda masukkan tidak valid " placeholder="Nama lengkap" required data-validation-required-message=" Tolong isi kotak di atas" type="text" class="form-control">
 									</div>
 									<p class="help-block text-right"></p>
 								</div>
@@ -703,7 +727,7 @@ $(document).ready(function() {
 									  	<span class="input-group-addon" id="basic-addon1">
 									  		<i class="fa fa-envelope"></i>
 									  	</span>
-									  	<input name="email" type="email" autocomplete="off" class="form-control" id="email" placeholder="Email" aria-describedby="basic-addon1" required data-validation-required-message="<i>&#xf071;</i> Tolong isi kotak di atas" data-validation-ajax-ajax="https://user.gadjian.com/cek-email/" data-validation-ajax-message="" data-validation-email-message="<i>&#xf071;</i> Alamat email tidak valid">
+									  	<input name="email" type="email" autocomplete="off" class="form-control" id="email" placeholder="Email" aria-describedby="basic-addon1" required data-validation-required-message=" Tolong isi kotak di atas" data-validation-ajax-ajax="https://user.gadjian.com/cek-email/" data-validation-ajax-message="" data-validation-email-message=" Alamat email tidak valid">
 									</div>
 									<p class="help-block text-right"></p>
 								</div>
@@ -717,7 +741,7 @@ $(document).ready(function() {
 									  	<span class="input-group-addon" id="basic-addon1">
 									  		<i class="fa fa-key"></i>
 									  	</span>
-									  	<input type="password" class="form-control" autocomplete="off" name="password" id="password" placeholder="Password" aria-describedby="basic-addon1" minlength="6" required data-validation-required-message="<i>&#xf071;</i> Tolong isi kotak di atas" data-validation-minlength-message="<i>&#xf071;</i> Terlalu pendek: Minimal '6' karakter">
+									  	<input type="password" class="form-control" autocomplete="off" name="password" id="password" placeholder="Password" aria-describedby="basic-addon1" minlength="6" required data-validation-required-message=" Tolong isi kotak di atas" data-validation-minlength-message=" Terlalu pendek: Minimal '6' karakter">
 									</div>
 									<p class="help-block text-right"></p>
 								</div>
@@ -731,7 +755,7 @@ $(document).ready(function() {
 									  	<span class="input-group-addon" id="basic-addon1">
 									  		<i class="fa fa-key"></i>
 									  	</span>
-									  	<input name="password_confirm" type="password" class="form-control" id="confirm_password" placeholder="Confirm password" aria-describedby="basic-addon1" data-validation-match-match="password" data-validation-match-message="<i>&#xf071;</i> Kedua password harus sama" required data-validation-required-message="<i>&#xf071;</i> Tolong isi kotak di atas">
+									  	<input name="password_confirm" type="password" class="form-control" id="confirm_password" placeholder="Confirm password" aria-describedby="basic-addon1" data-validation-match-match="password" data-validation-match-message=" Kedua password harus sama" required data-validation-required-message=" Tolong isi kotak di atas">
 									</div>
 									<p class="help-block text-right"></p>
 								</div>
@@ -745,9 +769,9 @@ $(document).ready(function() {
 									  	<span class="input-group-addon" id="basic-addon1">
 									  		<i class="fa fa-building"></i>
 									  	</span>
-									  	<input name="school_name"  type="text" class="form-control" id="school_name" pattern="^[a-zA-Z].*" minlength="3" placeholder="Nama Sekolah" aria-describedby="basic-addon1" required data-validation-required-message="<i>&#xf071;</i> Tolong isi kotak di atas"
-								data-validation-minlength-message="<i>&#xf071;</i> Terlalu pendek: Minimal '3' karakter"
-								data-validation-pattern-message="<i>&#xf071;</i> Karakter pertama harus huruf">
+									  	<input name="school_name"  type="text" class="form-control" id="school_name" pattern="^[a-zA-Z].*" minlength="3" placeholder="Nama Sekolah" aria-describedby="basic-addon1" required data-validation-required-message=" Tolong isi kotak di atas"
+								data-validation-minlength-message=" Terlalu pendek: Minimal '3' karakter"
+								data-validation-pattern-message=" Karakter pertama harus huruf">
 									</div>
 									<p class="help-block text-right"></p>
 								</div>
@@ -780,7 +804,7 @@ $(document).ready(function() {
 										<span class="input-group-addon" id="basic-addon1">
 									  		+<span class="kodeNegara">62</span>
 									  	</span>
-									  	<input name="no_hp" type="text" class="form-control hanyaAngka" id="no_tlp2" pattern="^[0-9]*$" data-validation-pattern-message="Maaf, karakter yang Anda masukkan tidak valid" placeholder="No. Handphone									  	" required data-validation-required-message="<i>&#xf071;</i> Tolong isi kotak di atas" aria-describedby="basic-addon1">
+									  	<input name="no_hp" type="text" class="form-control hanyaAngka" id="no_tlp2" pattern="^[0-9]*$" data-validation-pattern-message="Maaf, karakter yang Anda masukkan tidak valid" placeholder="No. Handphone									  	" required data-validation-required-message=" Tolong isi kotak di atas" aria-describedby="basic-addon1">
 									</div>
 									<p class="help-block text-right"></p>
 								</div>
@@ -792,6 +816,56 @@ $(document).ready(function() {
 							<div class="col-md-2 col-md-offset-5 col-sm-4 col-sm-offset-4 col-xs-6 col-xs-offset-3">
 								<button type="submit" name="submit" class="btn btn-warning btn-block btn-gadjian">
 									Buat akun								</button>
+							</div>
+						</div>
+					<!-- End The Second Part of The Form -->
+				</form>
+					    </div>
+				  	</div>
+				</div>
+      		</div>
+      	</div><!-- end modal-content -->
+    </div><!-- end modal-dialog modal-md -->
+
+<div class="modal log_in" role="dialog" aria-labelledby="gridSystemModalLabel" aria-hidden="true" id="modal_reset">
+    <div class="modal-dialog modal-md">
+      	<div class="modal-content">
+      		<div class="modal-header">
+      			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<img src="<?php echo base_url();?>template/font-awesome/images/logo_putih.png" alt="" class="center-block logo_gadjian">
+      		</div>
+      		<div class="modal-daftar" style="top:-60px;">
+      			<!-- Tab panes -->
+				  	<div class="tab-content margin_tabContent">
+					    <div role="tabpanel" class="tab-pane active" id="masuk_user">
+					    	
+                            <form method="post" action="<?php echo base_url();?>index.php/auth/forgot_password" autocomplete="off" novalidate class="form_daftar">
+
+										
+					<!-- Start The First Part of The Form -->
+						<div class="daftar">
+							<div class="col-sm-8 col-sm-offset-2 text-center">
+								<h4>RESET YOUR PASSWORD
+														</h4>
+                            </div>
+						</div>
+                            <div class="daftar">
+							<div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+								<div class="form-group">
+									<div class="input-group">
+									  	<span class="input-group-addon" id="basic-addon1">
+									  		<i class="fa fa-envelope"></i>
+									  	</span>
+									  	<input name="email" type="email" autocomplete="off" class="form-control" id="email" placeholder="Email" aria-describedby="basic-addon1" required data-validation-required-message=" Tolong isi kotak di atas" data-validation-ajax-message="" data-validation-email-message=" Alamat email tidak valid">
+									</div>
+									<p class="help-block text-right"></p>
+								</div>
+							</div>
+						</div>
+						<div class="daftar">
+							<div class="col-md-2 col-md-offset-5 col-sm-4 col-sm-offset-4 col-xs-6 col-xs-offset-3">
+								<button type="submit" name="submit" class="btn btn-warning btn-block btn-gadjian">
+									Kirim Email								</button>
 							</div>
 						</div>
 					<!-- End The Second Part of The Form -->

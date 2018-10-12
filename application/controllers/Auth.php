@@ -189,6 +189,34 @@ class Auth extends CI_Controller {
     function password(){
             $this->template->load('template', 'password/ganti');
     }
+    
+    function forgot_password() {
+        if (isset($_POST['submit'])) {
+            // Verifikasi Akun
+            //CEKEMAILDULUADAAPANGGAK??????????????????????????????????
+            $email=$_POST['email']; 
+            $regex = '/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/';
+            
+            $emailAdmin     = $this->Model_user->chekemailadmin($email);
+            if (!empty($emailAdmin)) {
+                if(preg_match($regex, $email))
+                {  
+                    $activation=md5($email); // Encrypted email+timestamp md5
+                    include 'smtp/Send_Mail.php';
+                    $to=$email;
+                    $subject="Reset Password";
+                    $body='Hi, <br/> <br/> Click Link Below if You Want to Reset Your Password <br/> <br/> <a href="'.base_url().'template/password/'.$activation.'">'.base_url().'template/password/'.$activation.'</a>';
+                    Send_Mail($to,$subject,$body);
+                       // .$base_url.
+                    $this->session->set_flashdata('data_email_masuk', 'Data Telah Masuk');
+                    redirect('auth');
+                    //$msg= "Registration successful, please activate email.";	
+                }
+            }
+            $this->session->set_flashdata('data_email_gagal', 'Data Telah Masuk');
+            redirect('auth');
+        }
+    }
         
     function agreed(){ 
             $username            = $this->input->post('username',TRUE);

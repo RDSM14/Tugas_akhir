@@ -8,6 +8,12 @@ class Model_user extends CI_Model{
         $user = $this->db->get('tbl_admin')->row_array();
         return $user;
     }
+    
+    function chekemailadmin($email){
+        $this->db->where('email',$email);
+        $user = $this->db->get('tbl_admin')->row_array();
+        return $user;
+    }
     function chekadmin($username,$password){
         $this->db->where('email',$username);
         $this->db->where('password',  md5($password));

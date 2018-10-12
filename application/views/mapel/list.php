@@ -79,10 +79,18 @@
                         <th>NO</th>
                         <th>KODE MAPEL</th>
                         <th>NAMA MATA PELAJARAN</th>
-                        <th>NILAI MINIMUM A</th>
-                        <th>NILAI MINIMUM B</th>
-                        <th>NILAI MINIMUM C</th>
-                        <th>NILAI MINIMUM D</th>
+                        <th>NILAI A+</th>
+                        <th>NILAI A</th>
+                        <th>NILAI A-</th>
+                        <th>NILAI B+</th>
+                        <th>NILAI B</th>
+                        <th>NILAI B-</th>
+                        <th>NILAI C+</th>
+                        <th>NILAI C</th>
+                        <th>NILAI C-</th>
+                        <th>NILAI D+</th>
+                        <th>NILAI D</th>
+                        <th>NILAI D-</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -114,10 +122,18 @@
                         "sClass": "text-center"
                     },
                     { "data": "nama_mapel" },
+                    { "data": "min_a+" },
                     { "data": "min_a" },
+                    { "data": "min_a-" },
+                    { "data": "min_b+" },
                     { "data": "min_b" },
+                    { "data": "min_b-" },
+                    { "data": "min_c+" },
                     { "data": "min_c" },
+                    { "data": "min_c-" },
+                    { "data": "min_d+" },
                     { "data": "min_d" },
+                    { "data": "min_d-" },
                     { "data": "aksi","width": "100px" },
                 ]
             } );
