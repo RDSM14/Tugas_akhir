@@ -89,14 +89,14 @@
                 </label>
                 
                 <div class="col-sm-2">
-                    Nilai Minimum A+ :<input type="text" value="<?php echo $info['min_a+'];?>" name="min_aplus" placeholder="nilai terendah dari A+" id="min_aplus" class="form-control"><label class="min_aplus_message" style="color:red">Nilai A+ Harus Lebih Besar dari A</label>
+                    Nilai Minimum A+ :<input type="text" value="<?php echo $info['min_aplus'];?>" name="min_aplus" placeholder="nilai terendah dari A+" id="min_aplus" class="form-control"><label class="min_aplus_message" style="color:red">Nilai A+ Harus Lebih Besar dari A</label>
                 </div>
                 <div class="col-sm-2">
                     Nilai Minimum A:<input type="text" value="<?php echo $info['min_a'];?>" name="min_a" placeholder="nilai terendah dari A" id="min_a" class="form-control"><label class="min_a_message" style="color:red">Nilai A Harus Lebih Besar dari A-</label>
                 </div>
                 
                 <div class="col-sm-2">
-                    Nilai Minimum A- :<input type="text" value="<?php echo $info['min_a-'];?>" name="min_amin" placeholder="nilai terendah dari A-" id="min_amin" class="form-control"><label class="min_amin_message" style="color:red">Nilai A- Harus Lebih Besar dari B+</label>
+                    Nilai Minimum A- :<input type="text" value="<?php echo $info['min_amin'];?>" name="min_amin" placeholder="nilai terendah dari A-" id="min_amin" class="form-control"><label class="min_amin_message" style="color:red">Nilai A- Harus Lebih Besar dari B+</label>
                 </div>
                 
             </div>
@@ -104,13 +104,13 @@
                 <label class="col-sm-2 control-label" for="form-field-1">
                 </label>
                 <div class="col-sm-2">
-                    Nilai Minimum B +:<input type="text" value="<?php echo $info['min_b+'];?>" name="min_bplus" placeholder="nilai terendah dari B+" id="min_bplus" class="form-control"><label class="min_bplus_message" style="color:red">Nilai B+ Harus Lebih Besar dari B</label>
+                    Nilai Minimum B +:<input type="text" value="<?php echo $info['min_bplus'];?>" name="min_bplus" placeholder="nilai terendah dari B+" id="min_bplus" class="form-control"><label class="min_bplus_message" style="color:red">Nilai B+ Harus Lebih Besar dari B</label>
                 </div>
                 <div class="col-sm-2">
                     Nilai Minimum B:<input type="text" value="<?php echo $info['min_b'];?>" name="min_b" placeholder="nilai terendah dari B" id="min_b" class="form-control"><label class="min_b_message" style="color:red">Nilai B Harus Lebih Besar dari B-</label>
                 </div>
                 <div class="col-sm-2">
-                    Nilai Minimum B -:<input type="text" value="<?php echo $info['min_b-'];?>" name="min_bmin" placeholder="nilai terendah dari B-" id="min_bmin" class="form-control"><label class="min_bmin_message" style="color:red">Nilai B- Harus Lebih Besar dari C+</label>
+                    Nilai Minimum B -:<input type="text" value="<?php echo $info['min_bmin'];?>" name="min_bmin" placeholder="nilai terendah dari B-" id="min_bmin" class="form-control"><label class="min_bmin_message" style="color:red">Nilai B- Harus Lebih Besar dari C+</label>
                 </div>
             </div>
             
@@ -118,13 +118,13 @@
                 <label class="col-sm-2 control-label" for="form-field-1">
                 </label>
                 <div class="col-sm-2">
-                    Nilai Minimum C +:<input type="text" value="<?php echo $info['min_c+'];?>" name="min_cplus" placeholder="nilai terendah dari C+" id="min_cplus" class="form-control"><label class="min_cplus_message" style="color:red">Nilai C+ Harus Lebih Besar dari C</label>
+                    Nilai Minimum C +:<input type="text" value="<?php echo $info['min_cplus'];?>" name="min_cplus" placeholder="nilai terendah dari C+" id="min_cplus" class="form-control"><label class="min_cplus_message" style="color:red">Nilai C+ Harus Lebih Besar dari C</label>
                 </div>
                 <div class="col-sm-2">
                     Nilai Minimum C:<input type="text" value="<?php echo $info['min_c'];?>" name="min_c" placeholder="nilai terendah dari C" id="min_c" class="form-control"><label class="min_c_message" style="color:red">Nilai C Harus Lebih Besar dari C-</label>
                 </div>
                 <div class="col-sm-2">
-                    Nilai Minimum C -:<input type="text" value="<?php echo $info['min_c-'];?>" name="min_cmin" placeholder="nilai terendah dari C-" id="min_cmin" class="form-control"><label class="min_cmin_message" style="color:red">Nilai C- Harus Lebih Besar dari D+</label>
+                    Nilai Minimum C -:<input type="text" value="<?php echo $info['min_cmin'];?>" name="min_cmin" placeholder="nilai terendah dari C-" id="min_cmin" class="form-control"><label class="min_cmin_message" style="color:red">Nilai C- Harus Lebih Besar dari D+</label>
                 </div>
             </div>
             
@@ -132,13 +132,13 @@
                 <label class="col-sm-2 control-label" for="form-field-1">
                 </label>
                 <div class="col-sm-2">
-                    Nilai Minimum D +:<input type="text" value="<?php echo $info['min_d+'];?>" name="min_dplus" placeholder="nilai terendah dari D+" id="min_dplus" class="form-control"><label class="min_dplus_message" style="color:red">Nilai D+ Harus Lebih Besar dari D</label>
+                    Nilai Minimum D +:<input type="text" value="<?php echo $info['min_dplus'];?>" name="min_dplus" placeholder="nilai terendah dari D+" id="min_dplus" class="form-control"><label class="min_dplus_message" style="color:red">Nilai D+ Harus Lebih Besar dari D</label>
                 </div>
                 <div class="col-sm-2">
                     Nilai Minimum D:<input type="text" value="<?php echo $info['min_d'];?>" name="min_d" placeholder="nilai terendah dari D" id="min_d" class="form-control"><label class="min_d_message" style="color:red">Nilai D Harus Lebih Besar dari D-</label>
                 </div>
                 <div class="col-sm-2">
-                    Nilai Minimum D -:<input type="text" value="<?php echo $info['min_d-'];?>" name="min_dmin" placeholder="nilai terendah dari D-" id="min_dmin" class="form-control"><label class="min_dmin_message" style="color:red">Nilai D- Harus Lebih Besar dari nilai terendah</label>
+                    Nilai Minimum D -:<input type="text" value="<?php echo $info['min_dmin'];?>" name="min_dmin" placeholder="nilai terendah dari D-" id="min_dmin" class="form-control"><label class="min_dmin_message" style="color:red">Nilai D- Harus Lebih Besar dari nilai terendah</label>
                 </div>
             </div>
             <div class="form-group">

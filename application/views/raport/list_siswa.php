@@ -22,13 +22,16 @@
         </div>
         <div class="panel-body">
                 <table class="table table-bordered">
-                    <tr><th>NISN</th><th>NAMA</th><th>LIHAT NILAI</th></tr>
+                    <tr><th>NISN</th><th>NAMA</th><th>LIHAT NILAI</th>
                     <?php
                     foreach ($siswa->result() as $row){
                         echo "<tr>
                             <td width='100'>$row->nisn</td>
                             <td>$row->nama</td>
-                            <td width='100'>".anchor('raport/nilai_semester/'.$row->nisn,'Lihat Raport','class="btn btn-success btn-sm"')."</td></tr>";
+                            <td width='100'>".anchor('raport/nilai_semester/'.$row->nisn,'Lihat Raport','class="btn btn-success btn-sm"')."</td> 
+                            
+                        
+                        </tr>";
                     }
                     ?>
                 </table>
@@ -36,3 +39,4 @@
     </div>
     <!-- end: DYNAMIC TABLE PANEL -->
 </div>
+

@@ -39,4 +39,9 @@ class Model_guru extends CI_Model {
         $user = $this->db->get('tbl_walikelas')->row_array();
         return $user;
     }
+    function chekemailguru($email){
+        $this->db->where('email',$email);
+        $user = $this->db->get('tbl_guru')->row_array();
+        return $user;
+    }
 }

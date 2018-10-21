@@ -74,10 +74,18 @@
                         <th>NO</th>
                         <th>KODE MAPEL</th>
                         <th>NAMA MATA PELAJARAN</th>
-                        <th>NILAI MINIMUM A</th>
-                        <th>NILAI MINIMUM B</th>
-                        <th>NILAI MINIMUM C</th>
-                        <th>NILAI MINIMUM D</th>
+                        <th> A+</th>
+                        <th> A</th>
+                        <th> A-</th>
+                        <th> B+</th>
+                        <th> B</th>
+                        <th> B-</th>
+                        <th> C+</th>
+                        <th> C</th>
+                        <th> C-</th>
+                        <th> D+</th>
+                        <th> D</th>
+                        <th> D-</th>
                         <th></th>
                     </tr>
                     <?php
@@ -87,10 +95,18 @@
                         <td>$no</td>
                         <td>$row->kd_mapel</td>
                         <td>$row->nama_mapel</td>
+                        <td>$row->min_aplus</td>
                         <td>$row->min_a</td>
+                        <td>$row->min_amin</td>
+                        <td>$row->min_bplus</td>
                         <td>$row->min_b</td>
+                        <td>$row->min_bmin</td>
+                        <td>$row->min_cplus</td>
                         <td>$row->min_c</td>
+                        <td>$row->min_cmin</td>
+                        <td>$row->min_dplus</td>
                         <td>$row->min_d</td>
+                        <td>$row->min_dmin</td>
                         <td>".anchor('mapel/edit/'.$row->id_mapel,'<i class="fa fa-edit"></i>','class="btn btn-xs btn-teal tooltips" data-placement="top" data-original-title="Edit" title="Edit Mata Pelajaran"').' 
                         '.anchor('mapel/list_komponen/'.$row->id_mapel,'<i class="fa fa-navicon"></i>','class="btn btn-xs btn-success tooltips" data-placement="top" data-original-title="List" title="Detail Komponen Nilai"');"</td>
                         </tr>";
@@ -126,10 +142,18 @@
                         "sClass": "text-center"
                     },
                     { "data": "nama_mapel" },
+                    { "data": "min_aplus" },
                     { "data": "min_a" },
+                    { "data": "min_amin" },
+                    { "data": "min_bplus" },
                     { "data": "min_b" },
+                    { "data": "min_bmin" },
+                    { "data": "min_cplus" },
                     { "data": "min_c" },
+                    { "data": "min_cmin" },
+                    { "data": "min_dplus" },
                     { "data": "min_d" },
+                    { "data": "min_dmin" },
                     { "data": "aksi","width": "100px" },
                 ]
             } );

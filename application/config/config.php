@@ -24,6 +24,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 $config['base_url'] = 'http://localhost/school/';
+//http://119.235.255.111/school/
+//http://if.uai.ac.id/~rifqidhiyahulhaq/school/
 
 /*
 |--------------------------------------------------------------------------

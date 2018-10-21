@@ -3,7 +3,9 @@ include 'db.php';
 $msg='00';
 if(!empty($_GET['code']) && isset($_GET['code']))
 {
-    $password = rand(10000000,100000000);
+    //$password = rand(10000000,100000000);
+    $char = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    $password = substr(str_shuffle($char),0,8);
     $updatepassword = md5($password);
 	$code=mysqli_real_escape_string($connection,$_GET['code']);
 

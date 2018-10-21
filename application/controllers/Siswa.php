@@ -16,24 +16,23 @@ Class Siswa extends CI_Controller {
     function data() {
    
         // nama tabel
-        $table = 'tbl_siswa';
+        $table = 'v_tbl_siswa';
         // nama PK
         $primaryKey = 'nisn';
         // list field
         $columns = array(
-            array('db' => 'foto',
-                'dt' => 'foto',
-                'formatter' => function( $d) {
-                   if(empty($d)){
-                       return "<img width='30px' src='".  base_url()."/uploads/user-siluet.jpg'>";
-                   }else{
-                       return "<img width='20px' src='".  base_url()."/uploads/".$d."'>";
-                   }   
-                }
-            ),
+            
             array('db' => 'nisn', 'dt' => 'nisn'),
             array('db' => 'nim', 'dt' => 'nim'),
             array('db' => 'nama', 'dt' => 'nama'),
+            array('db' => 'tempat_lahir', 'dt' => 'tempat_lahir'),
+            array('db' => 'tanggal_lahir', 'dt' => 'tanggal_lahir'),
+            array('db' => 'nama_agama', 'dt' => 'nama_agama'),
+            array('db' => 'alamat_siswa', 'dt' => 'alamat_siswa'),
+            array('db' => 'telepon_siswa', 'dt' => 'telepon_siswa'),
+            array('db' => 'nama_rombel', 'dt' => 'nama_rombel'),
+            array('db' => 'nama_ayah', 'dt' => 'nama_ayah'),
+            array('db' => 'nama_ibu', 'dt' => 'nama_ibu'),
         //    array('db' => 'tbl_rombel.nama_rombel', 'dt' => 'nama_rombel'),
             array(
                 'db' => 'nisn',

@@ -31,9 +31,9 @@
 <div class="col-md-12">
     <!-- start: DYNAMIC TABLE PANEL -->
    <?php echo anchor('siswa/add','Input Data Baru',array('class'=>'btn btn-danger btn-sm'))?>
-   <!-- Trigger the modal with a button -->
+   <!-- Trigger the modal with a button 
 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">Import Data Excel Dari Dapodik</button>
-
+-->
     <div style="margin-bottom: 10px;"></div>
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -53,6 +53,14 @@
                         <th>NISN</th>
                         <th>NIM</th>
                         <th>NAMA</th>
+                        <th>TEMPAT LAHIR</th>
+                        <th>TANGGAL LAHIR</th>
+                        <th>ALAMAT</th>
+                        <th>TELEPON</th>
+                        <th>ROMBEL / KELAS</th>
+                        <th>AGAMA</th>
+                        <th>NAMA AYAH</th>
+                        <th>NAMA IBU</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -79,13 +87,21 @@
                     },
                     {
                         "data": "nisn",
-                        "width": "120px",
+                        "width": "80px",
                         "sClass": "text-center"
                     },
                     { "data": "nim",
-                      "width": "120px",
+                      "width": "80px",
                       "sClass": "text-center" },
                     { "data": "nama"  },
+                    { "data": "tempat_lahir"  },
+                    { "data": "tanggal_lahir"  },
+                    { "data": "alamat_siswa"  },
+                    { "data": "telepon_siswa"  },
+                    { "data": "nama_rombel"  },
+                    { "data": "nama_agama"  },
+                    { "data": "nama_ayah"  },
+                    { "data": "nama_ibu"  },
                     //{ "data": "tbl_rombel.nama_rombel", "width": "150px" },
                     { "data": "aksi","width": "100px","sClass": "text-center" },
                 ]

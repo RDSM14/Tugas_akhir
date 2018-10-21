@@ -198,6 +198,8 @@ class Auth extends CI_Controller {
             $regex = '/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/';
             
             $emailAdmin     = $this->Model_user->chekemailadmin($email);
+           // $emailGuru     = $this->Model_guru->chekemailguru($email);
+        //    $emailTU     = $this->Model_user->chekemailtu($email);
             if (!empty($emailAdmin)) {
                 if(preg_match($regex, $email))
                 {  
@@ -213,8 +215,6 @@ class Auth extends CI_Controller {
                     //$msg= "Registration successful, please activate email.";	
                 }
             }
-            $this->session->set_flashdata('data_email_gagal', 'Data Telah Masuk');
-            redirect('auth');
         }
     }
         

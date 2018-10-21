@@ -26,14 +26,14 @@ Class Mapel extends CI_Controller {
             array('db' => 'min_b', 'dt' => 'min_b'),
             array('db' => 'min_c', 'dt' => 'min_c'),
             array('db' => 'min_d', 'dt' => 'min_d'),
-            array('db' => 'min_a+', 'dt' => 'min_a+'),
-            array('db' => 'min_b+', 'dt' => 'min_b+'),
-            array('db' => 'min_c+', 'dt' => 'min_c+'),
-            array('db' => 'min_d+', 'dt' => 'min_d+'),
-            array('db' => 'min_a-', 'dt' => 'min_a-'),
-            array('db' => 'min_b-', 'dt' => 'min_b-'),
-            array('db' => 'min_c-', 'dt' => 'min_c-'),
-            array('db' => 'min_d-', 'dt' => 'min_d-'),
+            array('db' => 'min_aplus', 'dt' => 'min_aplus'),
+            array('db' => 'min_bplus', 'dt' => 'min_bplus'),
+            array('db' => 'min_cplus', 'dt' => 'min_cplus'),
+            array('db' => 'min_dplus', 'dt' => 'min_dplus'),
+            array('db' => 'min_amin', 'dt' => 'min_amin'),
+            array('db' => 'min_bmin', 'dt' => 'min_bmin'),
+            array('db' => 'min_cmin', 'dt' => 'min_cmin'),
+            array('db' => 'min_dmin', 'dt' => 'min_dmin'),
             array('db' => 'nama_mapel', 'dt' => 'nama_mapel'),
             array(
                 'db' => 'id_mapel',
@@ -64,7 +64,7 @@ Class Mapel extends CI_Controller {
             // load daftar ngajar guru
             $username = $this->session->userdata('username');
             $id_sekolah = $this->session->userdata('id_sekolah');
-            $sql = "SELECT tbl_mapel.id_mapel,kd_mapel,min_a,min_b,min_c,min_d,nama_mapel
+            $sql = "SELECT tbl_mapel.id_mapel,kd_mapel,min_a,min_b,min_c,min_d,min_aplus,min_bplus,min_cplus,min_dplus,min_amin,min_bmin,min_cmin,min_dmin,nama_mapel
                     FROM tbl_mapel,tbl_jadwal
                     WHERE tbl_jadwal.username_guru='$username' AND tbl_jadwal.id_sekolah='$id_sekolah' AND tbl_mapel.id_mapel=tbl_jadwal.id_mapel";
             $data['mapel'] = $this->db->query($sql); 
@@ -96,7 +96,7 @@ Class Mapel extends CI_Controller {
             $id_mapel      = $this->uri->segment(3);
            
             //$data['mapel'] = $this->db->get_where('tbl_mapel',array('id_mapel'=>$id_mapel))->row_array();
-            $this->db->select('*, a.nama_mapel as amapel,a.id_mapel as id_mpel,a.kd_mapel as kode,a.min_a as nilai_a,a.min_b as nilai_b,a.min_c as nilai_c,a.min_d as nilai_d,b.nilai_max as maximal,b.nilai_min as minimal, a.min_a+ as nilai_aplus,a.min_a-  as nilai_amin, a.min_b+ as nilai_bplus,a.min_b- as nilai_bmin, a.min_c+ as nilai_cplus,a.min_c- as nilai_cmin, a.min_d+ as nilai_dplus,a.min_d- as nilai_dmin');
+            $this->db->select('*, a.nama_mapel as amapel,a.id_mapel as id_mpel,a.kd_mapel as kode,a.min_a as nilai_a,a.min_b as nilai_b,a.min_c as nilai_c,a.min_d as nilai_d,b.nilai_max as maximal,b.nilai_min as minimal, a.min_aplus as nilai_aplus,a.min_amin  as nilai_amin, a.min_bplus as nilai_bplus,a.min_bmin as nilai_bmin, a.min_cplus as nilai_cplus,a.min_cmin as nilai_cmin, a.min_dplus as nilai_dplus,a.min_dmin as nilai_dmin');
             $this->db->from('tbl_mapel a'); 
             $this->db->join('tbl_sekolah_info b', 'b.id_sekolah=a.id_sekolah', 'left');
             $this->db->where('a.id_mapel',$id_mapel);

@@ -529,10 +529,10 @@
                     <!-- start: PAGE HEADER -->
                     <div class="row">
                         <div class="col-sm-12">
-                            <!-- start: STYLE SELECTOR BOX -->
-                            <div id="style_selector" class="hidden-xs close-style">
+                            <!-- start: STYLE SELECTOR BOX BUAT """"""""""STYLE CUSTOM""""""--> 
+                            <!--<div id="style_selector" class="hidden-xs close-style">
                                 <div id="style_selector_container" style="display:block">
-                                    <div class="style-main-title">
+                                    <div class="style-main-title">222
                                         Style Selector
                                     </div>
                                     <div class="box-title">
@@ -611,7 +611,7 @@
                                 <div class="style-toggle open">
                                     <i class="fa fa-cog fa-spin"></i>
                                 </div>
-                            </div>
+                            </div>-->
                             <!-- end: STYLE SELECTOR BOX -->
                             <!-- start: PAGE TITLE & BREADCRUMB 
                             <ol class="breadcrumb">

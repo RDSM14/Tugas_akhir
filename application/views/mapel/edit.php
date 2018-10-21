@@ -33,7 +33,7 @@
                 </label>
                 <div class="col-sm-9">
                     <input type="hidden" readonly="" value="<?php echo $row->id_mpel;?>" name="id_mapel" placeholder="MASUKAN KODE MAPEL" id="form-field-1" class="form-control">
-                    <input type="text" value="<?php echo $row->kode;?>" name="kd_mapel" placeholder="MASUKAN KODE MAPEL" id="kd_mapel" class="form-control"><label class="kd_mapel" style="color:red">Kode Pelajaran Tidak Boleh Kosong</label>
+                    <input type="text" value="<?php echo $row->kode;?>" name="kd_mapel" placeholder="MASUKAN KODE MAPEL" id="kd_mapel" class="form-control">
                 </div>
             </div>
             <div class="form-group">
@@ -41,7 +41,7 @@
                     MATA PELAJARAN
                 </label>
                 <div class="col-sm-9">
-                    <input type="text" value="<?php echo $row->amapel;?>" name="nama_mapel" placeholder="MASUKAN NAMA MAPEL" id="nama_mapel" class="form-control"><label class="nama_mapel" style="color:red">Kode Pelajaran Tidak Boleh Kosong</label>
+                    <input type="text" value="<?php echo $row->amapel;?>" name="nama_mapel" placeholder="MASUKAN NAMA MAPEL" id="nama_mapel" class="form-control">
                 </div>
             </div>
             <div class="form-group">
@@ -141,9 +141,6 @@
 	$(document).ready(function(){
         $(".nilai_max_message_mapel_edit").hide();
         $(".nilai_min_message_mapel_edit").hide();
-        $(".kd_mapel").hide();
-        $(".nama_mapel").hide();
-        
         $(".min_aplus_message_mapel_edit").hide();
         $(".min_a_message_mapel_edit").hide();
         $(".min_amin_message_mapel_edit").hide();
@@ -298,24 +295,7 @@
                     
                     if((nilai_max>min_aplus) && (min_aplus>min_a) && (min_a>min_amin) && (min_amin>min_bplus) && (min_bplus>min_b) && (min_b>min_bmin) && (min_bmin>min_cplus) && (min_cplus>min_c) && (min_c>min_cmin) && (min_cmin>min_dplus) && (min_dplus>min_d) && (min_d>min_dmin) && (min_dmin>=nilai_min))
                         {
-                             if (kd_mapel == '' || kd_mapel == null)
-                             {  
-                                 $(".kd_mapel").show();                    
-                                return false;
-                             }
-                             else{
-                                     $(".kd_mapel").hide();
-                                    if (nama_mapel == '' || nama_mapel == null)
-                                        {  
-                                             $(".nama_mapel").show();                    
-                                                return false;
-                                         }
-                                        else{
-                                             $(".nama_mapel").hide();
-                                                return true;
-                                            
-                                        }
-                             }
+                             return true;
                         }
                 return false;
             });

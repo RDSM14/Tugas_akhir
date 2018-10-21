@@ -16,6 +16,12 @@ class Model_tu extends CI_Model {
         $this->db->insert($this->table,$data);
     }
     
+    function chekemailtu($email){
+        $this->db->where('email',$email);
+        $user = $this->db->get('tbl_tu')->row_array();
+        return $user;
+    }
+    
     function update() {
         $data = array(
             'username'      => $this->input->post('email', TRUE),

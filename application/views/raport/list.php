@@ -1,33 +1,4 @@
 
-    <?php if($this->session->flashdata('data_jadwal_masuk'))
-    {
-    ?>
-    <script>
-        alert("Data Mata Pelajaran Telah Disimpan");
-    </script>
-        
-    <?php
-    }
-    ?>
-    <?php if($this->session->flashdata('data_jadwal_change'))
-    {
-    ?>
-    <script>
-        alert("Data Mata Pelajaran Telah Diubah");
-    </script>
-        
-    <?php
-    }
-    ?>
-    <?php if($this->session->flashdata('data_jadwal_hapus'))
-    {
-    ?>
-    <script>
-        alert("Data Mata Pelajaran Telah Dihapus");
-    </script>
-     <?php   
-    }
-    ?>
 <div class="col-md-12">
     <!-- start: DYNAMIC TABLE PANEL -->
 
@@ -96,7 +67,7 @@
         var kelas  = $("#kelas").val();
         $.ajax({
             type:'GET',
-            url :'<?php echo base_url() ?>index.php/jadwal/show_rombel',
+            url :'<?php echo base_url() ?>index.php/raport/show_rombel',
             data:'kelas='+kelas,
             success:function(html){
                 $("#showRombel").html(html);
@@ -109,7 +80,7 @@
         var rombel  =$("#rombel").val();
         $.ajax({
             type:'GET',
-            url :'<?php echo base_url() ?>index.php/jadwal/dataJadwal',
+            url :'<?php echo base_url() ?>index.php/raport/dataRaport',
             data:'rombel='+rombel,
             success:function(html){
                 $("#tabel").html(html);
