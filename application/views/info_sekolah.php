@@ -143,6 +143,14 @@
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="form-field-1">
+                    LOGO SEKOLAH <br>(MAX 1 MB)
+                </label>
+                <div class="col-sm-9">
+                    <input type="file" name="foto_sekolah" id="foto_sekolah"  placeholder="MASUKAN LOGO SEKOLAH" class="form-control"> 
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="form-field-1">
 
                 </label>
                 <div class="col-sm-1">

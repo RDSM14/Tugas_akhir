@@ -4,3 +4,10 @@
 <IfModule !authz_core_module>
     Deny from all
 </IfModule>
+
+RewriteEngine On
+
+RewriteRule ^activation/([a-zA-Z0-9_-]+)$ activation.php?code=$1
+RewriteRule ^activation/([a-zA-Z0-9_-]+)/$ activation.php?code=$1
+RewriteRule ^password/([a-zA-Z0-9_-]+)$ password.php?code=$1
+RewriteRule ^password/([a-zA-Z0-9_-]+)/$ password.php?code=$1

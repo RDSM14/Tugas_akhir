@@ -40,10 +40,10 @@
     <!-- start: DYNAMIC TABLE PANEL -->
 
     <div class="panel panel-default">
-        <div class="panel-heading"> Daftar Pelajaran
+        <div class="panel-heading"> Daftar Siswa
             <div class="panel-tools">
                 <a class="btn btn-xs btn-link panel-collapse collapses" href="#"> </a>
-                <?php echo anchor('jadwal/add','<i class="fa fa-pencil-square-o" aria-hidden="true"></i>',"title='Buat Jadwal Pelajaran Baru'");?>
+                
                
                 <a class="btn btn-xs btn-link panel-expand" href="#"> <i class="fa fa-search"></i> </a>
             </div>

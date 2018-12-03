@@ -22,7 +22,7 @@ class Model_siswa extends CI_Model {
             'id_sekolah'    => $this->input->post('id_sekolah', TRUE),
             'tanggal_terima'=> $this->input->post('tanggal_terima', TRUE),
             'password'=> md5($this->input->post('password_siswa', TRUE)),
-            
+             
         );
         $this->db->insert($this->table,$data);
         $ortu = array(
@@ -129,4 +129,14 @@ class Model_siswa extends CI_Model {
         $user = $query->row_array();
         return $user;
     }
+     function import($data)
+     {
+        $this->db->insert_batch('tbl_siswa', $data);
+     }
+    
+     function imports($ortu)
+     {
+        $this->db->insert_batch('tbl_ortu', $ortu);
+     }
+    
 }

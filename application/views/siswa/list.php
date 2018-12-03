@@ -31,9 +31,9 @@
 <div class="col-md-12">
     <!-- start: DYNAMIC TABLE PANEL -->
    <?php echo anchor('siswa/add','Input Data Baru',array('class'=>'btn btn-danger btn-sm'))?>
-   <!-- Trigger the modal with a button 
-<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">Import Data Excel Dari Dapodik</button>
--->
+    
+<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">Import Data Excel</button>
+        
     <div style="margin-bottom: 10px;"></div>
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -51,7 +51,7 @@
                     <tr>
                         <th>NO</th>
                         <th>NISN</th>
-                        <th>NIM</th>
+                        <th>NIS</th>
                         <th>NAMA</th>
                         <th>TEMPAT LAHIR</th>
                         <th>TANGGAL LAHIR</th>
@@ -61,7 +61,7 @@
                         <th>AGAMA</th>
                         <th>NAMA AYAH</th>
                         <th>NAMA IBU</th>
-                        <th></th>
+                        <th>EDIT</th><th>DELETE</th>
                     </tr>
                 </thead>
             </table>
@@ -103,7 +103,8 @@
                     { "data": "nama_ayah"  },
                     { "data": "nama_ibu"  },
                     //{ "data": "tbl_rombel.nama_rombel", "width": "150px" },
-                    { "data": "aksi","width": "100px","sClass": "text-center" },
+                    { "data": "aksi","width": "50px","sClass": "text-center" },
+                    { "data": "aksid","width": "50px","sClass": "text-center" },
                 ]
             } );
                
@@ -119,22 +120,60 @@
   <div class="modal-dialog">
 
     <!-- Modal content-->
+    <?php
+            echo form_open_multipart('siswa/import', 'role="form" class="form-horizontal"');
+    ?>
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Form Upload</h4>
       </div>
       <div class="modal-body">
-          <p>Silahkan pilih file excel hasil export data siswa dari aplikasi dapodik.</p>
+          <p>Silahkan pilih file excel</p>
           <table class="table table-bordered">
-              <tr><td width="100">Pilih File</td><td><input type="file" name="file"></td></tr>
+              <tr><td width="100">Pilih File</td><td><input type="file" name="file" required=".xls, .xlsx"></td></tr>
           </table>
       </div>
       <div class="modal-footer">
-          <button type="submit" class="btn btn-danger btn-sm">Upload Data</button>
+          <button type="submit" class="btn btn-danger btn-sm" name="import">Upload Data</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
       </div>
+    </form>
     </div>
 
   </div>
 </div>
+
+
+
+
+
+
+
+
+
+<!--javascript-->
+
+
+<script>
+$(document).ready(function(){
+
+
+
+ $('#import_form').on('submit', function(event){
+  event.preventDefault();
+  $.ajax({
+   url:"<?php echo base_url(); ?>siswa/import",
+   method:"POST",
+   data:new FormData(this),
+   contentType:false,
+   cache:false,
+   processData:false,
+   success:function(data){
+    $('#file').val('');
+   }
+  })
+ });
+
+});
+</script>

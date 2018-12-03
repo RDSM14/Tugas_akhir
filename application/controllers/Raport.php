@@ -207,9 +207,9 @@ class Raport extends CI_Controller{
         $pdf->Cell(20,5,'Angka',1,0,'C');
         $pdf->Cell(20,5,'Predikat',1,1,'C');
         $pdf->Cell(108,5,'',0,0,'C');
-        $pdf->Cell(20,5,'1-'.$sekolah_info['nilai_max'],1,0,'C');
+        $pdf->Cell(20,5,'',1,0,'C');
         $pdf->Cell(20,5,'A/B/C/D/E',1,0,'C');
-        $pdf->Cell(20,5,'1-'.$sekolah_info['nilai_max'],1,0,'C');
+        $pdf->Cell(20,5,'',1,0,'C');
         $pdf->Cell(20,5,'A/B/C/D/E',1,1,'C');
         ///////THE END OF HEADER TABLE
        
@@ -431,25 +431,29 @@ class Raport extends CI_Controller{
         }
     }
     function nilai_pengetahuan($id_jadwal){
-        $sql   =  "SELECT SUM((skor)*porsi/100) as nilai_pengetahuan FROM tbl_nilai,tbl_komponen_nilai WHERE id_jadwal= $id_jadwal AND tbl_nilai.id_komponen=tbl_komponen_nilai.id_komponen AND id_jenis_nilai = 3";
+        $nisn = $this->uri->segment(3);
+        $sql   =  "SELECT SUM((skor)*porsi/100) as nilai_pengetahuan FROM tbl_nilai,tbl_komponen_nilai WHERE id_jadwal= $id_jadwal AND tbl_nilai.id_komponen=tbl_komponen_nilai.id_komponen AND id_jenis_nilai = 3 AND tbl_nilai.nisn=$nisn";
         $nilai_pengetahuan = $this->db->query($sql)->row_array();
         return $nilai_pengetahuan['nilai_pengetahuan'];
     }
     
     function nilai_keterampilan($id_jadwal){
-        $sql   =  "SELECT SUM((skor)*porsi/100) as nilai_keterampilan FROM tbl_nilai,tbl_komponen_nilai WHERE id_jadwal= $id_jadwal AND tbl_nilai.id_komponen=tbl_komponen_nilai.id_komponen AND id_jenis_nilai = 4";
+        $nisn = $this->uri->segment(3);
+        $sql   =  "SELECT SUM((skor)*porsi/100) as nilai_keterampilan FROM tbl_nilai,tbl_komponen_nilai WHERE id_jadwal= $id_jadwal AND tbl_nilai.id_komponen=tbl_komponen_nilai.id_komponen AND id_jenis_nilai = 4 AND tbl_nilai.nisn=$nisn";
         $nilai_keterampilan = $this->db->query($sql)->row_array();
         return $nilai_keterampilan['nilai_keterampilan'];
     }
     
     function nilai_sosial($id_jadwal){
-        $sql   =  "SELECT SUM((skor)*porsi/100) as nilai_sosial FROM tbl_nilai,tbl_komponen_nilai WHERE id_jadwal= $id_jadwal AND tbl_nilai.id_komponen=tbl_komponen_nilai.id_komponen AND id_jenis_nilai = 2";
+        $nisn = $this->uri->segment(3);
+        $sql   =  "SELECT SUM((skor)*porsi/100) as nilai_sosial FROM tbl_nilai,tbl_komponen_nilai WHERE id_jadwal= $id_jadwal AND tbl_nilai.id_komponen=tbl_komponen_nilai.id_komponen AND id_jenis_nilai = 2 AND tbl_nilai.nisn=$nisn";
         $nilai_sosial = $this->db->query($sql)->row_array();
         return $nilai_sosial['nilai_sosial'];
     }
     
     function nilai_spiritual($id_jadwal){
-        $sql   =  "SELECT SUM((skor)*porsi/100) as nilai_spiritual FROM tbl_nilai,tbl_komponen_nilai WHERE id_jadwal= $id_jadwal AND tbl_nilai.id_komponen=tbl_komponen_nilai.id_komponen AND id_jenis_nilai = 3";
+        $nisn = $this->uri->segment(3);
+        $sql   =  "SELECT SUM((skor)*porsi/100) as nilai_spiritual FROM tbl_nilai,tbl_komponen_nilai WHERE id_jadwal= $id_jadwal AND tbl_nilai.id_komponen=tbl_komponen_nilai.id_komponen AND id_jenis_nilai = 3 AND tbl_nilai.nisn=$nisn";
         $nilai_spiritual = $this->db->query($sql)->row_array();
         return $nilai_spiritual['nilai_spiritual'];
     }

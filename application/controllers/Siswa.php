@@ -10,11 +10,12 @@ Class Siswa extends CI_Controller {
         }
         //chekAksesModule();
         $this->load->library('ssp');
-        $this->load->model('Model_siswa');        
+        $this->load->model('Model_siswa');
+        $this->load->library('excel');
     }
 
     function data() {
-   
+        ///dicoba disini
         // nama tabel
         $table = 'v_tbl_siswa';
         // nama PK
@@ -39,8 +40,15 @@ Class Siswa extends CI_Controller {
                 'dt' => 'aksi',
                 'formatter' => function( $d) {
                     //return "<a href='edit.php?id=$d'>EDIT</a>";
-                    return anchor('siswa/edit/'.$d,'<i class="fa fa-edit"></i>','class="btn btn-xs btn-teal tooltips" data-placement="top" data-original-title="Edit"').' 
-                        '.anchor('siswa/delete/'.$d,'<i class="fa fa-trash-o"></i>','class="btn btn-xs btn-danger tooltips" data-placement="top" data-original-title="Delete"');
+                    return anchor('siswa/edit/'.$d,'<i class="fa fa-edit"></i>','class="btn btn-xs btn-teal tooltips" data-placement="top" data-original-title="Edit"');
+                }
+            ),
+            array(
+                'db' => 'nisn',
+                'dt' => 'aksid',
+                'formatter' => function( $d) {
+                    //return "<a href='edit.php?id=$d'>EDIT</a>";
+                    return anchor('siswa/delete/'.$d,'<i class="fa fa-trash-o"></i>','class="btn btn-xs btn-danger tooltips" data-placement="top" data-original-title="Delete"');
                 }
             )
         );
@@ -102,7 +110,6 @@ Class Siswa extends CI_Controller {
             $this->db->where('nisn',$nisn);
             $this->db->delete('tbl_orang_tua');
             
-            
         }
         $this->session->set_flashdata('data_siswa_hapus', 'Data Telah Dihapus');
         redirect('siswa');
@@ -162,5 +169,78 @@ Class Siswa extends CI_Controller {
         $this->load->helper('download');
         force_download('data-siswa.xlsx', NULL);
     }
+    
+    
+    function import()
+    {
+      $id_sekolah         =   "SELECT id_rombel,nama_rombel FROM tbl_rombel WHERE id_sekolah = ".$_SESSION['id_sekolah'];
+      if(isset($_FILES["file"]["name"]))
+      {
+       $path = $_FILES["file"]["tmp_name"];
+       $object = PHPExcel_IOFactory::load($path);
+       foreach($object->getWorksheetIterator() as $worksheet)
+       {
+        $highestRow = $worksheet->getHighestRow();
+        $highestColumn = $worksheet->getHighestColumn();
+        for($row=7; $row<=$highestRow; $row++)//menentukan isian kolom yang ingin di import
+        {
+         $b = $worksheet->getCellByColumnAndRow(1, $row)->getValue(); //NISN
+         $a = $worksheet->getCellByColumnAndRow(2, $row)->getValue(); //NIS
+         $c = $worksheet->getCellByColumnAndRow(3, $row)->getValue(); //Tanggal Lahir
+         $d = $worksheet->getCellByColumnAndRow(4, $row)->getValue(); //Jenis Kelamin
+         $e = $worksheet->getCellByColumnAndRow(5, $row)->getValue(); //Tempat Lahir
+         $f = $worksheet->getCellByColumnAndRow(6, $row)->getValue(); //Nama Siswa
+         $g = $worksheet->getCellByColumnAndRow(7, $row)->getValue(); //Alamat
+         $h = $worksheet->getCellByColumnAndRow(8, $row)->getValue(); //id_rombel
+         $i = $worksheet->getCellByColumnAndRow(9, $row)->getValue(); //telepon
+         $j = $worksheet->getCellByColumnAndRow(10, $row)->getValue(); //Nama Ayah
+         $k = $worksheet->getCellByColumnAndRow(11, $row)->getValue(); //Nama ibu
+         $l = $worksheet->getCellByColumnAndRow(12, $row)->getValue(); //agama
+         $m = $worksheet->getCellByColumnAndRow(13, $row)->getValue(); //passsiswa
+         //$n = $worksheet->getCellByColumnAndRow(14, $row)->getValue(); tadinya id_sekolah
+         $o = $worksheet->getCellByColumnAndRow(14, $row)->getValue(); //pass ortu
+         $p = $worksheet->getCellByColumnAndRow(15, $row)->getValue(); //diterima di
+         $q = $worksheet->getCellByColumnAndRow(16, $row)->getValue(); // status 
+         $r = $worksheet->getCellByColumnAndRow(17, $row)->getValue();
+         $s = $worksheet->getCellByColumnAndRow(18, $row)->getValue();
+                
+         $data[] = array(
+           'nim'           => $a,
+            'nisn'          => $b,
+            'kd_agama'      => $c,
+            'nama'          => $d,
+            'tanggal_lahir' => $e,
+            'tempat_lahir'  => $f,
+            'gender'        => $g,
+            'id_rombel'     => $h,
+            'alamat_siswa'  => $i,
+            'status_keluarga'=> $j,
+            'telepon_siswa' => $k,
+            'asal_sekolah'  => $l,
+            'kelas_terima'  => $m,
+            'id_sekolah'    => $id_sekolah,
+            'tanggal_terima'=> $o,
+            'password'      => md5($p)
+         );
+             
+         $ortunya[] = array(
+            'nisn'          => $b,
+            'nama_ayah'  => $q,
+            'nama_ibu'  => $r,
+            'password_orangtua'=>md5($s)
+         );    
+            
+         $history[] = array(
+            'nisn'                => $b,
+            'id_tahun_akademik'   =>  get_tahun_akademik_aktif('id_tahun_akademik'),
+            'id_rombel'           =>  $h
+         );
+        }
+       }
+       $this->Model_siswa->import($data);
+       $this->Model_siswa->imports($ortu);
+       echo 'Data Imported successfully';
+      } 
+ }
 
 }

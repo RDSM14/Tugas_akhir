@@ -7,6 +7,7 @@ class Model_mapel extends CI_Model {
     function save() {
         $data = array(
             'id_mapel'      => $this->input->post('id_mapel', TRUE),
+            'kd_mapel'    => $this->input->post('kd_mapel', TRUE),
             'nama_mapel'    => $this->input->post('nama_mapel', TRUE),
             'min_a'         => $this->input->post('min_a', TRUE),
             'min_b'         => $this->input->post('min_b', TRUE),
@@ -29,6 +30,7 @@ class Model_mapel extends CI_Model {
     function update() {
         $data = array(
             'id_mapel'    => $this->input->post('id_mapel', TRUE),
+            'kd_mapel'    => $this->input->post('kd_mapel', TRUE),
             'nama_mapel'    => $this->input->post('nama_mapel', TRUE),
             'min_a'         => $this->input->post('min_a', TRUE),
             'min_b'         => $this->input->post('min_b', TRUE),

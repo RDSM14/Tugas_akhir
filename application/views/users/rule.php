@@ -69,8 +69,41 @@
                 //$("#tabel").html(html);
                 //loadData();
                 alert('sukses memberikan akses');
+                location.reload();
             }
         })
     }
+    
+    function updRule(id_modul){
+        var level_user = $("#level_user").val();
+        $.ajax({
+            type:'GET',
+            url :'<?php echo base_url() ?>index.php/users/updrule',
+            data:'level_user='+level_user+'&id_menu='+id_modul,
+            success:function(html){
+                //$("#tabel").html(html);
+                //loadData();
+                alert('sukses memberikan akses');
+                location.reload();
+            }
+        })
+    }
+    
+    function indelRule(id_modul){
+        var level_user = $("#level_user").val();
+        $.ajax({
+            type:'GET',
+            url :'<?php echo base_url() ?>index.php/users/indelrule',
+            data:'level_user='+level_user+'&id_menu='+id_modul,
+            success:function(html){
+                //$("#tabel").html(html);
+                //loadData();
+                alert('sukses memberikan akses');
+                location.reload();
+            }
+        })
+    }
+    
+    
 </script>
 

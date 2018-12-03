@@ -106,8 +106,9 @@ Class Users extends CI_Controller {
                     <tr>
                         <th width='10'>NO</th>
                         <th>NAMA MODULE</th>
-                        <th>DETAIL MODULE</th>
-                        <th width='100'>HAK AKSES</th>
+                        <th width='100'>READ</th>
+                        <th width='100'>UPDATE / UBAH</th>
+                        <th width='100'>INPUT & DELETE</th>
                     </tr>";
         
         $menu = $this->db->get('tabel_menu');
@@ -116,10 +117,18 @@ Class Users extends CI_Controller {
             echo "<tr>
                 <td>$no</td>
                 <td>".  strtoupper($row->nama_menu)."</td>
-                <td>$row->detail</td>
                 <td align='center'><input type='checkbox' ";
             $this->chek_akses($level_user, $row->id,$id_sekolah);
              echo " onclick='addRule($row->id)'></td>
+                
+                <td align='center'><input type='checkbox' ";
+            $this->chek_upd($level_user, $row->id,$id_sekolah);
+             echo " onclick='updRule($row->id)'></td>
+                
+                <td align='center'><input type='checkbox' ";
+            $this->chek_indel($level_user, $row->id,$id_sekolah);
+             echo " onclick='indelRule($row->id)'></td>
+                
                 </tr>";
             $no++;
         }
@@ -130,6 +139,34 @@ Class Users extends CI_Controller {
     
     function chek_akses($level_user,$id_menu,$id_sekolah){
         $data = array('id_level_user'=>$level_user,'id_menu'=>$id_menu,'id_sekolah'=>$id_sekolah);
+        $chek = $this->db->get_where('tbl_user_rule',$data);
+        if($chek->num_rows()>0){
+            echo "checked";
+        }
+    }
+    
+    function chek_upd($level_user,$id_menu,$id_sekolah){
+        $data = array('id_level_user'=>$level_user,'id_menu'=>$id_menu,'id_sekolah'=>$id_sekolah,'upd'=>'1');
+        $chek = $this->db->get_where('tbl_user_rule',$data);
+        if($chek->num_rows()>0){
+            echo "checked";
+        }
+        /*$this->db->select('upd');
+        $query = $this->db->query('SELECT upd FROM tbl_user_rule');
+        $this->db->where('id_level_user', $level_user);
+        $this->db->where('id_sekolah', $id_sekolah);
+        $this->db->where('id_menu', $id_menu);
+        $upd = $this->db->get('tbl_user_rule');
+        // = $query->result();
+        $sql = "SELECT upd FROM `tbl_user_rule` WHERE id_menu='$id_menu' AND id_level_user='$level_user' AND id_sekolah = '$level_user'";
+        $query = $this->db->query($sql);
+        $hasil = $query->result();
+        if($query == 1){
+            echo "checked";
+        }*/
+    }
+    function chek_indel($level_user,$id_menu,$id_sekolah){
+        $data = array('id_level_user'=>$level_user,'id_menu'=>$id_menu,'id_sekolah'=>$id_sekolah,'indel'=>'1');
         $chek = $this->db->get_where('tbl_user_rule',$data);
         if($chek->num_rows()>0){
             echo "checked";
@@ -156,5 +193,59 @@ Class Users extends CI_Controller {
             echo " berhasil delete akses modul";
         }
     }
+    
+    function updrule(){
+        $level_user = $_GET['level_user'];
+        $id_menu    = $_GET['id_menu'];
+        $id_sekolah = $_SESSION['id_sekolah'];
+        $data       = array('id_level_user'=>$level_user,'id_menu'=>$id_menu,'id_sekolah'=>$id_sekolah,'upd'=>'1');
+        $chek       = $this->db->get_where('tbl_user_rule',$data);
+        if($chek->num_rows()<1){
+            $value = array(
+            'upd'     => 1,
+            );
+            $this->db->where('id_level_user', $level_user);
+            $this->db->where('id_sekolah', $id_sekolah);
+            $this->db->where('id_menu', $id_menu);
+            $this->db->update('tbl_user_rule',$value);
+        }else{
+            $value = array(
+            'upd'     => 0,
+            );
+            $this->db->where('id_level_user', $level_user);
+            $this->db->where('id_sekolah', $id_sekolah);
+            $this->db->where('id_menu', $id_menu);
+            $this->db->update('tbl_user_rule',$value);
+            
+        }
+    }
+    
+    function indelrule(){
+        $level_user = $_GET['level_user'];
+        $id_menu    = $_GET['id_menu'];
+        $id_sekolah = $_SESSION['id_sekolah'];
+        $data       = array('id_level_user'=>$level_user,'id_menu'=>$id_menu,'id_sekolah'=>$id_sekolah,'indel'=>'1');
+        $chek       = $this->db->get_where('tbl_user_rule',$data);
+        if($chek->num_rows()<1){
+            $value = array(
+            'indel'     => 1,
+            );
+            $this->db->where('id_level_user', $level_user);
+            $this->db->where('id_sekolah', $id_sekolah);
+            $this->db->where('id_menu', $id_menu);
+            $this->db->update('tbl_user_rule',$value);
+        }else{
+            $value = array(
+            'indel'     => 0,
+            );
+            $this->db->where('id_level_user', $level_user);
+            $this->db->where('id_sekolah', $id_sekolah);
+            $this->db->where('id_menu', $id_menu);
+            $this->db->update('tbl_user_rule',$value);
+            
+        }
+    }
+        
+        
 
 }

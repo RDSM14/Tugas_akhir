@@ -4,7 +4,7 @@ Class Daftar extends CI_Controller {
 
     function __construct() {
         parent::__construct();
-        $this->load->library('ssp');
+       // $this->load->library('SSP');
         $this->load->model('Model_user');
         
     }
