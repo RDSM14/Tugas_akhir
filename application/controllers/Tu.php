@@ -24,6 +24,7 @@ Class Tu extends CI_Controller {
             array('db' => 'nip', 'dt' => 'nip'),
             array('db' => 'telepon_TU', 'dt' => 'telepon_TU'),
             array('db' => 'nama_lengkap', 'dt' => 'nama_lengkap'),
+            array('db' => 'username', 'dt' => 'username'),
             array(
                 'db' => 'nip',
                 'dt' => 'aksi',

@@ -53,6 +53,16 @@
                     <?php echo form_dropdown('gender', array('p' => 'LAKI LAKI', 'w' => 'PEREMPUAN'), $guru['gender'], "class='form-control'") ?>
                 </div>
             </div>
+            
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="form-field-1">
+                    RESET PASSWORD
+                </label>
+                <div class="col-sm-9">
+                    <input type="text" name="reset" placeholder="RESET PASSWORD GURU" id="form-field-1" class="form-control">
+                </div>
+            </div>
+            
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="form-field-1">
 

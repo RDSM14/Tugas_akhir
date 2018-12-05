@@ -17,12 +17,25 @@ class Model_guru extends CI_Model {
     }
     
     function update() {
+        $reset = $this->input->post('reset', TRUE);
+        if(empty($reset)){
         $data = array(
             'nuptk'      => $this->input->post('nuptk', TRUE),
             'nama_guru'  => $this->input->post('nama_guru', TRUE),
             'id_sekolah' => $_SESSION['id_sekolah'],
             'gender'     => $this->input->post('gender', TRUE)
         );
+        }
+        else
+        {
+        $data = array(
+            'nuptk'      => $this->input->post('nuptk', TRUE),
+            'nama_guru'  => $this->input->post('nama_guru', TRUE),
+            'id_sekolah' => $_SESSION['id_sekolah'],
+            'gender'     => $this->input->post('gender', TRUE),
+            'password'   => md5($this->input->post('reset', TRUE))
+        );
+        }
         $username   = $this->input->post('username');
         $this->db->where('username',$username);
         $this->db->update($this->table,$data);

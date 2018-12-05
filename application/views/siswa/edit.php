@@ -163,6 +163,22 @@
                     <input type="text" name="nama_ibu" value="<?php echo $ortu['nama_ibu'] ?>" id="form-field-1" class="form-control">
                 </div>
             </div> 
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="form-field-1">
+                    RESET PASSWORD SISWA
+                </label>
+                <div class="col-sm-9">
+                    <input type="text" name="reset_siswa" placeholder="RESET PASSWORD SISWA" id="form-field-1" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="form-field-1">
+                    RESET PASSWORD ORANG TUA SISWA
+                </label>
+                <div class="col-sm-9">
+                    <input type="text" name="reset_ortu" placeholder="RESET PASSWORD ORANG TUA SISWA" id="form-field-1" class="form-control">
+                </div>
+            </div>
                 <label class="col-sm-2 control-label" for="form-field-1">
 
                 </label>

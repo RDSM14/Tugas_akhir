@@ -48,6 +48,7 @@
                         <th>NO</th>
                         <th>NUPTK</th>
                         <th>NAMA GURU</th>
+                        <th>E-MAIL</th>
                         <th>JENIS KELAMIN</th>
                         <th></th>
                     </tr>
@@ -79,6 +80,7 @@
                         "sClass": "text-left"
                     },
                     { "data": "nama_guru" },
+                    { "data": "username" },
                     { "data": "gender","width": "150px",
                         "sClass": "text-center"},
                     { "data": "aksi","width": "80px" },

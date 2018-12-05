@@ -857,9 +857,11 @@ $(document).ready(function() {
 									  		<i class="fa fa-envelope"></i>
 									  	</span>
 									  	<input name="email" type="email" autocomplete="off" class="form-control" id="email" placeholder="Email" aria-describedby="basic-addon1" required data-validation-required-message=" Tolong isi kotak di atas" data-validation-ajax-message="" data-validation-email-message=" Alamat email tidak valid">
+                                        
 									</div>
 									<p class="help-block text-right"></p>
 								</div>
+                                <label class="warning" style="color:red;text-align: center">FORM INI HANYA UNTUK ADMIN SEKOLAH, SELAIN ADMIN BISA MENGHUBUNGI ADMIN MASING MASING SEKOLAH UNTUK RESET PASSWORD ANDA</h5></label>
 							</div>
 						</div>
 						<div class="daftar">

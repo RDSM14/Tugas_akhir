@@ -34,8 +34,6 @@
         <div class="panel-heading">
             <i class="fa fa-external-link-square"></i> Data Karyawan Tata Usaha
             <div class="panel-tools">
-                <a class="btn btn-xs btn-link panel-collapse collapses" href="#"> </a>
-                <?php echo anchor('tu/add','<i class="fa fa-pencil-square-o" aria-hidden="true"></i>',"title='Tambah Data'");?>
                 <a class="btn btn-xs btn-link panel-expand" href="#"> <i class="fa fa-search"></i> </a>
             </div>
         </div>
@@ -46,6 +44,7 @@
                         <th>NO</th>
                         <th>NIP</th>
                         <th>NAMA</th>
+                        <th>E-MAIL</th>
                         <th>TELEPON</th>
                         <th></th>
                     </tr>
@@ -77,6 +76,7 @@
                         "sClass": "text-left"
                     },
                     { "data": "nama_lengkap" },
+                    { "data": "username" },
                     { "data": "telepon_TU","width": "90px", },
                     { "data": "aksi","width": "100px" },
                 ]

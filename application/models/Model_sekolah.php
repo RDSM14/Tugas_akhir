@@ -6,7 +6,7 @@ class Model_sekolah extends CI_Model {
     
     function update($logo) {
         
-        if(empty($foto)){ //without foto
+        if(empty($logo)){ //without foto
         $data = array(
             'nama_sekolah'          => $this->input->post('nama_sekolah', TRUE),
             'alamat_sekolah'        => $this->input->post('alamat_sekolah', TRUE),

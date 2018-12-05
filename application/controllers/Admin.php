@@ -29,8 +29,7 @@ Class Admin extends CI_Controller {
                 'dt' => 'aksi',
                 'formatter' => function( $d) {
                     //return "<a href='edit.php?id=$d'>EDIT</a>";
-                    return anchor('admin/edit/'.$d,'<i class="fa fa-edit"></i>','class="btn btn-xs btn-teal tooltips" data-placement="top" data-original-title="Edit"').' 
-                        '.anchor('admin/delete/'.$d,'<i class="fa fa-trash-o"></i>','class="btn btn-xs btn-danger tooltips" data-placement="top" data-original-title="Delete"');
+                    return anchor('admin/edit/'.$d,'<i class="fa fa-edit"></i>','class="btn btn-xs btn-teal tooltips" data-placement="top" data-original-title="Edit"' );
                 }
             )
         );
@@ -43,7 +42,7 @@ Class Admin extends CI_Controller {
         );
         $where = "id_sekolah =".$_SESSION['id_sekolah']."";
         echo json_encode(
-                SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns,$where)
+                SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns,$where,$where)
         );
     }
 

@@ -24,7 +24,7 @@
                     NIP
                 </label>
                 <div class="col-sm-9">
-                    <input type="text" name="nip" value="<?php echo $tu['nip']?>" placeholder="MASUKAN nip" id="form-field-1" class="form-control" readonly>
+                    <input type="text" name="nip" value="<?php echo $tu['nip']?>" placeholder="MASUKAN NIP" id="form-field-1" class="form-control">
                 </div>
             </div>
             <div class="form-group">
@@ -44,6 +44,16 @@
                     <input type="text" value="<?php echo $tu['telepon_TU']?>" name="telepon_TU" placeholder="MASUKAN NOMOR TELEPON KARYAWAN" id="form-field-1" class="form-control">
                 </div>
             </div>
+            
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="form-field-1">
+                    RESET PASSWORD
+                </label>
+                <div class="col-sm-9">
+                    <input type="text" name="reset" placeholder="RESET PASSWORD TU" id="form-field-1" class="form-control">
+                </div>
+            </div>
+            
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="form-field-1">
 

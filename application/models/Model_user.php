@@ -33,6 +33,7 @@ class Model_user extends CI_Model{
             'nama_lengkap'  => $this->input->post('nama_lengkap', TRUE),
             'telepon_admin'     => $this->input->post('telepon', TRUE),
             'id_sekolah' => $_SESSION['id_sekolah'],
+            'status' => "1",
             'password'   => md5($this->input->post('password', TRUE))
         );
         $this->db->insert('tbl_admin',$data);

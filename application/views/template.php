@@ -44,6 +44,7 @@
         <div class="navbar navbar-inverse navbar-fixed-top">
             <!-- start: TOP NAVIGATION CONTAINER -->
             <div class="container">
+                
                 <div class="navbar-header">
                     <!-- start: RESPONSIVE MENU TOGGLER -->
                     <button data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle" type="button">
@@ -52,11 +53,13 @@
                     <!-- end: RESPONSIVE MENU TOGGLER -->
                     <!-- start: LOGO -->
                     <a class="navbar-brand" >
+                        
                         Sistem Informasi Sekolah
                     </a>
                     <!-- end: LOGO -->
                 </div>
                 <div class="navbar-tools">
+                    
                     <!-- start: TOP NAVIGATION MENU -->
                     <ul class="nav navbar-right">
                         <!-- start: TO-DO DROPDOWN --><?php /*
@@ -411,7 +414,10 @@
                 <div class="main-navigation navbar-collapse collapse" style="
     padding-right: 0px;
     padding-left: 0px;
-">
+">                  <ul></ul>
+                    
+                    
+                    
                     <!-- start: MAIN MENU TOGGLER BUTTON -->
                     <div class="navigation-toggler">
                         <i class="fa fa-angle-left" aria-hidden="true"></i>  
@@ -636,7 +642,25 @@
                                 </li>
                             </ol>-->
                             <div class="page-header">
-                                <h1>Dashboard <small>overview &amp; stats </small></h1>
+                                <h1><div style="padding-top: 10px;">
+				<?php 
+				  	$query = "SELECT * FROM tbl_sekolah_info WHERE id_sekolah='".$_SESSION['id_sekolah']."'";
+					$main_menus = $this->db->query($query)->result();
+                    foreach($main_menus as $menus){
+                    $foto = $menus->foto;
+					if(!empty($foto)){
+				?>
+                    <a> <img src="<?php echo base_url("./logosekolah/".$foto)?>" width="200"></a> </td>
+                    <?php }else{ ?>
+                    <a> <img src="<?php echo base_url("./logosekolah/no_school.png")?>" width="200"></a> </td>
+					<?php } echo $menus->nama_sekolah;
+                      ?></div></small></h1>
+                    <h1>
+                    <?php
+                        
+                        }
+                    ?>
+                    </h1>
                             </div>
                             <!-- end: PAGE TITLE & BREADCRUMB -->
                         </div>

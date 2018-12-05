@@ -29,7 +29,7 @@
         <div class="panel-body">
 
             <?php
-            echo form_open('sekolah/index', 'role="form" class="form-horizontal"');
+            echo form_open_multipart('sekolah/index', 'role="form" class="form-horizontal"');
             echo form_hidden('id_sekolah',$info['id_sekolah']);
             ?>
 

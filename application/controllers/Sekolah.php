@@ -13,8 +13,8 @@ Class sekolah extends CI_Controller {
     
     function index() {
         if (isset($_POST['submit'])) {
-            $logo = $this->input->post('foto_sekolah', TRUE);
-            $uploadFoto = $this->upload_foto_sekolah($logo);
+            //$logo = $this->input->post('foto_sekolah', TRUE);
+            $uploadFoto = $this->upload_foto_sekolah();
             $this->model_sekolah->update($uploadFoto);
             $this->session->set_flashdata('data_sekolah_masuk', 'Data Telah Disimpan');
             redirect('sekolah');
@@ -24,22 +24,18 @@ Class sekolah extends CI_Controller {
         }
     }
 
-    function upload_foto_sekolah($logo){
-        $config['upload_path']          = './logosekolah/';
-        $config['allowed_types']        = 'jpg|png';
-        $config['max_size']             = 1024; // imb
+    function upload_foto_sekolah(){
+        $config['upload_path'] = './logosekolah/';
+        $config['allowed_types'] = 'jpg|png|jpeg';
+        $config['max_size'] = '50000';
+        $config['overwrite'] = TRUE;
+        $config['encrypt_name'] = TRUE;
+        $config['remove_spaces'] = TRUE;
         $this->load->library('upload', $config);
             // proses upload
-        $this->upload->do_upload($logo);
-        if( empty($this->upload->do_upload($logo)) ){
-			$error = array( 'error' => $this->upload->display_errors() );
-            redirect('siswa');
-		}
-		else{
-			$data = array( 'upload_data' => $this->upload->data() );
-		}
-        //$upload = $this->upload->data();
-        return $upload_data['file_name'];
+        $this->upload->do_upload('foto_sekolah');
+        $upload = $this->upload->data();
+        return $upload['file_name'];
     }
     
     

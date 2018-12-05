@@ -24,6 +24,7 @@ Class Guru extends CI_Controller {
             array('db' => 'username', 'dt' => 'username'),
             array('db' => 'nuptk', 'dt' => 'nuptk'),
             array('db' => 'nama_guru', 'dt' => 'nama_guru'),
+            array('db' => 'username', 'dt' => 'username'),
             array('db' => 'gender', 
                   'dt' => 'gender',
                   'formatter' => function( $d) {

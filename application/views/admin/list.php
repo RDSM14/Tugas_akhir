@@ -80,7 +80,7 @@
                     { "data": "nama_lengkap" },
                     { "data": "telepon_admin","width": "150px",
                         "sClass": "text-center"},
-                    { "data": "aksi","width": "100px" },
+                    { "data": "aksi","width": "50px" },
                 ]
             } );
                
